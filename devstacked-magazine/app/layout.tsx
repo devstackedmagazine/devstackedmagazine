@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito,  } from "next/font/google";
+import { Nunito } from "next/font/google";
 import Header from "@/components/layout/Header";
 import "./globals.css";
 
@@ -8,7 +8,7 @@ const nunito = Nunito({
   variable: "--font-nunito",
   display: "swap",
   // No need to specify weight - supports 200-900 automatically
-})
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,9 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${nunito.variable} ${nunito.variable} antialiased`}
-      >
+      <body className={`${nunito.variable} ${nunito.variable} antialiased`}>
         <Header />
         {children}
       </body>
