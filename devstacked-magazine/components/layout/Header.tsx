@@ -4,7 +4,7 @@ import Button from "../ui/Button";
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center h-28 text-white">
+    <header className="flex justify-between items-center h-28 text-white px-[100px]">
       <div className="">
         <Link href="/">Logo</Link>
       </div>
