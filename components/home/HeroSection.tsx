@@ -1,6 +1,6 @@
 import Button from "@/components/ui/Button";
 import Image from "next/image";
-import heroImage from "@/public/images/hero/heroImage.svg";
+import heroImage from "@/public/images/home/heroImage.svg";
 
 export default function HeroSection() {
   return (
