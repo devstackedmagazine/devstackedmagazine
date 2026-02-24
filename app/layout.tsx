@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -23,8 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.variable} ${nunito.variable} antialiased`}>
-        <Header />
-        {children}
+        <main className="px-[100px] overflow-clip">
+          <Header />
+          {children}
+          <Footer />
+        </main>
       </body>
     </html>
   );

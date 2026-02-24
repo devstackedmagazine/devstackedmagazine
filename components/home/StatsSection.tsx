@@ -22,7 +22,7 @@ export const stats = [
 
 export default function StatsSection() {
   return (
-    <div className="px-[100px] h-28 flex items-center justify-between">
+    <div className="h-28 flex items-center justify-between">
       <Image src={RedDots} alt="Red Dots styling" />
       {stats.map((stat) => (
         <div className="text-white flex items-center gap-4" key={stat.label}>

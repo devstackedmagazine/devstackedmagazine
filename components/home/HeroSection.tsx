@@ -4,8 +4,9 @@ import heroImage from "@/public/images/home/heroImage.svg";
 
 export default function HeroSection() {
   return (
-    <section className="min-h-[calc(100vh-7rem)] relative flex items-center justify-center overflow-hidden px-[100px]">
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-red-active/10 -z-10" />
+    <section className="min-h-[calc(100vh-7rem)] relative flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 from-background via-background to-red-active/10 -z-10" />
+      {/* bg-gradient-to-br */}
       <div className="container">
         <div className="">
           <h1 className="text-5xl md:text-6xl lg:text-6xl font-semi text-white mb-6 leading-tight w-3/4">

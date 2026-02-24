@@ -32,7 +32,7 @@ const projects = [
 
 export default function OurProjectsSection() {
   return (
-    <section className="min-h-screen px-[100px] py-20">
+    <section className="min-h-screen py-20">
       <div className="flex items-center gap-2">
         <h1 className="text-white text-5xl font-light mb-1">Our Projects</h1>
         <Image src={RedDots} alt="Red Dots" />

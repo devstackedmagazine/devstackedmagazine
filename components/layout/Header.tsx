@@ -6,10 +6,10 @@ import Image from "next/image";
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center h-28 text-white px-[100px]">
-      <div className="">
-        <Image src={Logo} alt="Logo" className="scale-150 mt-3" />
-      </div>
+    <header className="flex justify-between items-center h-28 text-white">
+      {/* <div className=""> */}
+        <Image src={Logo} alt="Logo" className="w-60 mt-3" />
+      {/* </div> */}
       <Navigation />
       <div>
         <Button>Get In Touch</Button>
