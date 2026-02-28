@@ -8,7 +8,6 @@ const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-nunito",
   display: "swap",
-  // No need to specify weight - supports 200-900 automatically
 });
 
 export const metadata: Metadata = {

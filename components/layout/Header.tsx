@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <header className="flex justify-between items-center h-28 text-white">
       {/* <div className=""> */}
-        <Image src={Logo} alt="Logo" className="w-60 mt-3" />
+      <Image src={Logo} alt="Logo" className="w-60 mt-3" />
       {/* </div> */}
       <Navigation />
       <div>
