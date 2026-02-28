@@ -22,9 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${nunito.variable} ${nunito.variable} antialiased`}>
-        <main className="px-[100px] overflow-clip">
+        <main className="px-25 overflow-clip">
           <Header />
           {children}
           <Footer />

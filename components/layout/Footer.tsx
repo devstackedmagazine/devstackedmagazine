@@ -4,7 +4,7 @@ import instagram from "@/public/icons/instagram.svg";
 import tiktok from "@/public/icons/tiktok.svg";
 import discord from "@/public/icons/discord.svg";
 
-export default function Page() {
+export default function Footer() {
   return (
     <footer className="py-8 relative overflow-x-clip">
       <div className="text-white grid grid-cols-6 gap-14">
