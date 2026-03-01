@@ -1,4 +1,5 @@
 import { Mail, Phone, Briefcase } from 'lucide-react';
+import Button from '../ui/Button';
 
 export default function Form() {
   return (
@@ -10,58 +11,59 @@ export default function Form() {
 
       <form className='space-y-6'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-          <div className='flex items-center gap-3 bg-stone-700 p-3 rounded-lg border border-stone-600'>
-        <Briefcase className='w-5 h-5 text-stone-400 shrink-0' />
-        <input
-          type="text"
-          placeholder='Your Name'
-          className='w-full bg-transparent placeholder-stone-400 text-white focus:outline-none'
-        />
+          <div className='flex items-center gap-3 p-3 rounded-lg border-2 border-white/50 focus-within:ring-1 focus-within:ring-white/40'>
+            <Briefcase className='w-5 h-5 shrink-0 text-white/50' />  
+            <input
+              type="text"
+              placeholder='Your Name'
+              className='w-full bg-transparent text-white focus:outline-none'
+            />
           </div>
-          <div className='flex items-center gap-3 bg-stone-700 p-3 rounded-lg border border-stone-600'>
-        <Mail className='w-5 h-5 text-stone-400 shrink-0' />
-        <input
-          type="email"
-          placeholder='Your Email'
-          className='w-full bg-transparent placeholder-stone-400 text-white focus:outline-none'
-        />
+          <div className='flex items-center gap-3 p-3 rounded-lg border-2 border-white/50 focus-within:ring-1 focus-within:ring-white/40'>
+            <Mail className='w-5 h-5 shrink-0 text-white/50' />
+            <input
+              type="email"
+              placeholder='Your Email'
+              className='w-full bg-transparent text-white focus:outline-none'
+            />
           </div>
         </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-          <div className='flex items-center gap-3 bg-stone-700 p-3 rounded-lg border border-stone-600'>
-        <Phone className='w-5 h-5 text-stone-400 shrink-0' />
-        <input
-          type="tel"
-          placeholder='Your Phone'
-          className='w-full bg-transparent placeholder-stone-400 text-white focus:outline-none'
-        />
+          <div className='flex items-center gap-3 p-3 rounded-lg border-2 border-white/50 focus-within:ring-1 focus-within:ring-white/40'>
+            <Phone className='w-5 h-5 shrink-0 text-white/50' />
+            <input
+              type="tel"
+              placeholder='Your Phone'
+              className='w-full bg-transparent text-white focus:outline-none'
+            />
           </div>
-          <div className='flex items-center gap-3 bg-stone-700 p-3 rounded-lg border border-stone-600'>
-        <Briefcase className='w-5 h-5 text-stone-400 shrink-0' />
-        <input
-          type="text"
-          placeholder='Company'
-          className='w-full bg-transparent placeholder-stone-400 text-white focus:outline-none'
-        />
+          <div className='flex items-center gap-3 p-3 rounded-lg border-2 border-white/50 focus-within:ring-1 focus-within:ring-white/40'>
+            <Briefcase className='w-5 h-5 shrink-0 text-white/50' />
+            <input
+              type="text"
+              placeholder='Company'
+              className='w-full bg-transparent text-white focus:outline-none'
+            />
           </div>
         </div>
 
-        <div className='flex items-start gap-3 bg-stone-700 p-3 rounded-lg border border-stone-600'>
-          <Mail className='w-5 h-5 text-stone-400 shrink-0 mt-1' />
+        <div className='flex items-start gap-3 p-3 rounded-lg border-2 border-white/50 focus-within:ring-1 focus-within:ring-white/40'>
+          <Mail className='w-5 h-5 shrink-0 mt-1 text-white/50' />
           <textarea
-        placeholder='Your Message'
-        rows={5}
-        className='w-full bg-transparent placeholder-stone-400 text-white focus:outline-none resize-none'
+            placeholder='Your Message'
+            rows={5}
+            className='w-full bg-transparent text-white focus:outline-none resize-none'
           />
         </div>
 
-        <button
+        <Button
           type="submit"
-          className='w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition-colors duration-200'
+          className='w-full rounded-lg'
+          variant='primary'
         >
           Send Message
-        </button>
+        </Button>
       </form>
     </div>
   )

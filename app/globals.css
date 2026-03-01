@@ -6,6 +6,7 @@
   --foreground: #171717;
   --white-text: #ffffff;
   --red-active: #c70e1a;
+  --red-active-hover: #89121a;
   --orange-btn: #c7370e;
 }
 
@@ -18,6 +19,7 @@
   --font-mono: var(--font-geist-mono);
   --color-white: var(--white-text);
   --color-red-active: var(--red-active);
+  --color-red-active-hover: var(--red-active-hover);
 
   --gradient-blurry: linear-gradient(
     to bottom,
