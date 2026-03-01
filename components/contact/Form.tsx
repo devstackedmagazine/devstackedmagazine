@@ -3,15 +3,16 @@ import Button from '../ui/Button';
 
 export default function Form() {
   return (
-    <div className='max-w-4xl mx-auto'>
-      <div className='text-center mb-12'>
-        <h2 className="text-4xl font-bold text-white mb-2">Get in Touch</h2>
-        <p className="text-gray-300">We&apos;d love to hear from you. Send us a message!</p>
+    <div className='mx-auto w-full max-w-4xl'>
+      <div className='mb-8 text-center sm:mb-12'>
+        <h2 className="mb-2 text-3xl font-bold text-white sm:text-4xl">Get in Touch</h2>
+        <p className="text-sm text-gray-300 sm:text-base">We&apos;d love to hear from you. Send us a message!</p>
       </div>
 
-      <form className='space-y-6'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-          <div className='flex items-center gap-3 p-3 rounded-lg border-2 border-white/50 focus-within:ring-1 focus-within:ring-white/40'>
+      <form className='space-y-5 sm:space-y-6'>
+        <div className='grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2'>
+          <div className='flex items-center gap-3 rounded-lg border-2 border-white/50 p-3 
+          focus-within:border-red-active transition-colors duration-300 bg-gray-300/5'>
             <Briefcase className='w-5 h-5 shrink-0 text-white/50' />  
             <input
               type="text"
@@ -19,7 +20,8 @@ export default function Form() {
               className='w-full bg-transparent text-white focus:outline-none'
             />
           </div>
-          <div className='flex items-center gap-3 p-3 rounded-lg border-2 border-white/50 focus-within:ring-1 focus-within:ring-white/40'>
+          <div className='flex items-center gap-3 rounded-lg border-2 border-white/50 p-3 
+          focus-within:border-red-active transition-colors duration-300 bg-gray-300/5'>
             <Mail className='w-5 h-5 shrink-0 text-white/50' />
             <input
               type="email"
@@ -29,8 +31,9 @@ export default function Form() {
           </div>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-          <div className='flex items-center gap-3 p-3 rounded-lg border-2 border-white/50 focus-within:ring-1 focus-within:ring-white/40'>
+        <div className='grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2'>
+          <div className='flex items-center gap-3 rounded-lg border-2 border-white/50 p-3 
+          focus-within:border-red-active transition-colors duration-300 bg-gray-300/5'>
             <Phone className='w-5 h-5 shrink-0 text-white/50' />
             <input
               type="tel"
@@ -38,7 +41,8 @@ export default function Form() {
               className='w-full bg-transparent text-white focus:outline-none'
             />
           </div>
-          <div className='flex items-center gap-3 p-3 rounded-lg border-2 border-white/50 focus-within:ring-1 focus-within:ring-white/40'>
+          <div className='flex items-center gap-3 rounded-lg border-2 border-white/50 p-3 
+          focus-within:border-red-active transition-colors duration-300 bg-gray-300/5'>
             <Briefcase className='w-5 h-5 shrink-0 text-white/50' />
             <input
               type="text"
@@ -48,7 +52,8 @@ export default function Form() {
           </div>
         </div>
 
-        <div className='flex items-start gap-3 p-3 rounded-lg border-2 border-white/50 focus-within:ring-1 focus-within:ring-white/40'>
+        <div className='flex items-start gap-3 rounded-lg border-2 border-white/50 p-3 
+        focus-within:border-red-active transition-colors duration-300 bg-gray-300/5'>
           <Mail className='w-5 h-5 shrink-0 mt-1 text-white/50' />
           <textarea
             placeholder='Your Message'
