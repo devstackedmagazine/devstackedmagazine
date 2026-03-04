@@ -2,9 +2,9 @@ import ellipse from "@/public/styles/elipse-red.svg";
 import Image from "next/image";
 
 const contactDetails = [
-  "stygar@help.com",
-  "+1 (555) 123-4567",
-  "5987 Mid Rivers Mall Dr., St. Charles",
+  "Email: devstackedmagazine@gmail.com",
+  "Instagram: devstackedmagazine",
+  "Tiktok: devstackedmagazine",
 ];
 
 const stats = [
@@ -32,33 +32,32 @@ export default function Contact() {
   return (
     <section className="relative my-8 -mx-25 px-4 py-10 text-white sm:my-10 sm:px-8 sm:py-14 lg:px-16 lg:py-18">
       <div className="pointer-events-none absolute -inset-20">
-        <div className="absolute -left-28 top-8 h-[360px] w-[360px] rounded-full bg-red-active/30 blur-[120px]" />
-        <div className="absolute left-[32%] top-[18%] h-[280px] w-[280px] rounded-full bg-red-active/18 blur-[110px]" />
-        <div className="absolute right-[8%] top-[20%] h-[320px] w-[320px] rounded-full bg-red-active/24 blur-[120px]" />
-        <div className="absolute right-[18%] top-[52%] h-[280px] w-[280px] rounded-full bg-red-active/20 blur-[120px]" />
-        <div className="absolute left-[12%] bottom-[12%] h-[340px] w-[340px] rounded-full bg-red-active/22 blur-[130px]" />
-        <div className="absolute right-[-10%] bottom-[-8%] h-[400px] w-[400px] rounded-full bg-red-active/26 blur-[140px]" />
+        <div className="absolute -left-28 top-8 h-90 w-90 rounded-full bg-red-active/30 blur-[120px]" />
+        <div className="absolute left-[32%] top-[18%] h-70 w-70 rounded-full bg-red-active/18 blur-[110px]" />
+        <div className="absolute right-[8%] top-[20%] h-80 w-[320px] rounded-full bg-red-active/24 blur-[120px]" />
+        <div className="absolute right-[18%] top-[52%] h-70 w-70 rounded-full bg-red-active/20 blur-[120px]" />
+        <div className="absolute left-[12%] bottom-[12%] h-85 w-85 rounded-full bg-red-active/22 blur-[130px]" />
+        <div className="absolute right-[-10%] bottom-[-8%] h-100 w-100 rounded-full bg-red-active/26 blur-[140px]" />
       </div>
 
       <Image
         src={ellipse}
         alt=""
         aria-hidden
-        className="pointer-events-none absolute -right-64 -top-64 h-[860px] w-[860px] rotate-[168deg] opacity-40"
+        className="pointer-events-none absolute -right-64 -top-64 h-215 w-215 rotate-168 opacity-40"
       />
       <Image
         src={ellipse}
         alt=""
         aria-hidden
-        className="pointer-events-none absolute -bottom-72 -left-80 h-[860px] w-[860px] rotate-[24deg] opacity-34"
+        className="pointer-events-none absolute -bottom-72 -left-80 h-215 w-215 rotate-24 opacity-34"
       />
 
       <DotCluster className="pointer-events-none absolute right-[20%] top-[16%] opacity-95" />
-      <DotCluster className="pointer-events-none absolute left-[19%] top-[36%] opacity-90" />
 
-      <div className="relative z-10 mx-auto max-w-[1280px]">
+      <div className="relative z-10 mx-auto max-w-7xl">
         <div className="relative mb-14 pt-5 text-center sm:mb-18 sm:pt-8">
-          <p className="pointer-events-none absolute inset-x-0 top-[58%] -translate-y-1/2 text-[24vw] font-semibold leading-none text-white/[0.06] sm:text-[16vw] lg:text-[15rem]">
+          <p className="pointer-events-none absolute inset-x-0 top-[58%] -translate-y-1/2 text-[24vw] font-semibold leading-none text-white/6 sm:text-[16vw] lg:text-[15rem]">
             Contact
           </p>
 
@@ -83,25 +82,25 @@ export default function Contact() {
 
             <ul className="mt-9 space-y-4 text-sm text-white/95 sm:text-lg">
               {contactDetails.map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white/80" />
+                <li key={item} className="flex items-center gap-3">
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white/80" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </article>
 
-          <div className="rounded-[24px] bg-black/5 p-4 sm:p-6 lg:p-7">
+          <div className="rounded-3xl bg-black/5 p-4 sm:p-6 lg:p-7">
             <div className="space-y-4">
               <input
                 type="text"
                 placeholder="Full Name"
-                className="h-[52px] w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-[58px] sm:text-base"
+                className="h-13 w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-14.5 sm:text-base"
               />
               <input
                 type="email"
                 placeholder="Email"
-                className="h-[52px] w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-[58px] sm:text-base"
+                className="h-13 w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-14.5 sm:text-base"
               />
               <textarea
                 placeholder="Discussion"
