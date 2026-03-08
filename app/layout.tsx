@@ -8,7 +8,6 @@ const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-nunito",
   display: "swap",
-  // No need to specify weight - supports 200-900 automatically
 });
 
 export const metadata: Metadata = {
@@ -24,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.variable} ${nunito.variable} antialiased`}>
-        <main className="px-[100px] overflow-clip">
+        <main className="px-[20px] sm:px-[50px] lg:px-[100px] overflow-clip">
           <Header />
           {children}
           <Footer />
