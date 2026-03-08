@@ -3,6 +3,8 @@
 import ellipse from "@/public/styles/elipse-red.svg";
 import Image from "next/image";
 import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
+import StatsSection from "@/components/StatsSection";
+import CtaSection from "@/components/CtaSection";
 
 const contactDetails = [
   "Email: devstackedmagazine@gmail.com",
@@ -10,12 +12,12 @@ const contactDetails = [
   "Tiktok: devstackedmagazine",
 ];
 
-const stats = [
-  { value: "150+", label: "Project Completed" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "5+", label: "Years of Experience" },
-  { value: "24/7", label: "Support Available" },
-];
+// const stats = [
+//   { value: "150+", label: "Project Completed" },
+//   { value: "98%", label: "Client Satisfaction" },
+//   { value: "5+", label: "Years of Experience" },
+//   { value: "24/7", label: "Support Available" },
+// ];
 
 function DotCluster({ className = "" }: { className?: string }) {
   return (
@@ -192,8 +194,8 @@ export default function Contact() {
             </h2>
             <p className="mt-5 max-w-[57ch] text-sm leading-8 text-white/80 sm:text-base">
               Pizza ipsum dolor meat lovers buffalo. Extra broccoli parmesan
-              ricotta garlic dolor sauce marinara Chicago marinara. Tomato
-              dolor pesto pesto Bianca pesto roll onions.
+              ricotta garlic dolor sauce marinara Chicago marinara. Tomato dolor
+              pesto pesto Bianca pesto roll onions.
             </p>
 
             <ul className="mt-9 space-y-4 text-sm text-white/95 sm:text-lg">
@@ -256,23 +258,8 @@ export default function Contact() {
             </form>
           </div>
         </div>
-
-        <div className="mt-16 border-t border-dashed border-white/25 pt-8 sm:mt-20 sm:pt-10">
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-6 lg:gap-10">
-            {stats.map((item, index) => (
-              <div key={item.label} className="flex items-start gap-4">
-                {index === 0 && <DotCluster className="mt-1 hidden sm:grid" />}
-                <div>
-                  <p className="text-4xl font-semibold leading-none sm:text-5xl">{item.value}</p>
-                  <p className="mt-2 text-sm leading-tight text-white/85 sm:text-base">
-                    {item.label}
-                  </p>
-                </div>
-                {index === 3 && <DotCluster className="mt-1 hidden sm:grid" />}
-              </div>
-            ))}
-          </div>
-        </div>
+        <StatsSection className="mt-10 mb-50" />
+        <CtaSection />
       </div>
     </section>
   );

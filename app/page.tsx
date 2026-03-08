@@ -1,9 +1,9 @@
 import Image from "next/image";
 import HeroSection from "@/components/home/HeroSection";
-import StatsSection from "@/components/home/StatsSection";
+import StatsSection from "@/components/StatsSection";
 import OurProjectsSection from "@/components/home/OurProjectsSection";
 import OurJourneySection from "@/components/home/OurJourneySection";
-import CtaSection from "@/components/home/CtaSection";
+import CtaSection from "@/components/CtaSection";
 import ellipse from "@/public/styles/elipse-red.svg";
 
 export default function Home() {
