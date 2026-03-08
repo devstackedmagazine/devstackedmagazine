@@ -2,7 +2,7 @@ import Button from "@/components/ui/Button";
 import Image from "next/image";
 import arrow from "@/public/icons/arrow.svg";
 
-export default function Page() {
+export default function Page({ className }: { className: string }) {
   return (
     <div className="flex items-center w-full max-w-md border-2 border-white/30 rounded-3xl p-1 focus-within:ring-1 focus-within:ring-white/40">
       <input

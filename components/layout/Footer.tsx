@@ -7,15 +7,15 @@ import discord from "@/public/icons/discord.svg";
 export default function Page() {
   return (
     <footer className="py-8 relative overflow-x-clip">
-      <div className="text-white grid grid-cols-6 gap-14">
-        <div className="col-span-4 flex flex-col gap-10">
+      <div className="text-white grid grid-cols-1 lg:grid-cols-7 gap-14">
+        <div className="lg:col-span-4 flex flex-col gap-10">
           <Image src={logo} alt="Devstacked logo" className="w-72" />
           <p>
             At DevStacked, we create modern web experiences that are fast,
             scalable, and easy to use. From design to development, we help turn
             ideas into real-world products built to grow with your business.
           </p>
-          <div className="flex gap-5">
+          <div className="flex flex-col md:flex-row gap-1 md:gap-5">
             <p>devstackedmagazine@gmail.com</p>
             <p>+1 (555) 123-4567</p>
             <p>5987 Mid Rivers Mall Dr., St. Charles</p>
@@ -30,36 +30,38 @@ export default function Page() {
             <Image src={discord} alt="Discord" className="w-5 cursor-pointer" />
           </div>
         </div>
-        <div className="col-span-1">
-          <h2 className="text-2xl mb-5 font-semibold">Services</h2>
-          <ul className="flex flex-col gap-3 text-nowrap relative">
-            <li className="hover:ms-2 transition-all cursor-pointer">
-              UI/UX Design
-            </li>
-            <li className="hover:ms-2 transition-all cursor-pointer">
-              Web Development
-            </li>
-            <li className="hover:ms-2 transition-all cursor-pointer">
-              Mobile App Development
-            </li>
-            <li className="hover:ms-2 transition-all cursor-pointer">
-              Consulting
-            </li>
-          </ul>
-        </div>
-        <div className="col-span-1">
-          <h2 className="text-2xl mb-5 font-semibold">Company</h2>
-          <ul className="flex flex-col gap-3 text-nowrap">
-            <li className="hover:ms-2 transition-all cursor-pointer">
-              About Us
-            </li>
-            <li className="hover:ms-2 transition-all cursor-pointer">
-              Privacy Policy
-            </li>
-            <li className="hover:ms-2 transition-all cursor-pointer">
-              Terms of Service
-            </li>
-          </ul>
+        <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-14">
+          <div className="col-span-1">
+            <h2 className="text-2xl mb-5 font-semibold">Services</h2>
+            <ul className="flex flex-col gap-3 text-nowrap relative">
+              <li className="hover:ms-2 transition-all cursor-pointer">
+                UI/UX Design
+              </li>
+              <li className="hover:ms-2 transition-all cursor-pointer">
+                Web Development
+              </li>
+              <li className="hover:ms-2 transition-all cursor-pointer">
+                Mobile App Development
+              </li>
+              <li className="hover:ms-2 transition-all cursor-pointer">
+                Consulting
+              </li>
+            </ul>
+          </div>
+          <div className="col-span-1">
+            <h2 className="text-2xl mb-5 font-semibold">Company</h2>
+            <ul className="flex flex-col gap-3 text-nowrap">
+              <li className="hover:ms-2 transition-all cursor-pointer">
+                About Us
+              </li>
+              <li className="hover:ms-2 transition-all cursor-pointer">
+                Privacy Policy
+              </li>
+              <li className="hover:ms-2 transition-all cursor-pointer">
+                Terms of Service
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </footer>
