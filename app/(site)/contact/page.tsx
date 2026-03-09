@@ -12,13 +12,6 @@ const contactDetails = [
   "Tiktok: devstackedmagazine",
 ];
 
-// const stats = [
-//   { value: "150+", label: "Project Completed" },
-//   { value: "98%", label: "Client Satisfaction" },
-//   { value: "5+", label: "Years of Experience" },
-//   { value: "24/7", label: "Support Available" },
-// ];
-
 function DotCluster({ className = "" }: { className?: string }) {
   return (
     <div className={`grid grid-cols-3 gap-1 ${className}`}>

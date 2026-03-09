@@ -1,8 +1,8 @@
 ﻿import AgencyHeroSection from "@/components/about/AgencyHeroSection";
-import BuildSomethingSection from "@/components/about/BuildSomethingSection";
 import DreamToRealitySection from "@/components/about/DreamToRealitySection";
-import JourneySection from "@/components/about/JourneySection";
-import StatsStrip from "@/components/about/StatsStrip";
+import OurJourneySection from "@/components/OurJourneySection";
+import StatsSection from "@/components/StatsSection";
+import CtaSection from "@/components/CtaSection";
 import styles from "@/components/about/about.module.css";
 
 export default function AboutPage() {
@@ -14,9 +14,9 @@ export default function AboutPage() {
 
       <AgencyHeroSection />
       <DreamToRealitySection />
-      <JourneySection />
-      <StatsStrip />
-      <BuildSomethingSection />
+      <OurJourneySection />
+      <StatsSection className="mt-10 mb-50" />
+      <CtaSection />
     </div>
   );
 }

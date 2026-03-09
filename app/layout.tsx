@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -22,12 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${nunito.variable} ${nunito.variable} antialiased`}>
-        <main className="px-[20px] sm:px-[50px] lg:px-[100px] overflow-clip">
-          <Header />
-          {children}
-          <Footer />
-        </main>
+      <body className={`${nunito.variable} antialiased`}>
+        {/* No Header or Footer here, so the 404 page stays clean */}
+        {children}
       </body>
     </html>
   );
