@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Nunito, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -19,7 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn("scroll-smooth", "font-sans", geist.variable)}
+    >
       <body className={`${nunito.variable} antialiased`}>
         {/* No Header or Footer here, so the 404 page stays clean */}
         {children}
