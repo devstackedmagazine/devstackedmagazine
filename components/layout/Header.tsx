@@ -1,6 +1,5 @@
 import Navigation from "../layout/Navigation";
 import Logo from "@/public/logos/devstacked-horizontally.svg";
-import Link from "next/link";
 import Button from "../ui/Button";
 import Image from "next/image";
 

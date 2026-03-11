@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import RedDots from "@/public/styles/red-dots.svg";
 import Project from "@/public/images/home/quickit.png";
 
