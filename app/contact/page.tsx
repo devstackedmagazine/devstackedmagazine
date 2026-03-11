@@ -2,16 +2,29 @@
 
 import ellipse from "@/public/styles/elipse-red.svg";
 import Image from "next/image";
+import Link from "next/link";
 import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
 
 const contactDetails = [
-  "Email: devstackedmagazine@gmail.com",
-  "Instagram: devstackedmagazine",
-  "Tiktok: devstackedmagazine",
+  {
+    label: "Email",
+    value: "devstackedmagazine@gmail.com",
+    href: "mailto:devstackedmagazine@gmail.com",
+  },
+  {
+    label: "Instagram",
+    value: "@devstackedmagazine",
+    href: "https://www.instagram.com/devstackedmagazine/",
+  },
+  {
+    label: "TikTok",
+    value: "@devstackedmagazine",
+    href: "https://www.tiktok.com/@devstackedmagazine",
+  },
 ];
 
 const stats = [
-  { value: "150+", label: "Project Completed" },
+  { value: "150+", label: "Projects Completed" },
   { value: "98%", label: "Client Satisfaction" },
   { value: "5+", label: "Years of Experience" },
   { value: "24/7", label: "Support Available" },
@@ -22,7 +35,6 @@ function DotCluster({ className = "" }: { className?: string }) {
     <div className={`grid grid-cols-3 gap-1 ${className}`}>
       {Array.from({ length: 9 }, (_, index) => (
         <span
-          // index is stable because the grid length is static.
           key={index}
           className="h-2.5 w-2.5 rounded-full bg-red-active"
         />
@@ -111,7 +123,7 @@ export default function Contact() {
     setSubmitMessage(null);
 
     try {
-      const response = await fetch("/contact/api/send", {
+      const response = await fetch("/api/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -178,7 +190,7 @@ export default function Contact() {
           </p>
 
           <h1 className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl">
-            Reach Out Let&apos;s
+            Reach Out. Let&apos;s
           </h1>
           <p className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl">
             Collaborate
@@ -188,22 +200,41 @@ export default function Contact() {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.03fr)] lg:gap-14">
           <article className="lg:pt-3">
             <h2 className="text-3xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-              Let&apos;s Talk About Your Idea
+              Tell Us What You&apos;re Building
             </h2>
             <p className="mt-5 max-w-[57ch] text-sm leading-8 text-white/80 sm:text-base">
-              Pizza ipsum dolor meat lovers buffalo. Extra broccoli parmesan
-              ricotta garlic dolor sauce marinara Chicago marinara. Tomato
-              dolor pesto pesto Bianca pesto roll onions.
+              Use this page to start a project conversation, ask about a site
+              refresh, or reach out about a landing page that needs better
+              structure and stronger execution. A short brief is enough to get
+              the conversation moving.
             </p>
 
             <ul className="mt-9 space-y-4 text-sm text-white/95 sm:text-lg">
               {contactDetails.map((item) => (
-                <li key={item} className="flex items-center gap-3">
+                <li key={item.label} className="flex items-center gap-3">
                   <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white/80" />
-                  <span>{item}</span>
+                  <a
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                    className="transition-colors hover:text-red-active"
+                  >
+                    {item.label}: {item.value}
+                  </a>
                 </li>
               ))}
             </ul>
+
+            <p className="mt-8 max-w-[52ch] text-sm leading-7 text-white/65 sm:text-base">
+              Prefer email? You can also write directly to{" "}
+              <Link
+                href="mailto:devstackedmagazine@gmail.com"
+                className="text-white underline decoration-white/30 underline-offset-4 transition-colors hover:text-red-active"
+              >
+                devstackedmagazine@gmail.com
+              </Link>
+              .
+            </p>
           </article>
 
           <div className="rounded-3xl bg-black/5 p-4 sm:p-6 lg:p-7">
@@ -215,6 +246,7 @@ export default function Contact() {
                 value={formData.fullName}
                 onChange={handleInputChange}
                 required
+                autoComplete="name"
                 className="h-13 w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-14.5 sm:text-base"
               />
               <input
@@ -224,11 +256,12 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
+                autoComplete="email"
                 className="h-13 w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-14.5 sm:text-base"
               />
               <textarea
                 name="discussion"
-                placeholder="Discussion"
+                placeholder="Tell us about your project"
                 value={formData.discussion}
                 onChange={handleInputChange}
                 required
@@ -236,6 +269,7 @@ export default function Contact() {
               />
               {submitMessage && (
                 <p
+                  aria-live="polite"
                   className={`text-sm ${
                     submitMessage.type === "success"
                       ? "text-green-300"
@@ -263,7 +297,9 @@ export default function Contact() {
               <div key={item.label} className="flex items-start gap-4">
                 {index === 0 && <DotCluster className="mt-1 hidden sm:grid" />}
                 <div>
-                  <p className="text-4xl font-semibold leading-none sm:text-5xl">{item.value}</p>
+                  <p className="text-4xl font-semibold leading-none sm:text-5xl">
+                    {item.value}
+                  </p>
                   <p className="mt-2 text-sm leading-tight text-white/85 sm:text-base">
                     {item.label}
                   </p>

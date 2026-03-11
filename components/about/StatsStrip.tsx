@@ -3,7 +3,7 @@ import redDots from "@/public/styles/red-dots.svg";
 import styles from "./about.module.css";
 
 const STATS = [
-  { value: "150+", label: "Project Completed" },
+  { value: "150+", label: "Projects Completed" },
   { value: "98%", label: "Client Satisfaction" },
   { value: "5+", label: "Years of Experience" },
   { value: "24/7", label: "Support Available" },

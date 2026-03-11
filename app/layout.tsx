@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { absoluteUrl, defaultKeywords, siteConfig } from "@/lib/site";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -11,23 +12,50 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "DevStacked Magazine | Tech Content & Web Services",
-  description: "Explore funny and informative tech content. We create custom websites for individuals and businesses with quality web services and the latest tech industry insights.",
-  keywords: "tech content, web services, websites, tech articles, tech news, web development",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: "DevStacked Magazine | Web Design, Development, and Tech Content",
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  keywords: defaultKeywords,
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
-    icon: "/favicon.png",
+    icon: "/logos/favicon.png",
+    shortcut: "/logos/favicon.png",
+    apple: "/logos/favicon.png",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   openGraph: {
-    title: "DevStacked Magazine | Tech Content & Web Services",
-    description: "Explore funny and informative tech content. We create custom websites for individuals and businesses.",
-    url: "https://devstackedmagazine.com",
-    siteName: "DevStacked Magazine",
+    title: "DevStacked Magazine",
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     images: [
       {
-        url: "/og-image.png",
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "DevStacked Magazine",
+        alt: "DevStacked Magazine project preview",
       },
     ],
     locale: "en_US",
@@ -35,18 +63,37 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DevStacked Magazine | Tech Content & Web Services",
-    description: "Explore funny and informative tech content. We create custom websites for individuals and businesses.",
-    images: ["/og-image.png"],
+    title: "DevStacked Magazine",
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
   },
   alternates: {
-    canonical: "https://devstackedmagazine.com",
+    canonical: siteConfig.url,
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#89121a"
-}
+  themeColor: "#89121a",
+};
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: absoluteUrl("/logos/favicon.png"),
+    email: siteConfig.email,
+    description: siteConfig.description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+  },
+];
 
 export default function RootLayout({
   children,
@@ -61,6 +108,12 @@ export default function RootLayout({
           {children}
           <Footer />
         </main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
       </body>
     </html>
   );

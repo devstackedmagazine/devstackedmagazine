@@ -1,4 +1,4 @@
-﻿import styles from "./about.module.css";
+import styles from "./about.module.css";
 import type { LucideIcon } from "lucide-react";
 import {
   BriefcaseBusiness,
@@ -19,38 +19,38 @@ type FeatureCard = {
 const FEATURE_CARDS: FeatureCard[] = [
   {
     id: 1,
-    title: "Best Digital Agency",
-    copy: "Piza ipsum dolor meat lovers buffalo. Extra broccoli parmesan risotto garlic dolor sauce marinara Chicago marinara.",
+    title: "Strategy and Discovery",
+    copy: "We define goals, audience, and page structure before design decisions start multiplying.",
     icon: BriefcaseBusiness,
   },
   {
     id: 2,
-    title: "Best Digital Agency",
-    copy: "Piza ipsum dolor meat lovers buffalo. Extra broccoli parmesan risotto garlic dolor sauce marinara Chicago marinara.",
+    title: "Interface Design",
+    copy: "Layouts are designed to feel sharp, readable, and consistent across screens instead of generic or overworked.",
     icon: Palette,
   },
   {
     id: 3,
-    title: "Best Digital Agency",
-    copy: "Piza ipsum dolor meat lovers buffalo. Extra broccoli parmesan risotto garlic dolor sauce marinara Chicago marinara.",
+    title: "Front-End Development",
+    copy: "We build with modern tools and clean implementation so the shipped experience stays fast and dependable.",
     icon: Code2,
   },
   {
     id: 4,
-    title: "Best Digital Agency",
-    copy: "Piza ipsum dolor meat lovers buffalo. Extra broccoli parmesan risotto garlic dolor sauce marinara Chicago marinara.",
+    title: "Content Direction",
+    copy: "Messaging is shaped to help visitors understand the offer quickly without relying on vague filler copy.",
     icon: Megaphone,
   },
   {
     id: 5,
-    title: "Best Digital Agency",
-    copy: "Piza ipsum dolor meat lovers buffalo. Extra broccoli parmesan risotto garlic dolor sauce marinara Chicago marinara.",
+    title: "Performance and SEO",
+    copy: "We clean up technical basics, structure pages properly, and make sure the site can be crawled and understood.",
     icon: ChartNoAxesCombined,
   },
   {
     id: 6,
-    title: "Best Digital Agency",
-    copy: "Piza ipsum dolor meat lovers buffalo. Extra broccoli parmesan risotto garlic dolor sauce marinara Chicago marinara.",
+    title: "Launch Support",
+    copy: "After delivery, we help tighten loose ends, review outcomes, and keep the product moving in the right direction.",
     icon: Globe,
   },
 ];
@@ -61,8 +61,8 @@ export default function DreamToRealitySection() {
       <div className={styles.sectionHeadingRow}>
         <h2 className={styles.sectionTitle}>Our Dream to Reality</h2>
         <p className={styles.sectionLead}>
-          From ipsum dolor meat lovers buffalo. Extra broccoli parmesan risotto
-          garlic dolor sauce marinara Chicago marinara.
+          From early direction to launch-day polish, we handle the work that
+          turns a rough idea into something confident enough to publish.
         </p>
       </div>
 

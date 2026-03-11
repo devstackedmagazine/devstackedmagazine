@@ -1,11 +1,5 @@
-import HeroSection from "@/components/home/HeroSection";
-import OurProjectsSection from "@/components/home/OurProjectsSection";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <div>
-      <HeroSection />
-      {/* <OurProjectsSection /> */}
-    </div>
-  );
+export default function HomeAliasPage() {
+  redirect("/");
 }
