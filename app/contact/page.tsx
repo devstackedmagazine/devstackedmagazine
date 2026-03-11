@@ -2,7 +2,6 @@
 
 import ellipse from "@/public/styles/elipse-red.svg";
 import Image from "next/image";
-import Link from "next/link";
 import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
 
 const contactDetails = [
@@ -227,12 +226,12 @@ export default function Contact() {
 
             <p className="mt-8 max-w-[52ch] text-sm leading-7 text-white/65 sm:text-base">
               Prefer email? You can also write directly to{" "}
-              <Link
+              <a
                 href="mailto:devstackedmagazine@gmail.com"
                 className="text-white underline decoration-white/30 underline-offset-4 transition-colors hover:text-red-active"
               >
                 devstackedmagazine@gmail.com
-              </Link>
+              </a>
               .
             </p>
           </article>

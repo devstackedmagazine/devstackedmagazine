@@ -34,7 +34,7 @@ export default function OurProjectsSection() {
         </h2>
         <Image src={RedDots} alt="Red Dots" />
       </div>
-      <p className="mt-3 text-center text-sm text-white sm:w-lg sm:text-left">
+      <p className="mt-3 text-center text-sm text-white sm:max-w-lg sm:text-left">
         A mix of shipped work and the kinds of builds clients bring to us most
         often: product concepts, marketing pages, and business websites that
         need to feel polished from day one.

@@ -9,7 +9,7 @@ export default function OurJourney() {
         <h2 className="mb-1 text-5xl font-light text-white">How We Work</h2>
         <Image src={RedDots} alt="Red Dots" />
       </div>
-      <p className="mt-3 w-lg text-sm text-white">
+      <p className="mt-3 max-w-lg text-sm text-white">
         Good work is easier to ship when the process is clear. We keep the
         project focused, communicate early, and build with performance and real
         users in mind.
@@ -18,7 +18,7 @@ export default function OurJourney() {
         <Image
           src={journey}
           alt="Our process timeline"
-          className="absolute mt-10 w-full"
+          className="absolute top-10 w-full"
         />
         <div className="relative grid grid-cols-1 ps-18 pt-24 md:grid-cols-2">
           <div>

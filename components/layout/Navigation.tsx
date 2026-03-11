@@ -15,14 +15,16 @@ export default function Navigation({ className }: { className?: string }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
+  const isActiveLink = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <>
       <nav className={`hidden items-center gap-8 lg:flex ${className}`}>
         {navItems.map((item) => {
-          const isActive =
-            item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+          const isActive = isActiveLink(item.href);
 
           return (
             <Link
@@ -58,18 +60,22 @@ export default function Navigation({ className }: { className?: string }) {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={() => setIsOpen(false)}
-            className={`text-2xl font-light ${
-              pathname === item.href ? "text-red-active" : "text-white"
-            }`}
-          >
-            {item.label}
-          </Link>
-        ))}
+        {navItems.map((item) => {
+          const isActive = isActiveLink(item.href);
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setIsOpen(false)}
+              className={`text-2xl font-light ${
+                isActive ? "text-red-active" : "text-white"
+              }`}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
       </div>
     </>
   );
