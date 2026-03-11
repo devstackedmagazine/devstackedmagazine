@@ -1,28 +1,28 @@
-﻿import styles from "./about.module.css";
+import styles from "./about.module.css";
 
 const JOURNEY_STEPS = [
   {
     id: 1,
     title: "Discover",
-    copy: "Piza ipsum dolor meat lovers buffalo. Extra broccoli parmesan.",
+    copy: "We begin with the offer, the audience, and the exact job the site needs to do.",
     className: styles.nodeOne,
   },
   {
     id: 2,
-    title: "Discover",
-    copy: "Piza ipsum dolor meat lovers buffalo. Extra broccoli parmesan.",
+    title: "Shape",
+    copy: "Then we organize content, direction, and visual hierarchy so the page can carry a clear message.",
     className: styles.nodeTwo,
   },
   {
     id: 3,
-    title: "Discover",
-    copy: "Piza ipsum dolor meat lovers buffalo. Extra broccoli parmesan.",
+    title: "Build",
+    copy: "Development stays clean and responsive, with performance, accessibility, and maintainability in view.",
     className: styles.nodeThree,
   },
   {
     id: 4,
-    title: "Discover",
-    copy: "Piza ipsum dolor meat lovers buffalo. Extra broccoli parmesan.",
+    title: "Refine",
+    copy: "Before launch, we tighten the details that make the final experience feel deliberate instead of rushed.",
     className: styles.nodeFour,
   },
 ];
@@ -33,9 +33,10 @@ export default function JourneySection() {
       <div className={styles.sectionHeadingStack}>
         <h2 className={styles.sectionTitle}>Our Journey</h2>
         <p className={styles.sectionLeadFull}>
-          Piza ipsum dolor meat lovers buffalo. Extra broccoli parmesan risotto
-          garlic dolor sauce marinara Chicago marinara. Tomato dolor pesto
-          pesto bianca basil all limone.
+          We are less interested in inflated agency language than in doing the
+          work well. Every project moves through research, direction, build, and
+          refinement with the goal of making the final product clear, fast, and
+          useful.
         </p>
       </div>
 

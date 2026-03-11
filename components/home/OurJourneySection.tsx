@@ -4,90 +4,55 @@ import journey from "@/public/styles/journey.svg";
 
 export default function OurJourney() {
   return (
-    <section className="min-h-screen py-20">
+    <section id="process" className="min-h-screen py-20">
       <div className="flex items-center gap-2">
-        <h1 className="text-white text-5xl font-light mb-1">Our Journey</h1>
+        <h2 className="mb-1 text-5xl font-light text-white">How We Work</h2>
         <Image src={RedDots} alt="Red Dots" />
       </div>
-      <p className="text-white text-sm w-lg mt-3">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa laboriosam
-        tenetur ducimus quibusdam voluptas nam commodi rem, exercitationem et
-        odit.
+      <p className="mt-3 max-w-lg text-sm text-white">
+        Good work is easier to ship when the process is clear. We keep the
+        project focused, communicate early, and build with performance and real
+        users in mind.
       </p>
-      <div className="mt-10 relative text-white">
+      <div className="relative mt-10 text-white">
         <Image
           src={journey}
-          alt="Our Journey"
-          className="w-full mt-10 absolute"
+          alt="Our process timeline"
+          className="absolute top-10 w-full"
         />
-        <div className="relative ps-18 pt-24 grid grid-cols-1 md:grid-cols-2">
-          <div className="">
-            <h2 className="text-xl font-light mb-2">The Idea</h2>
-            <p className="font-thin w-1/2">
-              We started with a simple idea: build clean, modern digital
-              experiences that solve real problems.
+        <div className="relative grid grid-cols-1 ps-18 pt-24 md:grid-cols-2">
+          <div>
+            <h3 className="mb-2 text-xl font-light">Discovery</h3>
+            <p className="w-1/2 font-thin">
+              We start by understanding the offer, the audience, and what the
+              site needs to do beyond simply looking good.
             </p>
           </div>
-          <div className="">
-            <h2 className="text-xl font-light mb-2">Planning & Development</h2>
-            <p className="font-thin w-1/2">
-              Through research, design, and continuous learning, we turned ideas
-              into functional and scalable solutions.
+          <div>
+            <h3 className="mb-2 text-xl font-light">Direction</h3>
+            <p className="w-1/2 font-thin">
+              Then we shape the page structure, visual rhythm, and content flow
+              so every section has a clear job.
             </p>
           </div>
         </div>
-        <div className="relative pt-10 flex justify-end items-start gap-50">
+        <div className="relative flex items-start justify-end gap-50 pt-10">
           <div className="inline-block">
-            <h2 className="text-xl font-light mb-2">Growth & Optimization</h2>
-            <p className="font-thin max-w-sm">
-              With each project, we refined our workflow, improved performance,
-              and focused on user experience.
+            <h3 className="mb-2 text-xl font-light">Build</h3>
+            <p className="max-w-sm font-thin">
+              Development stays lean and deliberate, with responsive layouts,
+              accessible markup, and performance considered from the start.
             </p>
           </div>
           <div className="inline-block">
-            <h2 className="text-xl font-light mb-2">Delivery & Impact</h2>
-            <p className="font-thin max-w-xs">
-              Today, we deliver responsive, reliable, and user-focused products
-              that make an impact.
+            <h3 className="mb-2 text-xl font-light">Refine</h3>
+            <p className="max-w-xs font-thin">
+              Before launch, we tighten copy, polish interactions, and clean up
+              technical details that help the finished site hold up in the wild.
             </p>
           </div>
         </div>
       </div>
-      {/* <div className="h-full relative pt-14">
-        <Image
-          src={journeyLines}
-          alt="Journey Lines"
-          className="hidden md:block absolute w-4xl object-contain pointer-events-none ms-5"
-        />
-        <div className="relative h-[300px] grid grid-cols-1 gap-x-24 gap-y-20">
-          <div className="flex justify-between items-start mt-10 w-1/2">
-            <Image
-              src={firstpoint}
-              alt="First Point"
-              className="max-w-md justify-self-start"
-            />
-
-            <Image
-              src={secondpoint}
-              alt="Second Point"
-              className="max-w-md justify-self-end"
-            />
-          </div>
-          <div className="flex justify-between items-end w-1/2 mx-auto">
-            <Image
-              src={thirdpoint}
-              alt="Third Point"
-              className="max-w-md justify-self-start"
-            />
-
-            <Image
-              src={fourthpoint}
-              alt="Fourth Point"
-              className="max-w-md justify-self-end"
-            />
-          </div>
-        </div>
-      </div> */}
     </section>
   );
 }
