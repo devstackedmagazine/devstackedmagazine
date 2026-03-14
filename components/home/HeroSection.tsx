@@ -7,8 +7,8 @@ export default function HeroSection() {
     <section className="min-h-[calc(100vh-7rem)] relative flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 from-background via-background to-red-active/10 -z-10" />
       <div className="container">
-        <div className="">
-          <h1 className="text-5xl md:text-6xl lg:text-6xl font-semi text-white mb-6 leading-tight sm:w-3/4">
+        <div className="relative">
+          <h1 className="text-5xl md:text-6xl lg:text-8xl font-semi text-white mb-6 leading-tight sm:w-3/4 lg:w-full">
             Turning <span className="bg-clip-text text-red-active">Ideas </span>
             Into Digital Reality
           </h1>
@@ -50,13 +50,18 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      {/* <div className="hidden sm:block"> */}
       <Image
         src={heroImage}
         alt="Hero Image"
         className="hidden sm:block h-[350px] lg:h-[550px] "
       />
-      {/* </div> */}
+      <span
+        className="
+           absolute left-0 top-20 text-[25rem] leading-none tracking-[0.08em] uppercase select-none text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)] opacity-25
+         "
+      >
+        DEVSTACKED
+      </span>
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <svg
           className="w-6 h-6 text-white/40"

@@ -12,69 +12,42 @@ export function EmailTemplate({ fullName, email, discussion }: EmailTemplateProp
   });
 
   return (
-    <div
-      style={{
-        margin: "0 auto",
-        maxWidth: "640px",
-        backgroundColor: "#0A0A0A",
-        borderRadius: "24px",
-        border: "1px solid #1F1F1F",
-        padding: "28px",
-        fontFamily: "Helvetica, Arial, sans-serif",
-        color: "#FFFFFF",
-      }}
-    >
-      <p
-        style={{
-          margin: "0 0 8px 0",
-          fontSize: "13px",
-          letterSpacing: "0.08em",
-          textTransform: "uppercase",
-          color: "#F87171",
-          fontWeight: 700,
-        }}
-      >
+    <div className="mx-auto max-w-[640px] bg-[#0A0A0A] rounded-[24px] border border-[#1F1F1F] p-[28px] font-sans text-white">
+      <p className="m-0 mb-2 text-[13px] tracking-[0.08em] uppercase text-[#F87171] font-bold">
         New Contact Request
       </p>
-      <h1
-        style={{
-          margin: "0 0 24px 0",
-          fontSize: "30px",
-          lineHeight: "1.2",
-          fontWeight: 700,
-        }}
-      >
-        Reach Out Let&apos;s <span style={{ color: "#EF4444" }}>Collaborate</span>
+      <h1 className="m-0 mb-6 text-[30px] leading-[1.2] font-bold">
+        Reach Out Let&apos;s <span className="text-[#EF4444]">Collaborate</span>
       </h1>
 
-      <div style={{ marginBottom: "14px", borderRadius: "16px", backgroundColor: "#111111", padding: "16px" }}>
-        <p style={{ margin: "0 0 6px 0", color: "#F87171", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+      <div className="mb-[14px] rounded-2xl bg-[#111111] p-4">
+        <p className="m-0 mb-[6px] text-[#F87171] text-xs uppercase tracking-[0.06em]">
           Full Name
         </p>
-        <p style={{ margin: 0, fontSize: "16px", fontWeight: 600 }}>{fullName}</p>
+        <p className="m-0 text-base font-semibold">{fullName}</p>
       </div>
 
-      <div style={{ marginBottom: "14px", borderRadius: "16px", backgroundColor: "#111111", padding: "16px" }}>
-        <p style={{ margin: "0 0 6px 0", color: "#F87171", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+      <div className="mb-[14px] rounded-2xl bg-[#111111] p-4">
+        <p className="m-0 mb-[6px] text-[#F87171] text-xs uppercase tracking-[0.06em]">
           Email
         </p>
-        <p style={{ margin: 0, fontSize: "16px", fontWeight: 600 }}>{email}</p>
+        <p className="m-0 text-base font-semibold">{email}</p>
       </div>
 
-      <div style={{ marginBottom: "18px", borderRadius: "16px", backgroundColor: "#111111", padding: "16px" }}>
-        <p style={{ margin: "0 0 6px 0", color: "#F87171", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+      <div className="mb-[18px] rounded-2xl bg-[#111111] p-4">
+        <p className="m-0 mb-[6px] text-[#F87171] text-xs uppercase tracking-[0.06em]">
           Discussion
         </p>
-        <p style={{ margin: 0, fontSize: "16px", whiteSpace: "pre-wrap", lineHeight: "1.6", color: "#E5E5E5" }}>
+        <p className="m-0 text-base whitespace-pre-wrap leading-[1.6] text-[#E5E5E5]">
           {discussion}
         </p>
       </div>
 
-      <p style={{ margin: 0, fontSize: "12px", color: "#A3A3A3" }}>
+      <p className="m-0 text-xs text-[#A3A3A3]">
         Submitted at {submittedAt}
       </p>
-      <div style={{ marginTop: "14px", height: "2px", width: "120px", background: "linear-gradient(90deg, #EF4444 0%, transparent 100%)" }} />
-      <p style={{ margin: "14px 0 0 0", fontSize: "12px", color: "#737373" }}>
+      <div className="mt-[14px] h-[2px] w-[120px] bg-gradient-to-r from-[#EF4444] to-transparent" />
+      <p className="m-0 mt-[14px] text-xs text-[#737373]">
         Message generated from devstackedmagazine.com contact form.
       </p>
     </div>
