@@ -1,9 +1,13 @@
+"use client";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { motion } from "framer-motion";
+import { variants, viewportConfig } from "@/lib/motion-presets";
 
 const items = [
   {
@@ -40,19 +44,26 @@ const items = [
 
 export default function FaqSection() {
   return (
-    <section>
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportConfig}
+      variants={variants.staggerContainer}
+    >
       <Accordion
         type="multiple"
         defaultValue={["item-1"]}
         className="w-full my-20"
       >
         {items.map((item) => (
-          <AccordionItem key={item.value} value={item.value}>
-            <AccordionTrigger>{item.trigger}</AccordionTrigger>
-            <AccordionContent>{item.content}</AccordionContent>
-          </AccordionItem>
+          <motion.div key={item.value} variants={variants.fadeInUp}>
+            <AccordionItem value={item.value}>
+              <AccordionTrigger>{item.trigger}</AccordionTrigger>
+              <AccordionContent>{item.content}</AccordionContent>
+            </AccordionItem>
+          </motion.div>
         ))}
       </Accordion>
-    </section>
+    </motion.section>
   );
 }
