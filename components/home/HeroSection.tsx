@@ -1,22 +1,41 @@
+"use client";
+
 import Button from "@/components/ui/Button";
 import Image from "next/image";
 import heroImage from "@/public/images/home/heroImage.svg";
+import { motion } from "framer-motion";
+import { variants, viewportConfig } from "@/lib/motion-presets";
 
 export default function HeroSection() {
   return (
     <section className="min-h-[calc(100vh-7rem)] relative flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 from-background via-background to-red-active/10 -z-10" />
       <div className="container">
-        <div className="">
-          <h1 className="text-5xl md:text-6xl lg:text-6xl font-semi text-white mb-6 leading-tight sm:w-3/4">
+        <motion.div 
+          className="relative"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={variants.staggerContainer}
+        >
+          <motion.h1 
+            variants={variants.fadeInUp}
+            className="text-5xl md:text-6xl lg:text-8xl font-semi text-white mb-6 leading-tight sm:w-3/4 lg:w-full"
+          >
             Turning <span className="bg-clip-text text-red-active">Ideas </span>
             Into Digital Reality
-          </h1>
-          <p className="text-lg text-white/80 mb-8 max-w-2xl">
+          </motion.h1>
+          <motion.p 
+            variants={variants.fadeInUp}
+            className="text-md text-white/80 mb-8 max-w-2xl"
+          >
             Join thousands of developers creating amazing projects with our
             cutting-edge tools and resources.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          </motion.p>
+          <motion.div 
+            variants={variants.fadeInUp}
+            className="flex flex-col sm:flex-row gap-4"
+          >
             <Button variant="primary" size="md">
               Start a project
             </Button>
@@ -47,17 +66,38 @@ export default function HeroSection() {
             >
               See our work
             </Button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-      {/* <div className="hidden sm:block"> */}
-      <Image
-        src={heroImage}
-        alt="Hero Image"
-        className="hidden sm:block h-[350px] lg:h-[550px] "
-      />
-      {/* </div> */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={variants.scaleUp}
+        className="hidden sm:block"
+      >
+        <Image
+          src={heroImage}
+          alt="Hero Image"
+          className="h-[350px] lg:h-[550px]"
+        />
+      </motion.div>
+      <motion.span
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 0.25, x: 0 }}
+        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+        className="
+           absolute left-0 top-20 text-[25rem] leading-none tracking-[0.08em] uppercase select-none text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)]
+         "
+      >
+        DEVSTACKED
+      </motion.span>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+      >
         <svg
           className="w-6 h-6 text-white/40"
           fill="none"
@@ -71,7 +111,7 @@ export default function HeroSection() {
             d="M19 14l-7 7m0 0l-7-7m7 7V3"
           />
         </svg>
-      </div>
+      </motion.div>
     </section>
   );
 }
