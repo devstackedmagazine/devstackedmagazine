@@ -5,6 +5,9 @@ import Image from "next/image";
 import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
 import StatsSection from "@/components/StatsSection";
 import CtaSection from "@/components/CtaSection";
+import { motion } from "framer-motion";
+import { variants, viewportConfig } from "@/lib/motion-presets";
+import redDots from "@/public/styles/red-dots.svg";
 
 const contactDetails = [
   "Email: devstackedmagazine@gmail.com",
@@ -164,24 +167,45 @@ export default function Contact() {
         className="pointer-events-none absolute -bottom-72 -left-80 h-215 w-215 rotate-24 opacity-34"
       />
 
-      <DotCluster className="pointer-events-none absolute right-[20%] top-[16%] opacity-95" />
+      <Image src={redDots} alt="Red dots styling" className="pointer-events-none absolute -right-64 -top-64 h-215 w-215 rotate-168 opacity-10" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="relative mb-14 pt-5 text-center sm:mb-18 sm:pt-8">
-          <p className="pointer-events-none absolute inset-x-0 top-[58%] -translate-y-1/2 text-[24vw] font-semibold leading-none text-white/6 sm:text-[16vw] lg:text-[15rem]">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={variants.staggerContainer}
+          className="relative mb-14 pt-5 text-center sm:mb-18 sm:pt-8"
+        >
+          <motion.p
+            variants={variants.fadeInDown}
+            className="pointer-events-none absolute inset-x-0 top-[58%] -translate-y-1/2 text-[24vw] font-semibold leading-none text-white/6 sm:text-[16vw] lg:text-[15rem]"
+          >
             Contact
-          </p>
+          </motion.p>
 
-          <h1 className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl">
+          <motion.h1
+            variants={variants.fadeInUp}
+            className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl"
+          >
             Reach Out Let&apos;s
-          </h1>
-          <p className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl">
+          </motion.h1>
+          <motion.p
+            variants={variants.fadeInUp}
+            className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl"
+          >
             Collaborate
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.03fr)] lg:gap-14">
-          <article className="lg:pt-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={variants.staggerContainer}
+          className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.03fr)] lg:gap-14"
+        >
+          <motion.article variants={variants.fadeInUp} className="lg:pt-3">
             <h2 className="text-3xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
               Let&apos;s Talk About Your Idea
             </h2>
@@ -199,9 +223,12 @@ export default function Contact() {
                 </li>
               ))}
             </ul>
-          </article>
+          </motion.article>
 
-          <div className="rounded-3xl bg-black/5 p-4 sm:p-6 lg:p-7">
+          <motion.div
+            variants={variants.scaleUp}
+            className="rounded-3xl bg-black/5 p-4 sm:p-6 lg:p-7"
+          >
             <form className="space-y-4" onSubmit={handleSubmit}>
               <input
                 type="text"
@@ -249,8 +276,8 @@ export default function Contact() {
                 {isSubmitting ? "Sending..." : "Get in Touch"}
               </button>
             </form>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         <StatsSection className="mt-10 mb-50" />
         <CtaSection />
       </div>
