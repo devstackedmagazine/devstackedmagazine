@@ -80,6 +80,7 @@ export default function HeroSection() {
           src={heroImage}
           alt="Hero Image"
           className="h-[350px] lg:h-[550px]"
+          priority
         />
       </motion.div>
       <motion.span
