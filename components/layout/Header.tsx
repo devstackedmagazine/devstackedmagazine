@@ -10,7 +10,7 @@ import { variants } from "@/lib/motion-presets";
 
 export default function Header() {
   return (
-    <motion.header 
+    <motion.header
       initial="hidden"
       animate="visible"
       variants={variants.fadeInDown}
@@ -23,9 +23,9 @@ export default function Header() {
         <Navigation />
       </div>
       <div className="flex items-center gap-6">
-        <Button className="!hidden sm:!block white-space-nowrap">
-          Get In Touch
-        </Button>
+        <Link href="/contact" className="!hidden sm:!block">
+          <Button className="white-space-nowrap">Get In Touch</Button>
+        </Link>
         <Navigation className="lg:hidden" />
       </div>
     </motion.header>
