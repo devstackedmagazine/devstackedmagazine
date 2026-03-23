@@ -69,6 +69,7 @@ export default function OurProjectsSection() {
                 alt={project.name}
                 className="object-cover w-full h-auto transition-transform duration-500 group-hover:scale-105"
                 draggable={false}
+                loading="lazy"
               />
               <div
                 className="pointer-events-none absolute inset-0 backdrop-blur-md transition-all duration-500
