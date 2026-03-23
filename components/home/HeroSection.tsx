@@ -8,31 +8,31 @@ import { variants, viewportConfig } from "@/lib/motion-presets";
 
 export default function HeroSection() {
   return (
-    <section className="min-h-[calc(100vh-7rem)] relative flex items-center justify-center overflow-hidden">
+    <section className="min-h-[calc(100vh-7rem)] -mt-8 md:mt-0 relative flex items-center justify-center gap-10 overflow-hidden">
       <div className="absolute inset-0 from-background via-background to-red-active/10 -z-10" />
       <div className="container">
-        <motion.div 
+        <motion.div
           className="relative"
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
           variants={variants.staggerContainer}
         >
-          <motion.h1 
+          <motion.h1
             variants={variants.fadeInUp}
             className="text-5xl md:text-6xl lg:text-8xl font-semi text-white mb-6 leading-tight sm:w-3/4 lg:w-full"
           >
             Turning <span className="bg-clip-text text-red-active">Ideas </span>
             Into Digital Reality
           </motion.h1>
-          <motion.p 
+          <motion.p
             variants={variants.fadeInUp}
             className="text-md text-white/80 mb-8 max-w-2xl"
           >
             Join thousands of developers creating amazing projects with our
             cutting-edge tools and resources.
           </motion.p>
-          <motion.div 
+          <motion.div
             variants={variants.fadeInUp}
             className="flex flex-col sm:flex-row gap-4"
           >
@@ -92,7 +92,7 @@ export default function HeroSection() {
       >
         DEVSTACKED
       </motion.span>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
