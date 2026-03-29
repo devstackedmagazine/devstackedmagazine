@@ -20,26 +20,15 @@ export const stats = [
   },
 ];
 
-export default function StatsSection() {
+export default function StatsSection({
+  className = "",
+}: {
+  className?: string;
+}) {
   return (
-    // <div className="h-28 flex items-center justify-between">
-    //   <Image src={RedDots} alt="Red Dots styling" />
-    //   {stats.map((stat) => (
-    //     <div className="text-white flex items-center gap-4" key={stat.label}>
-    //       <div className="text-6xl font-semibold">{stat.value}</div>
-    //       <p className="text-gray-300">
-    //         {stat.label.split(" ").map((word, index) => (
-    //           <span key={index}>
-    //             {word}
-    //             <br />
-    //           </span>
-    //         ))}
-    //       </p>
-    //     </div>
-    //   ))}
-    //   <Image src={RedDots} alt="Red Dots styling" />
-    // </div>
-    <div className="min-h-[7rem] py-8 md:py-0 flex flex-col md:flex-row items-center justify-center md:justify-between gap-8 md:gap-4">
+    <div
+      className={`min-h-[7rem] py-8 md:py-0 flex flex-col md:flex-row items-center justify-center md:justify-between gap-8 md:gap-4 ${className}`}
+    >
       <Image
         src={RedDots}
         alt="Red Dots styling"
