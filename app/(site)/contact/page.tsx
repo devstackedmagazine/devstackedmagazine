@@ -205,7 +205,7 @@ export default function Contact() {
           <h1 className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl">
             Reach Out. Let&apos;s
           </h1>
-          <p className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl">
+          <motion.p className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl">
             Collaborate
           </motion.p>
         </motion.div>
@@ -254,7 +254,7 @@ export default function Contact() {
               </a>
               .
             </p>
-          </article>
+          </motion.article>
 
           <motion.div
             variants={variants.scaleUp}
@@ -310,8 +310,8 @@ export default function Contact() {
                 {isSubmitting ? "Sending..." : "Get in Touch"}
               </button>
             </form>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         <div className="mt-16 border-t border-dashed border-white/25 pt-8 sm:mt-20 sm:pt-10">
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-6 lg:gap-10">
