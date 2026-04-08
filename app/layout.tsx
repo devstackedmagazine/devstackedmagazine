@@ -181,7 +181,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      {/* 3. Combined both font variables in the body using cn() */}
       <body className={cn(geist.variable, nunito.variable, "antialiased")}>
         <main className="px-[20px] sm:px-[50px] lg:px-[100px] overflow-clip">
           <Header />

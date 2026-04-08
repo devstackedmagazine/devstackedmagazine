@@ -38,10 +38,7 @@ function DotCluster({ className = "" }: { className?: string }) {
   return (
     <div className={`grid grid-cols-3 gap-1 ${className}`}>
       {Array.from({ length: 9 }, (_, index) => (
-        <span
-          key={index}
-          className="h-2.5 w-2.5 rounded-full bg-red-active"
-        />
+        <span key={index} className="h-2.5 w-2.5 rounded-full bg-red-active" />
       ))}
     </div>
   );
@@ -185,7 +182,11 @@ export default function Contact() {
         className="pointer-events-none absolute -bottom-72 -left-80 h-215 w-215 rotate-24 opacity-34"
       />
 
-      <Image src={redDots} alt="Red dots styling" className="pointer-events-none absolute -right-64 -top-64 h-215 w-215 rotate-168 opacity-10" />
+      <Image
+        src={redDots}
+        alt="Red dots styling"
+        className="pointer-events-none absolute -right-64 -top-64 h-215 w-215 rotate-168 opacity-10"
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div
@@ -235,7 +236,9 @@ export default function Contact() {
                   <a
                     href={item.href}
                     target={item.href.startsWith("http") ? "_blank" : undefined}
-                    rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                    rel={
+                      item.href.startsWith("http") ? "noreferrer" : undefined
+                    }
                     className="transition-colors hover:text-red-active"
                   >
                     {item.label}: {item.value}
