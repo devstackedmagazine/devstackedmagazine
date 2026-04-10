@@ -9,7 +9,7 @@ import { variants, viewportConfig } from "@/lib/motion-presets";
 
 export default function HeroSection() {
   return (
-    <section className="min-h-[calc(100vh-7rem)] -mt-8 md:mt-0 relative flex items-center justify-center gap-10 overflow-hidden">
+    <section className="min-h-[calc(100vh-7rem)] -mt-8 relative flex items-center justify-center gap-10 overflow-hidden">
       <div className="absolute inset-0 from-background via-background to-red-active/10 -z-10" />
       <div className="container">
         <motion.div
@@ -80,7 +80,7 @@ export default function HeroSection() {
         <Image
           src={heroImage}
           alt="Hero Image"
-          className="h-[350px] lg:h-[550px]"
+          className="h-[400px] lg:h-[700px] select-none w-full "
           priority
         />
       </motion.div>

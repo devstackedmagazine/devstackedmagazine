@@ -33,7 +33,7 @@ export default function Page() {
         <Image
           src={heroImage}
           alt="Hero Image"
-          className="h-full w-auto"
+          className="h-full w-auto select-none"
         />
       </motion.div>
     </motion.div>
