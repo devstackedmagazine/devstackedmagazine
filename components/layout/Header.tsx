@@ -1,8 +1,10 @@
 "use client";
 
 import Navigation from "../layout/Navigation";
+// @ts-ignore
 import Logo from "@/public/logos/devstacked-horizontally.svg";
 import Button from "../ui/Button";
+import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { variants } from "@/lib/motion-presets";
