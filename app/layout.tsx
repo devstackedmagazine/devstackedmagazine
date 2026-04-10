@@ -88,9 +88,7 @@ export default function RootLayout({
     >
       <body className={`${nunito.variable} antialiased`}>
         <main className="px-[20px] sm:px-[50px] lg:px-[100px] overflow-clip">
-          <Header />
           {children}
-          <Footer />
         </main>
       </body>
     </html>
