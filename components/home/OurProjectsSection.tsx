@@ -9,42 +9,55 @@ import { variants, viewportConfig } from "@/lib/motion-presets";
 const projects = [
   {
     name: "Quickit",
-    description: "A focused product concept designed around speed, clarity, and AI-assisted workflows.",
+    description:
+      "A focused product concept designed around speed, clarity, and AI-assisted workflows.",
     image: Project,
   },
   {
     name: "Landing Pages",
-    description: "Conversion-minded pages built to explain an offer quickly and move visitors toward action.",
+    description:
+      "Conversion-minded pages built to explain an offer quickly and move visitors toward action.",
     image: Project,
   },
   {
     name: "Business Websites",
-    description: "Clean, flexible sites for teams that need a sharper online presence without unnecessary complexity.",
+    description:
+      "Clean, flexible sites for teams that need a sharper online presence without unnecessary complexity.",
     image: Project,
   },
   {
     name: "Product MVPs",
-    description: "Lean interfaces for startups and internal tools that need to be useful from the first release.",
+    description:
+      "Lean interfaces for startups and internal tools that need to be useful from the first release.",
     image: Project,
   },
 ];
 
 export default function OurProjectsSection() {
   return (
-    <section id="projects" className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+    <section
+      id="projects"
+      className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden"
+    >
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={viewportConfig}
         variants={variants.staggerContainer}
       >
-        <motion.div variants={variants.fadeInUp} className="flex justify-center md:justify-start items-center gap-2">
+        <motion.div
+          variants={variants.fadeInUp}
+          className="flex justify-center md:justify-start items-center gap-2"
+        >
           <h2 className="text-white text-center sm:text-left text-3xl md:text-5xl font-light mb-1">
             What We Build
           </h2>
           <Image src={RedDots} alt="Red Dots" />
         </motion.div>
-        <motion.p variants={variants.fadeInUp} className="text-white text-center text-sm sm:text-left sm:max-w-lg mt-3 mx-auto sm:mx-0">
+        <motion.p
+          variants={variants.fadeInUp}
+          className="text-white text-center text-sm sm:text-left sm:max-w-lg mt-3 mx-auto sm:mx-0"
+        >
           A mix of shipped work and the kinds of builds clients bring to us most
           often: product concepts, marketing pages, and business websites that
           need to feel polished from day one.
@@ -73,10 +86,10 @@ export default function OurProjectsSection() {
               group-hover:[mask-image:linear-gradient(to_top,black_0%,black_30%,transparent_60%)]
               "
               />
-              <h3 className="absolute bottom-8 left-4 md:left-6 md:bottom-10 text-white text-2xl md:text-3xl font-semibold transition-transform duration-300 group-hover:-translate-y-1">
+              <h3 className="absolute left-4 md:left-6 md:bottom-10 lg:bottom-18 text-white text-2xl md:text-3xl font-semibold transition-transform duration-300 group-hover:-translate-y-1">
                 {project.name}
               </h3>
-              <p className="absolute bottom-3 left-4 md:left-6 md:bottom-4 text-white text-sm md:text-base opacity-80 transition-all duration-300 group-hover:-translate-y-1 group-hover:opacity-100">
+              <p className="absolute bottom-4 left-4 md:left-6 md:bottom-4 text-white text-sm md:text-base opacity-80 transition-all duration-300 group-hover:-translate-y-1 group-hover:opacity-100">
                 {project.description}
               </p>
             </motion.article>
