@@ -10,10 +10,39 @@ import { variants, viewportConfig } from "@/lib/motion-presets";
 import redDots from "@/public/styles/red-dots.svg";
 
 const contactDetails = [
-  "Email: devstackedmagazine@gmail.com",
-  "Instagram: devstackedmagazine",
-  "Tiktok: devstackedmagazine",
+  {
+    label: "Email",
+    value: "devstackedmagazine@gmail.com",
+    href: "mailto:devstackedmagazine@gmail.com",
+  },
+  {
+    label: "Instagram",
+    value: "@devstackedmagazine",
+    href: "https://www.instagram.com/devstackedmagazine/",
+  },
+  {
+    label: "TikTok",
+    value: "@devstackedmagazine",
+    href: "https://www.tiktok.com/@devstackedmagazine",
+  },
 ];
+
+const stats = [
+  { value: "150+", label: "Projects Completed" },
+  { value: "98%", label: "Client Satisfaction" },
+  { value: "5+", label: "Years of Experience" },
+  { value: "24/7", label: "Support Available" },
+];
+
+function DotCluster({ className = "" }: { className?: string }) {
+  return (
+    <div className={`grid grid-cols-3 gap-1 ${className}`}>
+      {Array.from({ length: 9 }, (_, index) => (
+        <span key={index} className="h-2.5 w-2.5 rounded-full bg-red-active" />
+      ))}
+    </div>
+  );
+}
 
 type ContactFormData = {
   fullName: string;
@@ -95,7 +124,7 @@ export default function Contact() {
     setSubmitMessage(null);
 
     try {
-      const response = await fetch("/contact/api/send", {
+      const response = await fetch("/api/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -153,7 +182,11 @@ export default function Contact() {
         className="pointer-events-none absolute -bottom-72 -left-80 h-215 w-215 rotate-24 opacity-34"
       />
 
-      <Image src={redDots} alt="Red dots styling" className="pointer-events-none absolute -right-64 -top-64 h-215 w-215 rotate-168 opacity-10" />
+      <Image
+        src={redDots}
+        alt="Red dots styling"
+        className="pointer-events-none absolute -right-64 -top-64 h-215 w-215 rotate-168 opacity-10"
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div
@@ -170,16 +203,10 @@ export default function Contact() {
             Contact
           </motion.p>
 
-          <motion.h1
-            variants={variants.fadeInUp}
-            className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl"
-          >
-            Reach Out Let&apos;s
-          </motion.h1>
-          <motion.p
-            variants={variants.fadeInUp}
-            className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl"
-          >
+          <h1 className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl">
+            Reach Out. Let&apos;s
+          </h1>
+          <motion.p className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl">
             Collaborate
           </motion.p>
         </motion.div>
@@ -193,22 +220,43 @@ export default function Contact() {
         >
           <motion.article variants={variants.fadeInUp} className="lg:pt-3">
             <h2 className="text-3xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-              Let&apos;s Talk About Your Idea
+              Tell Us What You&apos;re Building
             </h2>
             <p className="mt-5 max-w-[57ch] text-sm leading-8 text-white/80 sm:text-base">
-              Pizza ipsum dolor meat lovers buffalo. Extra broccoli parmesan
-              ricotta garlic dolor sauce marinara Chicago marinara. Tomato dolor
-              pesto pesto Bianca pesto roll onions.
+              Use this page to start a project conversation, ask about a site
+              refresh, or reach out about a landing page that needs better
+              structure and stronger execution. A short brief is enough to get
+              the conversation moving.
             </p>
 
             <ul className="mt-9 space-y-4 text-sm text-white/95 sm:text-lg">
               {contactDetails.map((item) => (
-                <li key={item} className="flex items-center gap-3">
+                <li key={item.label} className="flex items-center gap-3">
                   <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white/80" />
-                  <span className="min-w-0 break-all">{item}</span>
+                  <a
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      item.href.startsWith("http") ? "noreferrer" : undefined
+                    }
+                    className="transition-colors hover:text-red-active"
+                  >
+                    {item.label}: {item.value}
+                  </a>
                 </li>
               ))}
             </ul>
+
+            <p className="mt-8 max-w-[52ch] text-sm leading-7 text-white/65 sm:text-base">
+              Prefer email? You can also write directly to{" "}
+              <a
+                href="mailto:devstackedmagazine@gmail.com"
+                className="text-white underline decoration-white/30 underline-offset-4 transition-colors hover:text-red-active"
+              >
+                devstackedmagazine@gmail.com
+              </a>
+              .
+            </p>
           </motion.article>
 
           <motion.div
@@ -223,6 +271,7 @@ export default function Contact() {
                 value={formData.fullName}
                 onChange={handleInputChange}
                 required
+                autoComplete="name"
                 className="h-13 w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-14.5 sm:text-base"
               />
               <input
@@ -232,11 +281,12 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
+                autoComplete="email"
                 className="h-13 w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-14.5 sm:text-base"
               />
               <textarea
                 name="discussion"
-                placeholder="Discussion"
+                placeholder="Tell us about your project"
                 value={formData.discussion}
                 onChange={handleInputChange}
                 required
@@ -244,6 +294,7 @@ export default function Contact() {
               />
               {submitMessage && (
                 <p
+                  aria-live="polite"
                   className={`text-sm ${
                     submitMessage.type === "success"
                       ? "text-green-300"
@@ -264,8 +315,25 @@ export default function Contact() {
             </form>
           </motion.div>
         </motion.div>
-        <StatsSection className="mt-10 mb-50" />
-        <CtaSection />
+
+        <div className="mt-16 border-t border-dashed border-white/25 pt-8 sm:mt-20 sm:pt-10">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-6 lg:gap-10">
+            {stats.map((item, index) => (
+              <div key={item.label} className="flex items-start gap-4">
+                {index === 0 && <DotCluster className="mt-1 hidden sm:grid" />}
+                <div>
+                  <p className="text-4xl font-semibold leading-none sm:text-5xl">
+                    {item.value}
+                  </p>
+                  <p className="mt-2 text-sm leading-tight text-white/85 sm:text-base">
+                    {item.label}
+                  </p>
+                </div>
+                {index === 3 && <DotCluster className="mt-1 hidden sm:grid" />}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
