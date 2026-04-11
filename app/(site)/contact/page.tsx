@@ -159,7 +159,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="relative my-8 -mx-25 px-4 py-10 text-white sm:my-10 sm:px-8 sm:py-14 lg:px-16 lg:py-18">
+    <section className="relative my-8 -mx-[20px] overflow-x-clip px-4 py-10 text-white sm:my-10 sm:-mx-[50px] sm:px-8 sm:py-14 lg:-mx-[100px] lg:px-16 lg:py-18">
       <div className="pointer-events-none absolute -inset-20">
         <div className="absolute -left-28 top-8 h-90 w-90 rounded-full bg-red-active/30 blur-[120px]" />
         <div className="absolute left-[32%] top-[18%] h-70 w-70 rounded-full bg-red-active/18 blur-[110px]" />
