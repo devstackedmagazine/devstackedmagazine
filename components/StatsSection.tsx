@@ -3,16 +3,16 @@ import Image from "next/image";
 
 export const stats = [
   {
-    value: "150+",
-    label: "Completed Projects",
+    value: "20+",
+    label: "Projects Goal for Year One",
   },
   {
     value: "98%",
-    label: "Client Satisfaction",
+    label: "Client Satisfaction Target",
   },
   {
-    value: "5+",
-    label: "Years Experience",
+    value: "10+",
+    label: "Technologies We Work With",
   },
   {
     value: "24/7",
@@ -43,12 +43,8 @@ export default function StatsSection({
             <div className="text-4xl md:text-5xl xl:text-6xl font-semibold">
               {stat.value}
             </div>
-            <p className="text-sm md:text-base text-gray-300 leading-tight">
-              {stat.label.split(" ").map((word, index) => (
-                <span key={index} className="block">
-                  {word}
-                </span>
-              ))}
+            <p className="max-w-[13ch] text-sm leading-tight text-gray-300 text-center md:text-center lg:text-left md:text-base">
+              {stat.label}
             </p>
           </div>
         ))}

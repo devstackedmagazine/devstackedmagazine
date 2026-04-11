@@ -20,17 +20,22 @@ export default function HeroSection() {
         >
           <motion.h1
             variants={variants.fadeInUp}
-            className="text-5xl md:text-6xl lg:text-8xl font-semi text-white mb-6 leading-tight sm:w-3/4 lg:w-full"
+            className="text-4xl md:text-5xl lg:text-7xl font-semi text-white mb-6 leading-tight sm:w-3/4 lg:w-full"
           >
-            Turning <span className="bg-clip-text text-red-active">Ideas </span>
-            Into Digital Reality
+            <span className="block">Websites That Work</span>
+            <span className="mt-2 block">
+              <span className="relative inline-flex items-center rounded-full border border-red-active/45 bg-red-active/12 px-4 py-1.5 text-red-active shadow-[0_0_32px_rgba(199,14,26,0.18)]">
+                as Hard
+              </span>{" "}
+              as You Do
+            </span>
           </motion.h1>
           <motion.p
             variants={variants.fadeInUp}
             className="text-md text-white/80 mb-8 max-w-2xl"
           >
-            Join thousands of developers creating amazing projects with our
-            cutting-edge tools and resources.
+            We build fast, modern, and SEO-optimized websites that help your
+            business get found &mdash; by search engines and AI alike.
           </motion.p>
           <motion.div
             variants={variants.fadeInUp}

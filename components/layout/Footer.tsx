@@ -23,9 +23,7 @@ export default function Footer() {
             <Image src={logo} alt="Devstacked logo" className="w-72" />
           </motion.div>
           <motion.p variants={variants.fadeInUp}>
-            At DevStacked, we create modern web experiences that are fast,
-            scalable, and easy to use. From design to development, we help turn
-            ideas into real-world products built to grow with your business.
+            At DevStacked, we build modern, high-performance websites for businesses ready to grow. From simple landing pages to full-stack web apps, we turn your vision into a digital product that works.
           </motion.p>
           <motion.div variants={variants.fadeInUp} className="flex flex-col md:flex-row gap-1 md:gap-5">
             <p>devstackedmagazine@gmail.com</p>

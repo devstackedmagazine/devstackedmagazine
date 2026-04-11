@@ -12,7 +12,7 @@ import redDots from "@/public/styles/red-dots.svg";
 const contactDetails = [
   "Email: devstackedmagazine@gmail.com",
   "Instagram: devstackedmagazine",
-  "Tiktok: devstackedmagazine",
+  "TikTok: devstackedmagazine",
 ];
 
 type ContactFormData = {
@@ -174,13 +174,13 @@ export default function Contact() {
             variants={variants.fadeInUp}
             className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl"
           >
-            Reach Out Let&apos;s
+            Got an Idea? Let&apos;s
           </motion.h1>
           <motion.p
             variants={variants.fadeInUp}
             className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl"
           >
-            Collaborate
+            Make It Real
           </motion.p>
         </motion.div>
 
@@ -193,12 +193,10 @@ export default function Contact() {
         >
           <motion.article variants={variants.fadeInUp} className="lg:pt-3">
             <h2 className="text-3xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-              Let&apos;s Talk About Your Idea
+              Tell Us About Your Project
             </h2>
             <p className="mt-5 max-w-[57ch] text-sm leading-8 text-white/80 sm:text-base">
-              Pizza ipsum dolor meat lovers buffalo. Extra broccoli parmesan
-              ricotta garlic dolor sauce marinara Chicago marinara. Tomato dolor
-              pesto pesto Bianca pesto roll onions.
+              {""}
             </p>
 
             <ul className="mt-9 space-y-4 text-sm text-white/95 sm:text-lg">
