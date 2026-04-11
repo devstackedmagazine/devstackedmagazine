@@ -1,12 +1,8 @@
-"use client";
-
 import Image from "next/image";
+import Link from "next/link";
 import logo from "@/public/logos/devstacked-horizontally.svg";
 import instagram from "@/public/icons/instagram.svg";
 import tiktok from "@/public/icons/tiktok.svg";
-import discord from "@/public/icons/discord.svg";
-import { motion } from "framer-motion";
-import { variants, viewportConfig } from "@/lib/motion-presets";
 
 export default function Footer() {
   return (
@@ -63,23 +59,29 @@ export default function Footer() {
                 Consulting
               </li>
             </ul>
-          </motion.div>
-          <motion.div variants={variants.fadeInUp} className="col-span-1">
-            <h2 className="text-2xl mb-5 font-semibold">Company</h2>
+          </div>
+          <div className="col-span-1">
+            <h2 className="mb-5 text-2xl font-semibold">Company</h2>
             <ul className="flex flex-col gap-3 text-nowrap">
-              <li className="hover:ms-2 transition-all cursor-pointer">
-                About Us
+              <li>
+                <Link href="/" className="transition-colors hover:text-red-active">
+                  Home
+                </Link>
               </li>
-              <li className="hover:ms-2 transition-all cursor-pointer">
-                Privacy Policy
+              <li>
+                <Link href="/about" className="transition-colors hover:text-red-active">
+                  About
+                </Link>
               </li>
-              <li className="hover:ms-2 transition-all cursor-pointer">
-                Terms of Service
+              <li>
+                <Link href="/contact" className="transition-colors hover:text-red-active">
+                  Contact
+                </Link>
               </li>
             </ul>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 }
