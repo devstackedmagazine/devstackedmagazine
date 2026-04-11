@@ -1,8 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import logo from "@/public/logos/devstacked-horizontally.svg";
 import instagram from "@/public/icons/instagram.svg";
 import tiktok from "@/public/icons/tiktok.svg";
+import discord from "@/public/icons/discord.svg";
+
+const variants = {
+  staggerContainer: {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  },
+  fadeInUp: {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  },
+};
+
+const viewportConfig = { once: true, amount: 0.3 };
 
 export default function Footer() {
   return (
@@ -59,8 +74,8 @@ export default function Footer() {
                 Consulting
               </li>
             </ul>
-          </div>
-          <div className="col-span-1">
+          </motion.div>
+          <motion.div variants={variants.fadeInUp} className="col-span-1">
             <h2 className="mb-5 text-2xl font-semibold">Company</h2>
             <ul className="flex flex-col gap-3 text-nowrap">
               <li>
@@ -79,9 +94,9 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
