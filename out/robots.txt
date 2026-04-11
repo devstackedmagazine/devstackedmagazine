@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://devstackedmagazine.com
+Sitemap: https://devstackedmagazine.com/sitemap.xml
