@@ -15,20 +15,6 @@ const contactDetails = [
   "Tiktok: devstackedmagazine",
 ];
 
-function DotCluster({ className = "" }: { className?: string }) {
-  return (
-    <div className={`grid grid-cols-3 gap-1 ${className}`}>
-      {Array.from({ length: 9 }, (_, index) => (
-        <span
-          // index is stable because the grid length is static.
-          key={index}
-          className="h-2.5 w-2.5 rounded-full bg-red-active"
-        />
-      ))}
-    </div>
-  );
-}
-
 type ContactFormData = {
   fullName: string;
   email: string;
@@ -144,7 +130,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="relative my-8 -mx-25 px-4 py-10 text-white sm:my-10 sm:px-8 sm:py-14 lg:px-16 lg:py-18">
+    <section className="relative my-8 -mx-[20px] overflow-x-clip px-4 py-10 text-white sm:my-10 sm:-mx-[50px] sm:px-8 sm:py-14 lg:-mx-[100px] lg:px-16 lg:py-18">
       <div className="pointer-events-none absolute -inset-20">
         <div className="absolute -left-28 top-8 h-90 w-90 rounded-full bg-red-active/30 blur-[120px]" />
         <div className="absolute left-[32%] top-[18%] h-70 w-70 rounded-full bg-red-active/18 blur-[110px]" />
@@ -219,7 +205,7 @@ export default function Contact() {
               {contactDetails.map((item) => (
                 <li key={item} className="flex items-center gap-3">
                   <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white/80" />
-                  <span>{item}</span>
+                  <span className="min-w-0 break-all">{item}</span>
                 </li>
               ))}
             </ul>
