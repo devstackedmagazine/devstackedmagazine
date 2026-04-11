@@ -10,9 +10,21 @@ import { variants, viewportConfig } from "@/lib/motion-presets";
 import redDots from "@/public/styles/red-dots.svg";
 
 const contactDetails = [
-  "Email: devstackedmagazine@gmail.com",
-  "Instagram: devstackedmagazine",
-  "TikTok: devstackedmagazine",
+  {
+    label: "Email",
+    value: "devstackedmagazine@gmail.com",
+    href: "mailto:devstackedmagazine@gmail.com",
+  },
+  {
+    label: "Instagram",
+    value: "devstackedmagazine",
+    href: "https://www.instagram.com/devstackedmagazine/",
+  },
+  {
+    label: "TikTok",
+    value: "devstackedmagazine",
+    href: "https://www.tiktok.com/@devstackedmagazine",
+  },
 ];
 
 const stats = [
