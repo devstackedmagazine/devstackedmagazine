@@ -73,7 +73,7 @@ export default function Home() {
         src={ellipse}
         alt=""
         aria-hidden
-        className="absolute bottom-[-100px] right-[-50px] w-[400px] h-[500px] rotate-[250deg] -z-10 scale-[5] select-none"
+        className="absolute bottom-[-100px] right-[-50px] w-[400px] h-[500px] rotate-[200deg] md:rotate-[250deg] -z-10 scale-[5] select-none"
       />
       <OurJourneySection />
       <CtaSection />
