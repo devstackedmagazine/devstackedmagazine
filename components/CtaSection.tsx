@@ -17,13 +17,11 @@ export default function Page() {
     >
       <div className="flex flex-col items-center justify-evenly lg:items-start gap-7">
         <motion.h2 variants={variants.fadeInUp} className="relative text-4xl sm:text-5xl lg:text-7xl text-white w-auto text-center lg:text-left z-10">
-          Let's Build Something{" "}
-          <span className="block text-red-active">Amazing</span>
+          Let&apos;s Build Something That Gets{" "}
+          <span className="block text-red-active">You Noticed</span>
         </motion.h2>
         <motion.p variants={variants.fadeInUp} className="text-gray-300 text-sm sm:w-[60%] text-center text-wrap lg:text-left">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ab
-          autem magnam sequi saepe earum, fugit rerum! Rem labore perferendis
-          mollitia! Impedit commodi labore earum?
+          {""}
         </motion.p>
         <motion.div variants={variants.fadeInUp} className="w-full sm:3/4 flex justify-center lg:justify-start">
           <EmailInput className="w-full" />

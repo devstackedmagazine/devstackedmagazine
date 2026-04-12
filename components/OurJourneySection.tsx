@@ -22,9 +22,7 @@ export default function OurJourney() {
           <Image src={RedDots} alt="Red Dots" />
         </motion.div>
         <motion.p variants={variants.fadeInUp} className="text-white text-center text-sm sm:text-left sm:max-w-lg mt-3 mx-auto sm:mx-0">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa laboriosam
-          tenetur ducimus quibusdam voluptas nam commodi rem, exercitationem et
-          odit.
+          {""}
         </motion.p>
       </motion.div>
 
@@ -42,8 +40,8 @@ export default function OurJourney() {
           </div>
           <h2 className="text-xl font-light mb-2 text-white">The Idea</h2>
           <p className="font-thin text-sm text-gray-300">
-            We started with a simple idea: build clean, modern digital
-            experiences that solve real problems.
+            Two developers, one goal — help businesses stop being invisible
+            online and start attracting the customers they deserve.
           </p>
         </motion.div>
         <motion.div variants={variants.fadeInUp} className="relative pl-14">
@@ -54,8 +52,8 @@ export default function OurJourney() {
             Planning & Development
           </h2>
           <p className="font-thin text-sm text-gray-300">
-            Through research, design, and continuous learning, we turned ideas
-            into functional and scalable solutions.
+            We built our process around modern tech stacks, clean code, and
+            solutions designed to scale without breaking down the road.
           </p>
         </motion.div>
         <motion.div variants={variants.fadeInUp} className="relative pl-14">
@@ -66,8 +64,8 @@ export default function OurJourney() {
             Growth & Optimization
           </h2>
           <p className="font-thin text-sm text-gray-300">
-            With each project, we refined our workflow, improved performance,
-            and focused on user experience.
+            Every project sharpens our craft. We obsess over performance, SEO,
+            and user experience so your site keeps delivering results.
           </p>
         </motion.div>
         <motion.div variants={variants.fadeInUp} className="relative pl-14">
@@ -78,8 +76,8 @@ export default function OurJourney() {
             Delivery & Impact
           </h2>
           <p className="font-thin text-sm text-gray-300">
-            Today, we deliver responsive, reliable, and user-focused products
-            that make an impact.
+            We hand over fast, reliable, fully-owned digital products — and the
+            growth in your customer base speaks for itself.
           </p>
         </motion.div>
       </motion.div>
@@ -100,8 +98,8 @@ export default function OurJourney() {
         <motion.div variants={variants.scaleUp} className="absolute top-[45%] -left-[50px] w-[28%]">
           <h2 className="text-xl lg:text-2xl font-light mb-2">The Idea</h2>
           <p className="font-thin text-sm lg:text-base text-gray-300">
-            We started with a simple idea: build clean, modern digital
-            experiences that solve real problems.
+            Two developers, one goal — help businesses stop being invisible
+            online and start attracting the customers they deserve.
           </p>
         </motion.div>
 
@@ -111,8 +109,8 @@ export default function OurJourney() {
             Planning & Development
           </h2>
           <p className="font-thin text-sm lg:text-base text-gray-300">
-            Through research, design, and continuous learning, we turned ideas
-            into functional and scalable solutions.
+            We built our process around modern tech stacks, clean code, and
+            solutions designed to scale without breaking down the road.
           </p>
         </motion.div>
 
@@ -122,8 +120,8 @@ export default function OurJourney() {
             Growth & Optimization
           </h2>
           <p className="font-thin text-sm lg:text-base text-gray-300">
-            With each project, we refined our workflow, improved performance,
-            and focused on user experience.
+            Every project sharpens our craft. We obsess over performance, SEO,
+            and user experience so your site keeps delivering results.
           </p>
         </motion.div>
 
@@ -133,8 +131,8 @@ export default function OurJourney() {
             Delivery & Impact
           </h2>
           <p className="font-thin text-sm lg:text-base text-gray-300">
-            Today, we deliver responsive, reliable, and user-focused products
-            that make an impact.
+            We hand over fast, reliable, fully-owned digital products — and the
+            growth in your customer base speaks for itself.
           </p>
         </motion.div>
       </motion.div>

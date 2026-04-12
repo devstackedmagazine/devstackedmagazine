@@ -1,97 +1,93 @@
 "use client";
 
-import Image from "next/image";
-import RedDots from "@/public/styles/red-dots.svg";
-import Project from "@/public/images/home/quickit.png";
+import { Globe, LayoutTemplate, Search, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { variants, viewportConfig } from "@/lib/motion-presets";
 
-const projects = [
+const features = [
   {
-    name: "Quickit",
+    title: "SEO Foundation",
     description:
-      "A focused product concept designed around speed, clarity, and AI-assisted workflows.",
-    image: Project,
+      "Clear structure, metadata, and content hierarchy so your site is easier to discover and understand.",
+    icon: Search,
+    accent: "Findable",
   },
   {
-    name: "Landing Pages",
+    title: "Conversion-Focused Design",
     description:
-      "Conversion-minded pages built to explain an offer quickly and move visitors toward action.",
-    image: Project,
+      "Pages are shaped around what visitors need to trust you, contact you, and take the next step.",
+    icon: LayoutTemplate,
+    accent: "Persuasive",
   },
   {
-    name: "Business Websites",
+    title: "Performance That Holds Up",
     description:
-      "Clean, flexible sites for teams that need a sharper online presence without unnecessary complexity.",
-    image: Project,
+      "Fast-loading screens, lean implementation, and UX decisions that do not collapse under growth.",
+    icon: Globe,
+    accent: "Fast",
   },
   {
-    name: "Product MVPs",
+    title: "Fully Yours",
     description:
-      "Lean interfaces for startups and internal tools that need to be useful from the first release.",
-    image: Project,
+      "No lock-in, no black box handoff, and no mystery builder. You get a site your business can actually own.",
+    icon: ShieldCheck,
+    accent: "Ownable",
   },
 ];
 
 export default function OurProjectsSection() {
   return (
-    <section
-      id="projects"
-      className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden"
-    >
+    <section className="mx-auto max-w-7xl overflow-hidden px-4 py-24 sm:px-6 lg:px-8">
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={viewportConfig}
         variants={variants.staggerContainer}
       >
-        <motion.div
-          variants={variants.fadeInUp}
-          className="flex justify-center md:justify-start items-center gap-2"
-        >
-          <h2 className="text-white text-center sm:text-left text-3xl md:text-5xl font-light mb-1">
-            What We Build
-          </h2>
-          <Image src={RedDots} alt="Red Dots" />
-        </motion.div>
-        <motion.p
-          variants={variants.fadeInUp}
-          className="text-white text-center text-sm sm:text-left sm:max-w-lg mt-3 mx-auto sm:mx-0"
-        >
-          A mix of shipped work and the kinds of builds clients bring to us most
-          often: product concepts, marketing pages, and business websites that
-          need to feel polished from day one.
-        </motion.p>
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <motion.div variants={variants.fadeInUp} className="max-w-2xl">
+            <div className="text-xs font-semibold tracking-[0.24em] text-red-active uppercase">
+              Features
+            </div>
+            <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl md:text-5xl">
+              What every serious build should already come with.
+            </h2>
+          </motion.div>
+          <motion.p
+            variants={variants.fadeInUp}
+            className="max-w-xl text-sm leading-7 text-white/68 sm:text-base"
+          >
+            These are the foundations we build into every project, so you can focus on what makes your business unique while still getting a site that can grow with you.
+          </motion.p>
+        </div>
+
         <motion.div
           variants={variants.staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 place-items-center md:place-items-stretch gap-6 md:gap-8 mt-10"
+          className="mt-10 grid gap-5 md:grid-cols-2"
         >
-          {projects.map((project) => (
+          {features.map((feature) => (
             <motion.article
+              key={feature.title}
               variants={variants.fadeInUp}
-              className="w-full max-w-[400px] md:max-w-none relative overflow-hidden rounded-2xl cursor-pointer border-4 border-transparent transition-all duration-300 ease-out hover:-translate-y-2 hover:border-white/80 hover:shadow-[0_20px_40px_rgba(255,255,255,0.15)] group"
-              key={project.name}
+              whileHover={{ y: -6 }}
+              className="group relative overflow-hidden rounded-[1.9rem] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.1),rgba(255,255,255,0.03))] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.18)] backdrop-blur-xl"
             >
-              <Image
-                src={project.image}
-                alt={`${project.name} preview`}
-                className="object-cover w-full h-auto transition-transform duration-500 group-hover:scale-105"
-                draggable={false}
-                loading="lazy"
-              />
-              <div
-                className="pointer-events-none absolute inset-0 backdrop-blur-md transition-all duration-500
-              [mask-image:linear-gradient(to_top,black_0%,black_15%,transparent_50%)]
-              [-webkit-mask-image:linear-gradient(to_top,black_0%,black_15%,transparent_50%)]
-              group-hover:[mask-image:linear-gradient(to_top,black_0%,black_30%,transparent_60%)]
-              "
-              />
-              <h3 className="absolute left-4 md:left-6 md:bottom-10 lg:bottom-18 text-white text-2xl md:text-3xl font-semibold transition-transform duration-300 group-hover:-translate-y-1">
-                {project.name}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex h-13 w-13 items-center justify-center rounded-[1.1rem] border border-red-active/40 bg-red-active/10 text-red-active">
+                  <feature.icon className="h-5.5 w-5.5" />
+                </div>
+                <span className="rounded-full border border-white/12 bg-black/18 px-3 py-1 text-[0.7rem] font-semibold tracking-[0.22em] text-white/54 uppercase">
+                  {feature.accent}
+                </span>
+              </div>
+              <h3 className="mt-8 text-2xl font-semibold text-white">
+                {feature.title}
               </h3>
-              <p className="absolute bottom-4 left-4 md:left-6 md:bottom-4 text-white text-sm md:text-base opacity-80 transition-all duration-300 group-hover:-translate-y-1 group-hover:opacity-100">
-                {project.description}
+              <p className="mt-3 max-w-[36ch] text-sm leading-7 text-white/68 sm:text-base">
+                {feature.description}
               </p>
+              <div className="mt-8 h-1.5 w-16 rounded-full bg-gradient-to-r from-red-active to-red-active/0 transition-all duration-300 group-hover:w-24" />
             </motion.article>
           ))}
         </motion.div>

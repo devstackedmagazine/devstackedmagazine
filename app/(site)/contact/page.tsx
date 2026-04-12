@@ -17,12 +17,12 @@ const contactDetails = [
   },
   {
     label: "Instagram",
-    value: "@devstackedmagazine",
+    value: "devstackedmagazine",
     href: "https://www.instagram.com/devstackedmagazine/",
   },
   {
     label: "TikTok",
-    value: "@devstackedmagazine",
+    value: "devstackedmagazine",
     href: "https://www.tiktok.com/@devstackedmagazine",
   },
 ];
@@ -203,11 +203,17 @@ export default function Contact() {
             Contact
           </motion.p>
 
-          <h1 className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl">
-            Reach Out. Let&apos;s
-          </h1>
-          <motion.p className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl">
-            Collaborate
+          <motion.h1
+            variants={variants.fadeInUp}
+            className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl"
+          >
+            Got an Idea? Let&apos;s
+          </motion.h1>
+          <motion.p
+            variants={variants.fadeInUp}
+            className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl"
+          >
+            Make It Real
           </motion.p>
         </motion.div>
 
@@ -220,13 +226,10 @@ export default function Contact() {
         >
           <motion.article variants={variants.fadeInUp} className="lg:pt-3">
             <h2 className="text-3xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-              Tell Us What You&apos;re Building
+              Tell Us About Your Project
             </h2>
             <p className="mt-5 max-w-[57ch] text-sm leading-8 text-white/80 sm:text-base">
-              Use this page to start a project conversation, ask about a site
-              refresh, or reach out about a landing page that needs better
-              structure and stronger execution. A short brief is enough to get
-              the conversation moving.
+              {""}
             </p>
 
             <ul className="mt-9 space-y-4 text-sm text-white/95 sm:text-lg">

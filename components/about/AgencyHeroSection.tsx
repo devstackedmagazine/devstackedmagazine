@@ -26,9 +26,9 @@ export default function AgencyHeroSection() {
         </motion.span>
         <div className="relative text-center z-10">
           <motion.h1 variants={variants.fadeInUp} className="m-0 text-[clamp(2.1rem,5vw,4rem)] font-medium leading-[1.06]">
-            The People Behind
+            Two Developers.
             <br />
-            The <span className="text-[#db1323] border-b border-[rgba(219,19,35,0.7)]">Pixels</span>
+            One <span className="text-[#db1323] border-b border-[rgba(219,19,35,0.7)]">Mission.</span>
           </motion.h1>
         </div>
         <motion.div variants={variants.scaleUp} className="absolute w-[52px] h-auto left-[120px] bottom-[54px] max-[980px]:left-[60px] max-[980px]:bottom-[34px] max-[680px]:w-[40px] max-[680px]:left-[24px] max-[680px]:bottom-[20px]">
