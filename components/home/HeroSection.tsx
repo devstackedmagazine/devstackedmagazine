@@ -43,11 +43,13 @@ export default function HeroSection() {
             className="flex flex-col sm:flex-row gap-4"
           >
             <Button variant="primary" size="md">
-              Start a project
+              <Link href="/project">Start a project</Link>
             </Button>
             <Button
               variant="outline"
               size="md"
+              disabled
+              aria-disabled
               rightIcon={
                 <svg
                   className="w-5 h-5"

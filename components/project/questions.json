@@ -1,0 +1,173 @@
+[
+  {
+    "id": "about-you",
+    "section": "About You",
+    "description": "Basic contact details and business context so we know who this project is for.",
+    "questions": [
+      {
+        "id": "name",
+        "question": "What's your name?",
+        "type": "text",
+        "placeholder": "Jane Smith"
+      },
+      {
+        "id": "business-name",
+        "question": "What's your business name?",
+        "type": "text",
+        "placeholder": "Acme Studio",
+        "optional": true
+      },
+      {
+        "id": "email",
+        "question": "What's your email address?",
+        "type": "email",
+        "placeholder": "you@example.com"
+      },
+      {
+        "id": "industry",
+        "question": "What industry or niche are you in?",
+        "type": "text",
+        "placeholder": "SaaS, fitness, consulting..."
+      }
+    ]
+  },
+  {
+    "id": "the-project",
+    "section": "The Project",
+    "description": "What you need built and the current state of your site and brand.",
+    "questions": [
+      {
+        "id": "project-type",
+        "question": "What type of project do you need?",
+        "type": "single-choice",
+        "options": [
+          "Landing Page",
+          "Multi-Page Website",
+          "Web App / Full-Stack",
+          "Not sure yet"
+        ]
+      },
+      {
+        "id": "project-description",
+        "question": "Describe your project in a few sentences. What does your business do and what should the website achieve?",
+        "type": "textarea",
+        "placeholder": "We help..., and the website should..."
+      },
+      {
+        "id": "existing-website",
+        "question": "Do you have an existing website?",
+        "type": "single-choice",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "id": "existing-website-url",
+        "question": "Paste your current website URL.",
+        "type": "text",
+        "placeholder": "https://example.com",
+        "dependsOn": {
+          "id": "existing-website",
+          "value": "Yes"
+        }
+      },
+      {
+        "id": "brand",
+        "question": "Do you have a brand already? (logo, colors, fonts)",
+        "type": "single-choice",
+        "options": [
+          "Yes, fully branded",
+          "Partially — some assets exist",
+          "No, starting from scratch"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "goals-expectations",
+    "section": "Goals & Expectations",
+    "description": "What success looks like and who the website needs to speak to.",
+    "questions": [
+      {
+        "id": "primary-goal",
+        "question": "What is the primary goal of this website?",
+        "type": "single-choice",
+        "options": [
+          "Get more leads / inquiries",
+          "Sell products or services",
+          "Build credibility / online presence",
+          "Something else"
+        ]
+      },
+      {
+        "id": "target-audience",
+        "question": "Who is your target audience?",
+        "type": "textarea",
+        "placeholder": "Who you want to reach, sell to, or speak to."
+      },
+      {
+        "id": "reference-sites",
+        "question": "Are there any websites you like the look or feel of?",
+        "type": "textarea",
+        "placeholder": "Paste links and note what you like about them."
+      }
+    ]
+  },
+  {
+    "id": "timeline-budget",
+    "section": "Timeline & Budget",
+    "description": "How quickly you need this and the budget range you have in mind.",
+    "questions": [
+      {
+        "id": "deadline",
+        "question": "When do you need this completed by?",
+        "type": "single-choice",
+        "options": [
+          "ASAP",
+          "Within 1 month",
+          "1–3 months",
+          "No hard deadline"
+        ]
+      },
+      {
+        "id": "budget",
+        "question": "What is your budget range?",
+        "type": "single-choice",
+        "options": [
+          "Under $500",
+          "$500–$1,500",
+          "$1,500–$5,000",
+          "$5,000+",
+          "Not sure yet"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "final",
+    "section": "Final",
+    "description": "A little final context before we reach out.",
+    "questions": [
+      {
+        "id": "how-found-us",
+        "question": "How did you find us?",
+        "type": "single-choice",
+        "options": [
+          "Instagram",
+          "TikTok",
+          "Google",
+          "Referral",
+          "Other"
+        ]
+      },
+      {
+        "id": "final-notes",
+        "question": "Anything else you want us to know before we reach out?",
+        "type": "textarea",
+        "placeholder": "Anything important, useful, or relevant.",
+        "optional": true
+      }
+    ]
+  }
+]
