@@ -42,8 +42,13 @@ export default function HeroSection() {
             variants={variants.fadeInUp}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Button variant="primary" size="md">
-              <Link href="/project">Start a project</Link>
+            <Button
+              variant="primary"
+              size="md"
+              href="/project"
+              className="z-50"
+            >
+              Start a project
             </Button>
             <Button
               variant="outline"

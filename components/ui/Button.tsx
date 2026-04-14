@@ -1,9 +1,10 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
+import Link from "next/link"; 
 
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface BaseProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
@@ -11,7 +12,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   children: ReactNode;
+  className?: string;
+  href?: string;
 }
+
+export type ButtonProps = BaseProps & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function Button({
   variant = "primary",
@@ -23,13 +28,15 @@ export default function Button({
   className = "",
   disabled,
   children,
+  href,
   ...props
 }: ButtonProps) {
   const baseStyles =
     "whitespace-nowrap inline-flex items-center justify-center gap-2 rounded-4xl font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:cursor-pointer";
 
   const variants = {
-    primary: "bg-red-active text-white hover:opacity-90 hover:bg-red-active-hover",
+    primary:
+      "bg-red-active text-white hover:opacity-90 hover:bg-red-active-hover",
     secondary:
       "bg-foreground text-white hover:bg-gray-700 focus-visible:ring-gray-400",
     outline:
@@ -44,24 +51,17 @@ export default function Button({
   };
 
   const widthClass = fullWidth ? "w-full" : "w-auto";
-
   const buttonClasses = `${baseStyles} ${variants[variant]} ${sizes[size]} ${widthClass} ${className}`;
+  const customStyles =
+    variant === "primary"
+      ? { backgroundColor: "var(--red-active)" }
+      : undefined;
 
-  return (
-    <button
-      className={buttonClasses}
-      style={variant === "primary" ? { backgroundColor: "var(--red-active)" } : undefined}
-      disabled={disabled || isLoading}
-      {...props}
-    >
+  const content = (
+    <>
       {isLoading ? (
         <>
-          <svg
-            className="animate-spin h-5 w-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
+          <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
             <circle
               className="opacity-25"
               cx="12"
@@ -69,6 +69,7 @@ export default function Button({
               r="10"
               stroke="currentColor"
               strokeWidth="4"
+              fill="none"
             />
             <path
               className="opacity-75"
@@ -85,6 +86,30 @@ export default function Button({
           {rightIcon && <span className="flex-shrink-0">{rightIcon}</span>}
         </>
       )}
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={buttonClasses}
+        style={customStyles}
+        {...(props as any)}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      className={buttonClasses}
+      style={customStyles}
+      disabled={disabled || isLoading}
+      {...props}
+    >
+      {content}
     </button>
   );
 }
