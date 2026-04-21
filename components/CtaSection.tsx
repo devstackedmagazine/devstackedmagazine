@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import heroImage from "@/public/images/home/heroImage.svg";
+import heroImage from "@/public/images/home/heroImage.png";
 import EmailInput from "@/components/ui/EmailInput";
 import { motion } from "framer-motion";
 import { variants, viewportConfig } from "@/lib/motion-presets";

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../ui/Button";
-import heroImage from "@/public/images/home/heroImage.svg";
+import heroImage from "@/public/images/home/heroImage.png";
 import { motion } from "framer-motion";
 import { variants, viewportConfig } from "@/lib/motion-presets";
 
@@ -85,7 +85,7 @@ export default function HeroSection() {
         <Image
           src={heroImage}
           alt="Hero Image"
-          className="h-[400px] lg:h-[700px] select-none w-full "
+          className="select-none size-120 h-auto"
           priority
         />
       </motion.div>

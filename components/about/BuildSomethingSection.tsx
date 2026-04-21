@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import heroImage from "@/public/images/home/heroImage.svg";
+import heroImage from "@/public/images/home/heroImage.png";
 import { motion } from "framer-motion";
 import { variants, viewportConfig } from "@/lib/motion-presets";
 
