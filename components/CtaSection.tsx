@@ -21,10 +21,10 @@ export default function Page() {
           <span className="block text-red-active">You Noticed</span>
         </motion.h2>
         <motion.p variants={variants.fadeInUp} className="text-gray-300 text-sm sm:w-[60%] text-center text-wrap lg:text-left">
-          {""}
+          Got a project in mind? Drop your email and we&apos;ll get back to you within 24 hours.
         </motion.p>
         <motion.div variants={variants.fadeInUp} className="w-full sm:3/4 flex justify-center lg:justify-start">
-          <EmailInput className="w-full" />
+          <EmailInput className="w-full rounded-full" />
         </motion.div>
       </div>
       <motion.div variants={variants.scaleUp} className="hidden lg:block h-[550px] absolute right-0 bottom-7">
