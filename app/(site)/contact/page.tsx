@@ -2,8 +2,14 @@
 
 import ellipse from "@/public/styles/elipse-red.svg";
 import Image from "next/image";
-import { type ChangeEvent, type FormEvent, useEffect, useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation"; // <-- Added this
+import {
+  type ChangeEvent,
+  type FormEvent,
+  useEffect,
+  useState,
+  Suspense,
+} from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { variants, viewportConfig } from "@/lib/motion-presets";
 import redDots from "@/public/styles/red-dots.svg";
@@ -135,20 +141,31 @@ function ContactContent() {
     setSubmitMessage(null);
 
     try {
-      const response = await fetch("/api/send", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          name: payload.fullName,
+          email: payload.email,
+          message: payload.discussion,
+          subject: `New contact request from ${payload.fullName}`,
+          from_name: "DevStacked Magazine",
+        }),
       });
 
-      const result = (await response.json()) as { error?: string };
+      const result = (await response.json()) as {
+        success?: boolean;
+        message?: string;
+      };
 
-      if (!response.ok) {
+      if (!response.ok || !result.success) {
         setSubmitMessage({
           type: "error",
-          text: result.error ?? "Something went wrong. Please try again.",
+          text: result.message ?? "Something went wrong. Please try again.",
         });
         return;
       }
@@ -159,6 +176,10 @@ function ContactContent() {
       });
       setFormData(EMPTY_CONTACT_FORM);
       localStorage.removeItem(CONTACT_FORM_STORAGE_KEY);
+
+      setTimeout(() => {
+        window.location.href = "/thank-you";
+      }, 2000);
     } catch {
       setSubmitMessage({
         type: "error",
@@ -168,7 +189,6 @@ function ContactContent() {
       setIsSubmitting(false);
     }
   };
-
   return (
     <section className="relative my-8 -mx-[20px] overflow-x-clip px-4 py-10 text-white sm:my-10 sm:-mx-[50px] sm:px-8 sm:py-14 lg:-mx-[100px] lg:px-16 lg:py-18">
       <div className="pointer-events-none absolute -inset-20">
@@ -180,34 +200,78 @@ function ContactContent() {
         <div className="absolute right-[-10%] bottom-[-8%] h-100 w-100 rounded-full bg-red-active/26 blur-[140px]" />
       </div>
 
-      <Image src={ellipse} alt="" aria-hidden className="pointer-events-none absolute -right-64 -top-64 h-215 w-215 rotate-168 opacity-40" />
-      <Image src={ellipse} alt="" aria-hidden className="pointer-events-none absolute -bottom-72 -left-80 h-215 w-215 rotate-24 opacity-34" />
-      <Image src={redDots} alt="Red dots styling" className="pointer-events-none absolute -right-64 -top-64 h-215 w-215 rotate-168 opacity-10" />
+      <Image
+        src={ellipse}
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute -right-64 -top-64 h-215 w-215 rotate-168 opacity-40"
+      />
+      <Image
+        src={ellipse}
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute -bottom-72 -left-80 h-215 w-215 rotate-24 opacity-34"
+      />
+      <Image
+        src={redDots}
+        alt="Red dots styling"
+        className="pointer-events-none absolute -right-64 -top-64 h-215 w-215 rotate-168 opacity-10"
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl">
-        <motion.div initial="hidden" whileInView="visible" viewport={viewportConfig} variants={variants.staggerContainer} className="relative mb-14 pt-5 text-center sm:mb-18 sm:pt-8">
-          <motion.p variants={variants.fadeInDown} className="pointer-events-none absolute inset-x-0 top-[58%] -translate-y-1/2 text-[24vw] font-semibold leading-none text-white/6 sm:text-[16vw] lg:text-[15rem]">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={variants.staggerContainer}
+          className="relative mb-14 pt-5 text-center sm:mb-18 sm:pt-8"
+        >
+          <motion.p
+            variants={variants.fadeInDown}
+            className="pointer-events-none absolute inset-x-0 top-[58%] -translate-y-1/2 text-[24vw] font-semibold leading-none text-white/6 sm:text-[16vw] lg:text-[15rem]"
+          >
             Contact
           </motion.p>
-          <motion.h1 variants={variants.fadeInUp} className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl">
+          <motion.h1
+            variants={variants.fadeInUp}
+            className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl"
+          >
             Got an Idea? Let&apos;s
           </motion.h1>
-          <motion.p variants={variants.fadeInUp} className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl">
+          <motion.p
+            variants={variants.fadeInUp}
+            className="relative mx-auto mt-1 inline-block border border-red-active/80 px-3 text-[2.45rem] font-semibold tracking-tight text-red-active sm:text-6xl"
+          >
             Make It Real
           </motion.p>
         </motion.div>
 
-        <motion.div initial="hidden" whileInView="visible" viewport={viewportConfig} variants={variants.staggerContainer} className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.03fr)] lg:gap-14">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={variants.staggerContainer}
+          className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.03fr)] lg:gap-14"
+        >
           <motion.article variants={variants.fadeInUp} className="lg:pt-3">
             <h2 className="text-3xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
               Tell Us About Your Project
             </h2>
-            <p className="mt-5 max-w-[57ch] text-sm leading-8 text-white/80 sm:text-base">{""}</p>
+            <p className="mt-5 max-w-[57ch] text-sm leading-8 text-white/80 sm:text-base">
+              {""}
+            </p>
             <ul className="mt-9 space-y-4 text-sm text-white/95 sm:text-lg">
               {contactDetails.map((item) => (
                 <li key={item.label} className="flex items-center gap-3">
                   <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white/80" />
-                  <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined} className="transition-colors hover:text-red-active">
+                  <a
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      item.href.startsWith("http") ? "noreferrer" : undefined
+                    }
+                    className="transition-colors hover:text-red-active"
+                  >
                     {item.label}: {item.value}
                   </a>
                 </li>
@@ -215,23 +279,62 @@ function ContactContent() {
             </ul>
             <p className="mt-8 max-w-[52ch] text-sm leading-7 text-white/65 sm:text-base">
               Prefer email? You can also write directly to{" "}
-              <a href="mailto:devstackedmagazine@gmail.com" className="text-white underline decoration-white/30 underline-offset-4 transition-colors hover:text-red-active">
+              <a
+                href="mailto:devstackedmagazine@gmail.com"
+                className="text-white underline decoration-white/30 underline-offset-4 transition-colors hover:text-red-active"
+              >
                 devstackedmagazine@gmail.com
-              </a>.
+              </a>
+              .
             </p>
           </motion.article>
 
-          <motion.div variants={variants.scaleUp} className="rounded-3xl bg-black/5 p-4 sm:p-6 lg:p-7">
+          <motion.div
+            variants={variants.scaleUp}
+            className="rounded-3xl bg-black/5 p-4 sm:p-6 lg:p-7"
+          >
             <form className="space-y-4" onSubmit={handleSubmit}>
-              <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleInputChange} required autoComplete="name" className="h-13 w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-14.5 sm:text-base" />
-              <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleInputChange} required autoComplete="email" className="h-13 w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-14.5 sm:text-base" />
-              <textarea name="discussion" placeholder="Tell us about your project" value={formData.discussion} onChange={handleInputChange} required className="h-36 w-full resize-none rounded-3xl border border-white/25 bg-transparent px-5 py-4 text-sm outline-none placeholder:text-white/65 sm:h-48 sm:text-base" />
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Full Name"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                required
+                autoComplete="name"
+                className="h-13 w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-14.5 sm:text-base"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                autoComplete="email"
+                className="h-13 w-full rounded-full border border-white/25 bg-transparent px-5 text-sm outline-none placeholder:text-white/65 sm:h-14.5 sm:text-base"
+              />
+              <textarea
+                name="discussion"
+                placeholder="Tell us about your project"
+                value={formData.discussion}
+                onChange={handleInputChange}
+                required
+                className="h-36 w-full resize-none rounded-3xl border border-white/25 bg-transparent px-5 py-4 text-sm outline-none placeholder:text-white/65 sm:h-48 sm:text-base"
+              />
               {submitMessage && (
-                <p aria-live="polite" className={`text-sm ${submitMessage.type === "success" ? "text-green-300" : "text-red-300"}`}>
+                <p
+                  aria-live="polite"
+                  className={`text-sm ${submitMessage.type === "success" ? "text-green-300" : "text-red-300"}`}
+                >
                   {submitMessage.text}
                 </p>
               )}
-              <button type="submit" disabled={isSubmitting} className="mx-auto mt-3 block rounded-full bg-red-active px-10 py-3 text-lg font-semibold transition-colors hover:bg-red-active-hover disabled:cursor-not-allowed disabled:opacity-70">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="mx-auto mt-3 block rounded-full bg-red-active px-10 py-3 text-lg font-semibold transition-colors hover:bg-red-active-hover disabled:cursor-not-allowed disabled:opacity-70"
+              >
                 {isSubmitting ? "Sending..." : "Get in Touch"}
               </button>
             </form>
@@ -244,8 +347,12 @@ function ContactContent() {
               <div key={item.label} className="flex items-start gap-4">
                 {index === 0 && <DotCluster className="mt-1 hidden sm:grid" />}
                 <div>
-                  <p className="text-4xl font-semibold leading-none sm:text-5xl">{item.value}</p>
-                  <p className="mt-2 text-sm leading-tight text-white/85 sm:text-base">{item.label}</p>
+                  <p className="text-4xl font-semibold leading-none sm:text-5xl">
+                    {item.value}
+                  </p>
+                  <p className="mt-2 text-sm leading-tight text-white/85 sm:text-base">
+                    {item.label}
+                  </p>
                 </div>
                 {index === 3 && <DotCluster className="mt-1 hidden sm:grid" />}
               </div>
@@ -259,7 +366,13 @@ function ContactContent() {
 
 export default function Contact() {
   return (
-    <Suspense fallback={<div className="min-h-screen pt-20 text-center text-white">Loading contact form...</div>}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen pt-20 text-center text-white">
+          Loading contact form...
+        </div>
+      }
+    >
       <ContactContent />
     </Suspense>
   );
