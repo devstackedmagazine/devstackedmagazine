@@ -2,9 +2,14 @@
 
 import ellipse from "@/public/styles/elipse-red.svg";
 import Image from "next/image";
-import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
-import StatsSection from "@/components/StatsSection";
-import CtaSection from "@/components/CtaSection";
+import {
+  type ChangeEvent,
+  type FormEvent,
+  useEffect,
+  useState,
+  Suspense,
+} from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { variants, viewportConfig } from "@/lib/motion-presets";
 import redDots from "@/public/styles/red-dots.svg";
@@ -81,13 +86,25 @@ function getInitialFormData(): ContactFormData {
   }
 }
 
-export default function Contact() {
+function ContactContent() {
+  const searchParams = useSearchParams();
+  const emailParam = searchParams.get("email");
+
   const [formData, setFormData] = useState<ContactFormData>(getInitialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{
     type: "success" | "error";
     text: string;
   } | null>(null);
+
+  useEffect(() => {
+    if (emailParam) {
+      setFormData((prev) => ({
+        ...prev,
+        email: decodeURIComponent(emailParam),
+      }));
+    }
+  }, [emailParam]);
 
   useEffect(() => {
     localStorage.setItem(CONTACT_FORM_STORAGE_KEY, JSON.stringify(formData));
@@ -124,20 +141,31 @@ export default function Contact() {
     setSubmitMessage(null);
 
     try {
-      const response = await fetch("/api/send", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          name: payload.fullName,
+          email: payload.email,
+          message: payload.discussion,
+          subject: `New contact request from ${payload.fullName}`,
+          from_name: "DevStacked Magazine",
+        }),
       });
 
-      const result = (await response.json()) as { error?: string };
+      const result = (await response.json()) as {
+        success?: boolean;
+        message?: string;
+      };
 
-      if (!response.ok) {
+      if (!response.ok || !result.success) {
         setSubmitMessage({
           type: "error",
-          text: result.error ?? "Something went wrong. Please try again.",
+          text: result.message ?? "Something went wrong. Please try again.",
         });
         return;
       }
@@ -148,6 +176,10 @@ export default function Contact() {
       });
       setFormData(EMPTY_CONTACT_FORM);
       localStorage.removeItem(CONTACT_FORM_STORAGE_KEY);
+
+      setTimeout(() => {
+        window.location.href = "/thank-you";
+      }, 2000);
     } catch {
       setSubmitMessage({
         type: "error",
@@ -157,7 +189,6 @@ export default function Contact() {
       setIsSubmitting(false);
     }
   };
-
   return (
     <section className="relative my-8 -mx-[20px] overflow-x-clip px-4 py-10 text-white sm:my-10 sm:-mx-[50px] sm:px-8 sm:py-14 lg:-mx-[100px] lg:px-16 lg:py-18">
       <div className="pointer-events-none absolute -inset-20">
@@ -181,7 +212,6 @@ export default function Contact() {
         aria-hidden
         className="pointer-events-none absolute -bottom-72 -left-80 h-215 w-215 rotate-24 opacity-34"
       />
-
       <Image
         src={redDots}
         alt="Red dots styling"
@@ -202,7 +232,6 @@ export default function Contact() {
           >
             Contact
           </motion.p>
-
           <motion.h1
             variants={variants.fadeInUp}
             className="relative text-[2.45rem] font-semibold leading-tight sm:text-6xl"
@@ -231,7 +260,6 @@ export default function Contact() {
             <p className="mt-5 max-w-[57ch] text-sm leading-8 text-white/80 sm:text-base">
               {""}
             </p>
-
             <ul className="mt-9 space-y-4 text-sm text-white/95 sm:text-lg">
               {contactDetails.map((item) => (
                 <li key={item.label} className="flex items-center gap-3">
@@ -249,7 +277,6 @@ export default function Contact() {
                 </li>
               ))}
             </ul>
-
             <p className="mt-8 max-w-[52ch] text-sm leading-7 text-white/65 sm:text-base">
               Prefer email? You can also write directly to{" "}
               <a
@@ -298,16 +325,11 @@ export default function Contact() {
               {submitMessage && (
                 <p
                   aria-live="polite"
-                  className={`text-sm ${
-                    submitMessage.type === "success"
-                      ? "text-green-300"
-                      : "text-red-300"
-                  }`}
+                  className={`text-sm ${submitMessage.type === "success" ? "text-green-300" : "text-red-300"}`}
                 >
                   {submitMessage.text}
                 </p>
               )}
-
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -339,5 +361,19 @@ export default function Contact() {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function Contact() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen pt-20 text-center text-white">
+          Loading contact form...
+        </div>
+      }
+    >
+      <ContactContent />
+    </Suspense>
   );
 }
