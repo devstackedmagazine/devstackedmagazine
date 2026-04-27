@@ -42,12 +42,19 @@ export default function HeroSection() {
             variants={variants.fadeInUp}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Button variant="primary" size="md">
+            <Button
+              variant="primary"
+              size="md"
+              href="/project"
+              className="z-50"
+            >
               Start a project
             </Button>
             <Button
               variant="outline"
               size="md"
+              disabled
+              aria-disabled
               rightIcon={
                 <svg
                   className="w-5 h-5"

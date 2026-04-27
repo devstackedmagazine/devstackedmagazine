@@ -7,7 +7,6 @@ import OurJourneySection from "@/components/OurJourneySection";
 import CtaSection from "@/components/CtaSection";
 import FaqSection from "@/components/home/FaqSection";
 import { absoluteUrl, siteConfig } from "@/lib/site";
-// @ts-ignore
 import ellipse from "@/public/styles/elipse-red.svg";
 
 export const metadata: Metadata = {

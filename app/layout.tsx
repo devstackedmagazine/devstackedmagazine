@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito, Geist as GeistFont } from "next/font/google";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 import { cn } from "@/lib/utils";
