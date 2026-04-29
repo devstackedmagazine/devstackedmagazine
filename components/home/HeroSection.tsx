@@ -46,7 +46,7 @@ export default function HeroSection() {
               variant="primary"
               size="md"
               href="/project"
-              className="z-50"
+              className="z-10"
             >
               Start a project
             </Button>
