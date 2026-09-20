@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap-presets";
+import { gsap, mq, staggerDelay } from "@/lib/gsap-presets";
 
 const projects = [
   {
@@ -37,49 +37,26 @@ const projects = [
   },
 ];
 
+const total = String(projects.length).padStart(2, "0");
+
 export default function ShowcaseHorizontal() {
   const root = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
     () => {
-      const track = trackRef.current;
-      if (!track) return;
+      // Entry only. No scroll-driven motion, no pinning: vertical scroll is
+      // never hijacked, so a user scrolling past reaches the next section.
+      if (mq.isReduced()) return;
 
-      const mm = gsap.matchMedia();
-
-      mm.add("(min-width: 1024px)", () => {
-        const distance = track.scrollWidth - window.innerWidth + 80;
-
-        gsap.to(track, {
-          x: -distance,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: () => `+=${distance}`,
-            scrub: 0.6,
-            pin: true,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        gsap.utils.toArray<HTMLElement>(".showcase-card").forEach((card) => {
-          gsap.fromTo(
-            card,
-            { scale: 0.94, opacity: 0.4 },
-            {
-              scale: 1,
-              opacity: 1,
-              ease: "none",
-              scrollTrigger: {
-                trigger: card,
-                start: "left 85%",
-                end: "right 15%",
-                scrub: 0.6,
-              },
-            }
-          );
+      gsap.utils.toArray<HTMLElement>(".showcase-card").forEach((card, i) => {
+        gsap.from(card, {
+          opacity: 0,
+          y: 24,
+          duration: 0.34,
+          ease: "design",
+          delay: staggerDelay(i),
+          scrollTrigger: { trigger: card, start: "top 85%" },
         });
       });
     },
@@ -87,79 +64,84 @@ export default function ShowcaseHorizontal() {
   );
 
   return (
-    <section
-      ref={root}
-      className="relative overflow-hidden bg-background-elevated/40 border-y border-white/8"
-    >
-      <div className="mx-auto max-w-7xl px-5 sm:px-12 lg:px-20 pt-24 pb-12">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+    <section ref={root} className="relative">
+      <div className="mx-auto max-w-[1400px] px-4 pt-16 pb-12 sm:px-6 md:pt-32">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end lg:gap-6">
           <div className="lg:col-span-7">
             <p className="label-mark">Selected work</p>
-            <h2 className="mt-6 font-display text-[clamp(2.2rem,4.4vw,4rem)] font-bold leading-[0.98] tracking-[-0.035em] text-white">
-              Quiet interfaces, <br />
-              <span className="text-white/55">measured outcomes.</span>
+            <h2 className="text-display-l mt-6 text-bone">
+              Quiet interfaces, <br className="hidden sm:block" />
+              <span className="text-ash">measured outcomes.</span>
             </h2>
           </div>
-          <p className="lg:col-span-5 text-base leading-7 text-white/55 lg:max-w-md">
+          <p className="text-body text-ash lg:col-span-5 lg:max-w-md">
             A short, recent cross-section. The right place to see how we think about
             brand, motion, and the boring details that actually move conversion.
           </p>
         </div>
       </div>
 
-      <div className="hidden lg:block pb-24">
+      {/* Desktop: native horizontal scroll strip. Transform-free, keyboard
+          operable, and it never captures vertical scroll. */}
+      <div className="hidden pb-16 md:pb-32 lg:block">
         <div
           ref={trackRef}
-          className="flex gap-6 pl-[max(5rem,calc((100vw-1280px)/2+5rem))] pr-20 will-change-transform"
+          tabIndex={0}
+          role="region"
+          aria-label="Selected work — scroll horizontally to browse projects"
+          className="overflow-x-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-void"
         >
-          {projects.map((p, i) => (
-            <article
-              key={p.name}
-              className="showcase-card relative flex h-[60vh] w-[70vw] max-w-[820px] shrink-0 flex-col justify-between rounded-[1.25rem] border border-white/10 bg-background-card p-10 lg:p-12"
-            >
-              <div className="flex items-start justify-between">
-                <span className="font-mono-meta text-red-active">{p.kind}</span>
-                <span className="font-mono-meta text-white/45">
-                  {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-                </span>
-              </div>
-              <div>
-                <h3 className="font-display text-5xl font-bold tracking-[-0.03em] text-white sm:text-6xl lg:text-7xl">
-                  {p.name}
-                </h3>
-                <div className="mt-8 flex items-end justify-between gap-6 border-t border-white/10 pt-6">
-                  <p className="max-w-md text-sm leading-7 text-white/55 sm:text-base">
-                    {p.note}
-                  </p>
-                  <p className="font-mono-meta text-white/40">{p.year}</p>
-                </div>
-              </div>
-            </article>
-          ))}
+          <div className="flex w-max px-4 sm:px-6">
+            <div className="flex gap-px bg-rule">
+              {projects.map((p, i) => (
+                <article
+                  key={p.name}
+                  tabIndex={0}
+                  aria-label={`${p.name} — ${p.kind}, ${p.year}`}
+                  className="showcase-card flex h-[60vh] w-[70vw] max-w-[820px] shrink-0 flex-col justify-between bg-shelf p-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-inset"
+                >
+                  <div className="flex items-start justify-between">
+                    <span className="text-label text-lime">{p.kind}</span>
+                    <span className="text-label text-ash">
+                      {String(i + 1).padStart(2, "0")} / {total}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-display-l text-bone">{p.name}</h3>
+                    <div className="mt-8 flex items-end justify-between gap-6 border-t border-rule pt-6">
+                      <p className="text-body max-w-md text-ash">{p.note}</p>
+                      <p className="text-label text-ash">{p.year}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="lg:hidden pb-24">
-        <div className="flex flex-col gap-5 px-5 sm:px-12">
-          {projects.map((p, i) => (
-            <article
-              key={p.name}
-              className="relative flex aspect-[4/3] w-full flex-col justify-between rounded-[1.25rem] border border-white/10 bg-background-card p-8"
-            >
-              <div className="flex items-start justify-between">
-                <span className="font-mono-meta text-red-active">{p.kind}</span>
-                <span className="font-mono-meta text-white/45">
-                  {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-                </span>
-              </div>
-              <div>
-                <h3 className="font-display text-3xl font-bold tracking-[-0.03em] text-white sm:text-4xl">
-                  {p.name}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-white/55">{p.note}</p>
-              </div>
-            </article>
-          ))}
+      {/* Below lg the strip collapses to a vertical stack in DOM order. */}
+      <div className="pb-16 md:pb-32 lg:hidden">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+          <div className="flex flex-col gap-px bg-rule">
+            {projects.map((p, i) => (
+              <article
+                key={p.name}
+                className="showcase-card flex flex-col justify-between gap-8 bg-shelf p-8"
+              >
+                <div className="flex items-start justify-between">
+                  <span className="text-label text-lime">{p.kind}</span>
+                  <span className="text-label text-ash">
+                    {String(i + 1).padStart(2, "0")} / {total}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-heading text-bone">{p.name}</h3>
+                  <p className="text-body mt-3 text-ash">{p.note}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

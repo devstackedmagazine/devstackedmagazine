@@ -246,6 +246,18 @@ These override the bans above. They are decisions, not oversights, and must not 
   static with `animation: none`. If either condition is broken, the exception
   lapses and the component comes out.
 
+- **`ShowcaseHorizontal` — horizontal scroll strip.** Overrides the horizontal
+  scroll strip ban (§7). Conditions: scrolling is transform-only — it uses native
+  `overflow-x` and never drives position with `left`/`margin`; under
+  `prefers-reduced-motion: reduce` there is no automatic or scroll-driven motion
+  and the section stays readable and navigable; it remains a scroll strip
+  permanently — **no dots, no arrows, no autoplay, ever**, as that progression is
+  precisely how it becomes the banned pattern; and it is operable by keyboard,
+  reachable in tab order, and must never trap scroll, so a user scrolling past
+  reaches the next section. The native scrollbar is the intended affordance and
+  must stay visible — hiding it invites the dots/arrows that void this exception.
+  If any condition is broken, the exception lapses and the component comes out.
+
 ### Project-specific bans
 
 - **No generic dark-SaaS look.** No purple-to-blue gradient mesh backgrounds, no
