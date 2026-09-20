@@ -79,7 +79,7 @@ any gradient, anything with a glow.
 
 | Role | Face | Weights | Tracking | Scope |
 |---|---|---|---|---|
-| Display | Unbounded | 600, 700 | -0.03em | H1 and H2 only. NEVER below 32px. |
+| Display | Unbounded | 600, 700 | -0.03em | H1 and H2 only. NEVER below 30px; the 30px value is reserved for `display-l` at mobile widths, and no other role may use the face at that size. |
 | Body | Outfit | 400, 500, 600 | -0.01em | Everything readable: H3–H6, paragraphs, buttons, nav. |
 | Mono | JetBrains Mono | 400, 500 | 0 | Metadata, stat figures, tags, timestamps, code, form labels. NEVER prose. |
 
