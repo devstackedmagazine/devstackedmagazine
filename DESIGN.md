@@ -265,3 +265,33 @@ These override the bans above. They are decisions, not oversights, and must not 
 - **Lime is never a background.** If a section reads as "the green section", it is wrong.
 - **No security-theatre imagery.** No padlock icons, no shield icons, no hooded
   figures, no binary rain, no fingerprint graphics.
+
+---
+
+## 8. Known Out-of-Scope Work
+
+Logged deviations that are **real and deliberately not being fixed yet**. They are
+recorded here so a later pass does not rediscover them as new findings, and so
+nobody "helpfully" converts them mid-task. Do not touch these without a separate
+instruction.
+
+### Unconverted sections (still on the pre-redesign system)
+
+These three still use the old `editorial-card` primitive (1px `--hairline` border,
+1.25rem radius) and the old inline type ramp (`font-display` with `clamp()`,
+`text-white/NN`, `font-mono-meta`) instead of §3 tokens and the §4 grid-gap divider
+construction. Their body contrast currently passes (measured 6.25:1–8.47:1 on
+`Void`), so this is a system-consistency debt, not an accessibility defect.
+
+| Section | File | Also violates |
+|---|---|---|
+| About — "Principle 01/02/03" | `components/about/DreamToRealitySection.tsx` | §4 three-equal-card row |
+| Services — "Tier 01/02/03" | `components/services/PricingSection.tsx` | §4 three-equal-card row |
+| Services — service list 01–04 | `components/services/ServiceListSection.tsx` | — |
+
+The two three-equal-card rows break §4 Composition ("NEVER three equal cards in a
+row") and the §7 ban on the same. Converting them to the divider construction does
+not fix that on its own — the column count has to change too.
+
+`.editorial-card` in `app/globals.css` exists only to serve these three. It is
+expected to be deleted, not restyled, when they are converted.
