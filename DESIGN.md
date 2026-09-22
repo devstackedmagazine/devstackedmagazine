@@ -127,8 +127,10 @@ trust the subset name alone.
 
 `sm 640` · `md 768` · `lg 1024` · `xl 1280`
 
-Below `md`, the asymmetric grid collapses to a single column in DOM order. The
-hero keeps its left alignment; it does NOT centre on mobile.
+Below `md`, the asymmetric grid collapses to a single column in DOM order.
+Non-home heroes keep their left alignment; they do NOT centre on mobile. The
+home hero's centred layout (§4 Composition) holds at every breakpoint — it was
+never a split grid to begin with, so there's no asymmetric layout to collapse.
 
 ### Divider construction
 
@@ -141,8 +143,12 @@ never bleed to the window edge. At corners, no join decoration.
 
 ### Composition
 
-- Hero is **split or left-aligned, asymmetric**. Centred heroes are banned at this
-  variance level.
+- **Hero exception:** the home page hero is centred — eyebrow, headline, 3D
+  robot centrepiece, subheading, and buttons, all centre-aligned and stacked.
+  This overrides the general rule below. It's a deliberate choice built around
+  the Spline robot as the page's focal point, not an unconverted section.
+- Every other hero on the site (About, Services, Contact, Project intake) stays
+  **split or left-aligned, asymmetric**. Centred heroes are banned there.
 - Feature sections are a **two-column zig-zag** or an **asymmetric 5/7 grid**.
 - NEVER three equal cards in a row.
 
@@ -295,3 +301,74 @@ not fix that on its own — the column count has to change too.
 
 `.editorial-card` in `app/globals.css` exists only to serve these three. It is
 expected to be deleted, not restyled, when they are converted.
+
+---
+
+## 9. Performance Budget
+
+No budget existed before this section — it was written retroactively after the
+Hero Spline embed (§9.3) forced the question of where that weight should land.
+Numbers below are targets, not a report of current measured state; check new
+work against them before it lands, not after.
+
+### 9.1 Budget
+
+| Metric | Budget | Scope |
+|---|---|---|
+| Initial page load, first-party JS | **250 KB gzip / route** | Everything parsed and executed before the route is interactive — the main framework chunk plus that route's own chunk. Excludes anything gated behind a breakpoint, viewport intersection, or user interaction that does not fire on first paint. |
+| Async / lazy-loaded chunk | **150 KB gzip / chunk** | Anything code-split behind `next/dynamic`, a route change, or a similar deferred boundary — modals, rich embeds, heavier interactive widgets. |
+
+Measure with a clean production build (`npm run build`), gzip each file under
+`.next/static/chunks`, and diff against a build of the same commit without the
+change. Do not estimate from `node_modules` package size — bundlers tree-shake,
+and third-party packages often ship far more than what actually lands in a chunk.
+
+### 9.2 What counts against the budget
+
+Any JS the browser downloads because of a first-party change: npm-bundled
+imports, self-hosted static assets pulled in via a runtime-injected `<script>`
+tag, anything served from `/public`. **Where the bytes are declared does not
+matter — only whether the visitor's browser fetches them as a consequence of
+using this site.** A self-hosted `<script src>` is not a loophole around the
+async-chunk budget; it is the same spend measured a different way.
+
+### 9.3 Named exception — Hero Spline embed
+
+`components/home/HeroSplineScene.tsx` (`<spline-viewer>` web component,
+`public/spline-viewer/`) is excluded from both budgets above, not folded into
+them. Measured for the reference scene profiled during implementation:
+**~985 KB gzip for the base engine, ~1.1–1.2 MB gzip/br total** once the
+scene's own feature chunks (physics/boolean ops, navmesh, audio, UI panel —
+varies per scene) are counted. That is 4–8x either budget number by itself.
+
+It is excluded rather than counted because folding it in would do one of two
+bad things: force both budget numbers so high they stop catching real bloat,
+or make this one deliberate, isolated, non-blocking hero element look like an
+ordinary line item any future addition can point to as precedent. Neither is
+the goal — the goal is a number that still means something the next time
+someone wants to add 1 MB of JS to a section.
+
+**Why the exclusion is defensible here, specifically:**
+- It never loads on mobile — the element is not mounted below the `md`
+  breakpoint (§4), full stop, not merely hidden.
+- It costs zero bytes in the JS bundle graph — confirmed via clean A/B
+  production build (+586 bytes gzip total, which is our own loader logic, not
+  the engine). It is not in Next's chunk graph at all; it is a same-document
+  custom element loaded async via `<script type="module">`, self-hosted so the
+  hero doesn't depend on a third party's uptime.
+- It does not block initial paint, hydration, or TTI for the rest of the page
+  — same-document, async, desktop-gated.
+- It is one deliberate centerpiece, not a pattern — this exception covers
+  this element, not "hero embeds" as a category.
+
+**The exception lapses — the element comes out or gets rebudgeted — if any of
+these change:**
+- The mobile gate is removed or weakened so the engine loads on small
+  viewports.
+- It stops being self-hosted / async-injected (e.g. reverts to an
+  `import`-based bundle, which would show up in the JS bundle graph and then
+  does count against §9.1/§9.2).
+- A second embed of comparable weight is added anywhere on the site — at that
+  point this stops being "one named exception" and becomes a pattern that
+  needs its own budget line, not a blanket carve-out.
+- It starts blocking or visibly delaying render of content around it.
