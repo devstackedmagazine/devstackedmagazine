@@ -8,32 +8,26 @@ import Mascot from "@/public/images/home/heroImage.png";
 
 const features = [
   {
-    title: "SEO Foundation",
-    body: "Clear structure, metadata, and content hierarchy so your site is easier to discover and understand.",
-    accent: "Findable",
-    keyword: "Findable",
+    title: "Findable",
+    titleNote: "SEO foundation",
+    body: "Clear structure, metadata, and content hierarchy, so search engines and AI assistants can actually read what you do.",
   },
   {
-    title: "Conversion-Focused Design",
-    body: "Pages are shaped around what visitors need to trust you, contact you, and take the next step.",
-    accent: "Persuasive",
-    keyword: "Persuasive",
+    title: "Persuasive",
+    titleNote: "Conversion-focused design",
+    body: "Pages shaped around what visitors need to trust you, contact you, and take the next step. No decoration without a job.",
   },
   {
-    title: "Performance That Holds Up",
-    body: "Fast-loading screens, lean implementation, and UX decisions that do not collapse under growth.",
-    accent: "Fast",
-    keyword: "Fast",
+    title: "Fast",
+    titleNote: "Performance that holds up",
+    body: "Built to a performance budget from the first commit. Lean screens that stay fast as the site grows.",
   },
   {
-    title: "Fully Yours",
-    body: "No lock-in, no black box handoff, and no mystery builder. You get a site your business can actually own.",
-    accent: "Ownable",
-    keyword: "Ownable",
+    title: "Yours",
+    titleNote: "Full ownership",
+    body: "No lock-in, no mystery builder. You get the repository, the assets, and a site your team can run.",
   },
-] as const;
-
-const leadFeature = features[0];
+];
 
 export default function ServicesBento() {
   const root = useRef<HTMLElement | null>(null);
@@ -131,6 +125,7 @@ export default function ServicesBento() {
             <div className="mt-6 h-px w-24 origin-left scale-x-50 bg-rule transition-[transform,background-color] duration-[340ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 group-hover:bg-lime" />
           </article>
         </div>
+
       </div>
     </section>
   );

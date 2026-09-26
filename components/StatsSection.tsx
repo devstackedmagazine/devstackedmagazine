@@ -5,10 +5,10 @@ import { useInView } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const stats = [
-  { value: 20, suffix: "+", label: "Projects Goal for Year One" },
-  { value: 98, suffix: "%", label: "Client Satisfaction Target" },
-  { value: 10, suffix: "+", label: "Technologies We Work With" },
-  { value: 24, suffix: "/7", label: "Support Available" },
+  { value: 2, suffix: "", label: "People on every project. The same two, start to finish." },
+  { value: 1, suffix: "", label: "Business day to a reply. We read everything personally." },
+  { value: 100, suffix: "%", label: "Of the code handed over. Repository, assets, docs." },
+  { value: 0, suffix: "", label: "Lock-in. No platform we hold over you." },
 ];
 
 function Counter({ to, suffix }: { to: number; suffix: string }) {
@@ -18,7 +18,7 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
 
   useEffect(() => {
     if (!inView) return;
-    const duration = 1400;
+    const duration = 1200;
     const start = performance.now();
     let raf = 0;
     const tick = (t: number) => {

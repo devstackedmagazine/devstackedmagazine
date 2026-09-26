@@ -66,7 +66,7 @@ export default function HeroSection() {
 
             <h1 className="hero-title-shift text-display-xl mt-8 text-bone">
               <span className="hero-line block overflow-hidden">
-                <span className="inline-block">Websites That Work</span>
+                <span className="block">Good work needs</span>
               </span>
               <span className="hero-line block overflow-hidden">
                 <span className="inline-block text-bone/90">

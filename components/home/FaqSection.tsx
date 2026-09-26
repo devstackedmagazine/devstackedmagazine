@@ -6,7 +6,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { motion } from "framer-motion";
 
 const items = [
   {
@@ -25,19 +24,19 @@ const items = [
     value: "item-3",
     trigger: "Do I own the source code once the project is finished?",
     content:
-      "Absolutely. Unlike website builder platforms that lock you in, you receive full ownership of the repository and all assets the moment the project is complete.",
+      "Yes. You get the repository and every asset the day the project wraps. Nothing sits behind a login only we hold.",
   },
   {
     value: "item-4",
     trigger: "Will my site be mobile-friendly?",
     content:
-      "Every site we build is mobile-first by default, meaning it looks and performs perfectly on everything from a smartphone to a widescreen monitor.",
+      "Yes, by default. We design for phones first, then adapt up to tablet and desktop, and we test on real devices before launch.",
   },
   {
     value: "item-5",
     trigger: "Do you provide ongoing maintenance and support?",
     content:
-      "Yes. We offer maintenance retainers that cover hosting management, security updates, and minor improvements so you can stay focused on running your business.",
+      "Yes. Retainers cover hosting, security updates, and small improvements month to month. You can also just call us when something breaks.",
   },
 ];
 
@@ -90,6 +89,6 @@ export default function FaqSection() {
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

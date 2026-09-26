@@ -2,28 +2,26 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import Logo from "@/public/logos/devstacked-horizontally.svg";
 import Button from "@/components/ui/Button";
 
 const services = [
-  "UI/UX Design",
-  "Web Development",
-  "Mobile App Development",
-  "Consulting",
+  { label: "UI/UX Design", href: "/services" },
+  { label: "Web Development", href: "/services" },
+  { label: "Mobile App Development", href: "/services" },
+  { label: "Consulting", href: "/services" },
 ];
 
-const company = [
+const sheets = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Project", href: "/project" },
+  { label: "Services", href: "/services" },
   { label: "Contact", href: "/contact" },
 ];
 
 const socials = [
   { label: "Instagram", href: "https://www.instagram.com/devstackedmagazine/" },
   { label: "TikTok", href: "https://www.tiktok.com/@devstackedmagazine" },
-  { label: "Discord", href: "#" },
 ];
 
 const variants = {
@@ -84,7 +82,7 @@ export default function Footer() {
             <motion.div variants={variants} custom={1}>
               <p className="text-label text-ash mb-5">Company</p>
               <ul className="flex flex-col gap-3">
-                {company.map((c) => (
+                {sheets.map((c) => (
                   <li key={c.label}>
                     <Link href={c.href} className="text-body text-bone/80 transition-colors hover:text-bone">
                       {c.label}
@@ -92,8 +90,8 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
 
         <div className="mt-24 flex flex-col gap-6 border-t border-rule pt-10 sm:flex-row sm:items-end sm:justify-between">
@@ -107,7 +105,7 @@ export default function Footer() {
             <p className="text-small mt-4 max-w-sm leading-7 text-ash">
               DevStacked Magazine. Modern websites, product experiences, and tech writing for teams that want their work to actually be found.
             </p>
-          </motion.div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -131,14 +129,13 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
         </div>
 
         <div className="text-small mt-10 flex flex-col gap-2 text-ash sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} DevStacked Magazine. All rights reserved.</p>
           <p className="text-label">St. Charles, MO. Remote worldwide.</p>
         </div>
-      </div>
 
       <div
         aria-hidden

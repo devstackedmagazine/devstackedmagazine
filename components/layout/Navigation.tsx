@@ -14,13 +14,14 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center gap-7">
+    <nav aria-label="Primary navigation" className="flex items-center gap-7">
       {items.map((item) => {
         const active = pathname === item.href;
         return (
           <Link
             key={item.href}
             href={item.href}
+            aria-current={active ? "page" : undefined}
             className={[
               "nav-link text-small font-medium! transition-colors duration-[140ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
               active ? "text-bone nav-link-active" : "text-ash hover:text-bone",

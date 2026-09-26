@@ -6,24 +6,20 @@ import { gsap, ScrollTrigger, mq } from "@/lib/gsap-presets";
 
 const steps = [
   {
-    index: "01",
     title: "Discovery",
     body: "Goals, audience, brand, content, constraints. We come out of it with a brief and a clear shape for the project.",
   },
   {
-    index: "02",
-    title: "Architecture & Design",
-    body: "Information design, type, motion, and visuals are sketched against real content. Screens, not mood boards.",
+    title: "Drawing & design",
+    body: "Information design, type, motion, and visuals sketched against real content. Screens, not mood boards.",
   },
   {
-    index: "03",
-    title: "Build & Iterate",
+    title: "Build & iterate",
     body: "We build in the open, on a real URL, on a real stack. Feedback rounds are short and the work is always reachable.",
   },
   {
-    index: "04",
-    title: "Ship & Handover",
-    body: "Lighthouse, accessibility, search, analytics, ownership. A site your team can run, not a black box.",
+    title: "Ship & handover",
+    body: "Performance, accessibility, search, analytics, ownership. A site your team can run, not a black box.",
   },
 ];
 
@@ -44,16 +40,15 @@ export default function PinnedJourney() {
 
         ScrollTrigger.create({
           trigger: track,
-          start: "top top+=80",
+          start: "top top+=64",
           end: "bottom bottom",
           pin: pinEl,
           pinSpacing: false,
-          pinReparent: true,
           anticipatePin: 1,
         });
 
-        const cards = gsap.utils.toArray<HTMLElement>(".journey-item");
-        cards.forEach((card) => {
+        const rows = gsap.utils.toArray<HTMLElement>(".journey-item");
+        rows.forEach((row) => {
           ScrollTrigger.create({
             trigger: card,
             start: "top 70%",
@@ -67,10 +62,9 @@ export default function PinnedJourney() {
             onLeaveBack: () =>
               gsap.to(card, { scale: 0.92, opacity: 0.45, duration: 0.14, ease: "design", overwrite: "auto" }),
           });
-
-          gsap.set(card, { scale: 0.92, opacity: 0.45 });
         });
 
+        gsap.set(rows, { opacity: 0.45 });
         ScrollTrigger.refresh();
       });
 

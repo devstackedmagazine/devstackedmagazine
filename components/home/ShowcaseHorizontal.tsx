@@ -57,6 +57,34 @@ export default function ShowcaseHorizontal() {
     { scope: root }
   );
 
+  const renderPlate = (p: (typeof plates)[number]) => (
+    <article
+      className="sheet flex h-[58vh] w-[80vw] max-w-[860px] shrink-0 flex-col justify-between p-8 lg:p-12"
+      key={p.name}
+    >
+      <div className="flex items-start justify-between">
+        <span className="meta-label text-ink-faint">{p.kind}</span>
+      </div>
+
+      <div>
+        <h3 className="h-display text-4xl text-ink sm:text-5xl lg:text-6xl">{p.name}</h3>
+        <dl className="mt-8 border-t border-line">
+          {p.lines.map(([k, v]) => (
+            <div
+              key={k}
+              className="flex flex-col gap-1 border-b border-line py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
+            >
+              <dt className="meta-label shrink-0 text-ink-faint">{k}</dt>
+              <dd className="text-sm leading-6 text-ink-dim sm:text-right">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <p className="meta-label text-ink-faint">{p.year}</p>
+    </article>
+  );
+
   return (
     <section ref={root} className="relative">
       <div className="mx-auto max-w-[1400px] px-4 pt-16 pb-12 sm:px-6 md:pt-32">

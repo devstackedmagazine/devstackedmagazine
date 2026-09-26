@@ -1,10 +1,14 @@
-﻿"use client";
+"use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap-presets";
-import Mascot from "@/public/images/home/heroImage.png";
+
+const facts = [
+  { label: "Founded", value: "2025" },
+  { label: "Based", value: "Vushtrri, Kosova — remote worldwide" },
+  { label: "Practice", value: "Two full-stack developers" },
+];
 
 export default function AgencyHeroSection() {
   const root = useRef<HTMLElement | null>(null);
@@ -39,36 +43,16 @@ export default function AgencyHeroSection() {
   );
 
   return (
-    <section
-      ref={root}
-      className="relative min-h-[80vh] overflow-hidden pt-20 pb-16"
-    >
-      <div aria-hidden className="ambient-canvas" />
-
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-12 lg:px-20 pt-12 lg:pt-20">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-9">
-            <p className="about-eyebrow label-mark">The studio</p>
-
-            <h1 className="mt-8 font-display text-[clamp(2.4rem,5.5vw,5.5rem)] font-bold leading-[0.95] tracking-[-0.04em] text-white">
+    <section ref={root} className="sheet-grid relative overflow-hidden pt-16 pb-16 lg:pt-24">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-12 lg:px-20">
+        <div className="grid grid-cols-1 items-end gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <h1 className="h-display text-[clamp(2.5rem,5.4vw,5.2rem)] text-ink">
               <span className="about-line block overflow-hidden">
-                <span className="inline-block">We shape</span>
+                <span className="block">We shape digital</span>
               </span>
               <span className="about-line block overflow-hidden">
-                <span className="inline-flex items-center gap-3 sm:gap-5">
-                  <span className="inline-block">digital</span>
-                  <span className="about-pill-image relative inline-block h-[0.85em] w-[0.85em] sm:h-[0.8em] sm:w-[0.8em] overflow-hidden rounded-full border border-white/20 align-middle">
-                    <Image
-                      src={Mascot}
-                      alt="DevStacked mascot"
-                      fill
-                      priority
-                      sizes="120px"
-                      className="object-contain"
-                    />
-                  </span>
-                  <span className="inline-block text-white/90">products</span>
-                </span>
+                <span className="block">products</span>
               </span>
               <span className="about-line block overflow-hidden">
                 <span className="inline-block text-white/55">
@@ -76,6 +60,11 @@ export default function AgencyHeroSection() {
                 </span>
               </span>
             </h1>
+
+            <p className="about-fade mt-8 max-w-xl text-base leading-7 text-ink-dim sm:text-lg">
+              Two developers, one drawing board. We take products from first
+              sketch to launch and stay responsible for how they run after.
+            </p>
           </div>
 
           <div className="lg:col-span-3 flex flex-col gap-6">
