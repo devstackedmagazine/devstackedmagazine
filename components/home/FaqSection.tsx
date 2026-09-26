@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { motion } from "framer-motion";
 
 const items = [
   {
@@ -24,34 +25,43 @@ const items = [
     value: "item-3",
     trigger: "Do I own the source code once the project is finished?",
     content:
-      "Yes. You get the repository and every asset the day the project wraps. Nothing sits behind a login only we hold.",
+      "Absolutely. Unlike website builder platforms that lock you in, you receive full ownership of the repository and all assets the moment the project is complete.",
   },
   {
     value: "item-4",
     trigger: "Will my site be mobile-friendly?",
     content:
-      "Yes, by default. We design for phones first, then adapt up to tablet and desktop, and we test on real devices before launch.",
+      "Every site we build is mobile-first by default, meaning it looks and performs perfectly on everything from a smartphone to a widescreen monitor.",
   },
   {
     value: "item-5",
     trigger: "Do you provide ongoing maintenance and support?",
     content:
-      "Yes. Retainers cover hosting, security updates, and small improvements month to month. You can also just call us when something breaks.",
+      "Yes. We offer maintenance retainers that cover hosting management, security updates, and minor improvements so you can stay focused on running your business.",
   },
 ];
 
 export default function FaqSection() {
   return (
-    <section className="relative section-pad">
-      <div className="mx-auto max-w-7xl px-5 sm:px-12 lg:px-20">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={{
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.34, ease: [0.22, 1, 0.36, 1] } },
+      }}
+      className="relative section-pad"
+    >
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-5">
-            <h2 className="h-display text-[clamp(2rem,3.6vw,3.4rem)] text-ink">
-              Questions,
-              <br />
-              <span className="text-ink-dim">answered straight.</span>
+            <p className="label-mark">Questions</p>
+            <h2 className="text-display-l mt-6 text-bone">
+              Frequently <br />
+              <span className="text-ash">asked.</span>
             </h2>
-            <p className="mt-6 max-w-sm text-base leading-7 text-ink-dim">
+            <p className="text-body mt-6 max-w-sm text-ash">
               The questions we hear most often, with the short honest answers.
             </p>
           </div>
@@ -60,22 +70,26 @@ export default function FaqSection() {
             <Accordion
               type="multiple"
               defaultValue={["item-1"]}
-              className="w-full border-t border-line"
+              className="w-full border-t border-rule"
             >
               {items.map((item) => (
                 <AccordionItem
                   key={item.value}
                   value={item.value}
-                  className="border-b border-line"
+                  className="border-b border-rule"
                 >
-                  <AccordionTrigger>{item.trigger}</AccordionTrigger>
-                  <AccordionContent>{item.content}</AccordionContent>
+                  <AccordionTrigger className="text-subhead text-bone">
+                    {item.trigger}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-body text-ash">
+                    {item.content}
+                  </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

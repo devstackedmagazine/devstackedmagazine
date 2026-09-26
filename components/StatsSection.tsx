@@ -41,18 +41,17 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
 
 export default function StatsSection() {
   return (
-    <section className="border-y border-line bg-board-raised py-16">
-      <div className="mx-auto max-w-7xl px-5 sm:px-12 lg:px-20">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label} className="flex flex-col gap-3">
-              <p className="text-5xl font-bold leading-none tracking-[-0.02em] text-ink sm:text-6xl">
-                <Counter to={s.value} suffix={s.suffix} />
-              </p>
-              <p className="max-w-[26ch] text-sm leading-6 text-ink-dim">{s.label}</p>
-            </div>
-          ))}
-        </div>
+    <section className="relative section-pad">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-px bg-rule px-4 sm:px-6 md:grid-cols-4">
+        {stats.map((s) => (
+          <div key={s.label} className="flex flex-col gap-3 bg-void px-6 py-8">
+            <p className="text-display-xl text-bone">
+              <Counter to={s.value} suffix={s.suffix} />
+            </p>
+            <div className="h-px w-8 bg-lime" />
+            <p className="text-small max-w-[24ch] text-ash">{s.label}</p>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -16,14 +16,30 @@ export default function AgencyHeroSection() {
   useGSAP(
     () => {
       const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
-      tl.from(".about-line > span", {
-        yPercent: 112,
-        duration: 1.1,
-        stagger: 0.07,
-      })
-        .from(".about-fade", { y: 14, opacity: 0, duration: 0.8, stagger: 0.08 }, "-=0.6");
+      tl.from(".about-eyebrow", { y: 20, opacity: 0, duration: 0.9 })
+        .from(
+          ".about-line > span",
+          {
+            yPercent: 110,
+            opacity: 0,
+            duration: 1.1,
+            stagger: 0.06,
+          },
+          "-=0.6",
+        )
+        .from(".about-sub", { y: 20, opacity: 0, duration: 0.9 }, "-=0.7")
+        .from(
+          ".about-pill-image",
+          {
+            scale: 0.4,
+            opacity: 0,
+            duration: 1.2,
+            ease: "elastic.out(1, 0.6)",
+          },
+          "-=0.8",
+        );
     },
-    { scope: root }
+    { scope: root },
   );
 
   return (
@@ -39,7 +55,9 @@ export default function AgencyHeroSection() {
                 <span className="block">products</span>
               </span>
               <span className="about-line block overflow-hidden">
-                <span className="block text-ink-dim">that work for a living.</span>
+                <span className="inline-block text-white/55">
+                  that work for a living.
+                </span>
               </span>
             </h1>
 
@@ -49,18 +67,25 @@ export default function AgencyHeroSection() {
             </p>
           </div>
 
-          <div className="about-fade flex flex-col lg:col-span-4">
-            <dl className="border-t border-line">
-              {facts.map((f) => (
-                <div
-                  key={f.label}
-                  className="flex flex-col gap-1 border-b border-line py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
-                >
-                  <dt className="meta-label text-ink-faint">{f.label}</dt>
-                  <dd className="text-sm font-medium text-ink sm:text-right">{f.value}</dd>
-                </div>
-              ))}
-            </dl>
+          <div className="lg:col-span-3 flex flex-col gap-6">
+            <div className="about-sub border-t border-white/10 pt-6">
+              <p className="font-mono-meta text-white/40">Founded</p>
+              <p className="mt-2 font-display text-3xl text-white">2025</p>
+            </div>
+            <div className="about-sub border-t border-white/10 pt-6">
+              <p className="font-mono-meta text-white/40">Based</p>
+              <p className="mt-2 font-display text-2xl text-white leading-tight">
+                In Kosovo <br />{" "}
+                <span className="text-white/50">Remote Worldwide</span>
+              </p>
+            </div>
+            <div className="about-sub border-t border-white/10 pt-6">
+              <p className="font-mono-meta text-white/40">Practice</p>
+              <p className="mt-2 font-display text-2xl text-white leading-tight">
+                Two full-stack <br />{" "}
+                <span className="text-white/50">developers</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import Link from "next/link"; 
+import Link from "next/link";
 
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
@@ -32,60 +32,44 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "whitespace-nowrap inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:cursor-pointer";
+    "whitespace-nowrap inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-[background-color,border-color,color,transform] duration-[140ms] ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-void disabled:pointer-events-none active:translate-y-px";
 
   const variants = {
     primary:
-      "bg-red-active text-white hover:bg-red-active-hover focus-visible:ring-red-active",
+      "bg-lime text-void hover:bg-lime-lift active:bg-lime-press disabled:bg-shelf disabled:text-ash disabled:border disabled:border-rule",
     secondary:
-      "bg-ink text-board hover:bg-red-active hover:text-white focus-visible:ring-red-active",
+      "bg-transparent text-bone border border-rule hover:border-lime hover:text-lime disabled:border-rule disabled:text-rule",
     outline:
-      "border border-line-strong bg-transparent text-ink hover:bg-ink hover:text-board hover:border-ink focus-visible:ring-red-active",
-    ghost: "bg-transparent text-ink hover:bg-white/10",
+      "bg-transparent text-bone border border-rule hover:border-lime hover:text-lime disabled:border-rule disabled:text-rule",
+    ghost:
+      "bg-transparent text-bone hover:text-lime disabled:text-rule",
   };
 
   const sizes = {
-    sm: "h-9 px-4 text-sm",
-    md: "h-11 px-6 text-base",
-    lg: "h-14 px-8 text-lg",
+    sm: "h-9 px-4 text-small",
+    md: "h-11 px-7 text-body",
+    lg: "h-14 px-8 text-subhead",
   };
 
   const widthClass = fullWidth ? "w-full" : "w-auto";
   const buttonClasses = `${baseStyles} ${variants[variant]} ${sizes[size]} ${widthClass} ${className}`;
-  const customStyles = {
-    borderRadius: "9999px",
-    ...(variant === "primary"
-      ? { backgroundColor: "var(--red-active)" }
-      : {}),
-  };
 
   const content = (
     <>
       {isLoading ? (
         <>
-          <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-              fill="none"
-            />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-          </svg>
-          Loading...
+          <span className="flex gap-1" aria-hidden>
+            <span className="loading-dot h-1.5 w-1.5 rounded-full bg-current" />
+            <span className="loading-dot h-1.5 w-1.5 rounded-full bg-current" />
+            <span className="loading-dot h-1.5 w-1.5 rounded-full bg-current" />
+          </span>
+          Loading
         </>
       ) : (
         <>
-          {leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
+          {leftIcon && <span className="shrink-0">{leftIcon}</span>}
           {children}
-          {rightIcon && <span className="flex-shrink-0">{rightIcon}</span>}
+          {rightIcon && <span className="shrink-0">{rightIcon}</span>}
         </>
       )}
     </>
@@ -93,11 +77,7 @@ export default function Button({
 
   if (href) {
     return (
-      <Link
-        href={href}
-        className={buttonClasses}
-        style={customStyles}
-      >
+      <Link href={href} className={buttonClasses}>
         {content}
       </Link>
     );
@@ -106,7 +86,6 @@ export default function Button({
   return (
     <button
       className={buttonClasses}
-      style={customStyles}
       disabled={disabled || isLoading}
       {...props}
     >

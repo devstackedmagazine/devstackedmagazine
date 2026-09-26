@@ -1,34 +1,42 @@
-import Link from "next/link";
+"use client";
+
+import { motion } from "framer-motion";
+import Button from "@/components/ui/Button";
 
 export default function CtaSection() {
   return (
-    <section className="relative section-pad">
-      <div className="mx-auto max-w-7xl px-5 sm:px-12 lg:px-20">
-        <div className="sheet relative px-6 py-14 sm:px-14 sm:py-18 lg:px-20 lg:py-24">
+    <section className="relative section-pad overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+          className="relative border border-rule bg-shelf px-8 py-16 sm:px-14 sm:py-20 lg:px-20 lg:py-28"
+        >
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">
-              <h2 className="h-display text-[clamp(2.4rem,5.6vw,5rem)] text-ink">
-                Got a project?
-                <br />
-                <span className="text-red-active">Open a work order.</span>
+              <p className="label-mark">The next step</p>
+              <h2 className="text-display-xl mt-6 text-bone">
+                Got a project? <br />
+                <span className="text-lime">Let&apos;s build it.</span>
               </h2>
-              <p className="mt-8 max-w-xl text-base leading-7 text-ink-dim sm:text-lg">
-                Send a short note or take the two-minute brief. Either way it
-                lands with the two people who will actually build it.
+              <p className="text-subhead mt-8 max-w-[65ch] text-ash">
+                Drop us a note. We read everything personally and respond within
+                one business day with a clear next step.
               </p>
             </div>
 
             <div className="flex flex-col gap-4 lg:col-span-4">
-              <Link href="/contact" className="btn-ink w-full">
-                Send a note
-              </Link>
-              <Link href="/project" className="btn-line w-full">
-                Take the 2-minute brief
-              </Link>
-              <p className="stamp mt-2 self-start">Response: 1 business day</p>
+              <Button href="/contact" size="lg">
+                Start a project
+              </Button>
+              <Button href="/project" variant="secondary" size="lg">
+                Or take the 2-min brief
+              </Button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

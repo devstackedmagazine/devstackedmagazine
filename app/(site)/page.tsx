@@ -5,7 +5,6 @@ import ServicesBento from "@/components/home/ServicesBento";
 import TrustedMarquee from "@/components/home/TrustedMarquee";
 import PinnedJourney from "@/components/home/PinnedJourney";
 import ShowcaseHorizontal from "@/components/home/ShowcaseHorizontal";
-import WorkingNotes from "@/components/home/WorkingNotes";
 import StatsSection from "@/components/StatsSection";
 import CtaSection from "@/components/CtaSection";
 import FaqSection from "@/components/home/FaqSection";
@@ -18,7 +17,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "devstackedmagazine | Web Design, Development, and Tech Content",
+    title: "DevStacked | Web Design, Development, and Tech Content",
     description:
       "Websites and practical tech content from a two-person studio. Fast builds, honest timelines, and code you own.",
     url: siteConfig.url,
@@ -27,13 +26,13 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "devstackedmagazine website preview",
+        alt: "DevStacked website preview",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "devstackedmagazine | Web Design, Development, and Tech Content",
+    title: "DevStacked | Web Design, Development, and Tech Content",
     description:
       "Websites and practical tech content from a two-person studio. Fast builds, honest timelines, and code you own.",
     images: [siteConfig.ogImage],
@@ -60,7 +59,6 @@ export default function Home() {
       <ShowcaseHorizontal />
       <StatsSection />
       <PinnedJourney />
-      <WorkingNotes />
       <CtaSection />
       <FaqSection />
 

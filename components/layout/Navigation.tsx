@@ -23,8 +23,8 @@ export default function Navigation() {
             href={item.href}
             aria-current={active ? "page" : undefined}
             className={[
-              "nav-link text-sm font-medium transition-colors",
-              active ? "text-ink nav-link-active" : "text-ink-dim hover:text-ink",
+              "nav-link text-small font-medium! transition-colors duration-[140ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
+              active ? "text-bone nav-link-active" : "text-ash hover:text-bone",
             ].join(" ")}
           >
             {item.label}

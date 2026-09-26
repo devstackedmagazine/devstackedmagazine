@@ -2,84 +2,82 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-/* ============================================================
-   THE SPEC SHEET — devstackedmagazine visual world
-   The site is a working set of engineering drawings:
-   graphite board, ink linework, red reserved for the
-   live/active edge and revision marks. One material,
-   declared once, everywhere.
-   ============================================================ */
-
 :root {
-  /* Ink and board */
-  --board: #141414;
-  --board-raised: #181818;
-  --board-card: #1c1c1c;
-  --ink: oklch(0.985 0 0);
-  --ink-dim: oklch(0.72 0 0);
-  --ink-faint: oklch(0.52 0 0);
+  /* Design system palette — six named values plus lime's two interaction states. */
+  --void: #0a0b08;
+  --shelf: #131510;
+  --hairline: #2a2e24;
+  --rule: #5f6553;
+  --bone: #f2f4ee;
+  --ash: #8f9488;
+  --lime: #affc41;
+  --lime-lift: #c4ff66;
+  --lime-press: #93d62e;
 
-  /* Brand, kept: revision red — the live edge, never decoration */
-  --red-active: #c70e1a;
-  --red-active-hover: #89121a;
-  --red-soft: #c7370e;
+  /* Error states only — DESIGN.md §2. NEVER decorative. */
+  --flare: #ff6b4a;
 
-  /* Hairlines */
-  --line: oklch(1 0 0 / 0.1);
-  --line-strong: oklch(1 0 0 / 0.2);
+  /* shadcn-compatible tokens, remapped onto the palette above so existing
+     shadcn primitives (accordion, progress) stay on-system without a rewrite. */
+  --background: var(--void);
+  --foreground: var(--bone);
+  --card: var(--shelf);
+  --card-foreground: var(--bone);
+  --popover: var(--shelf);
+  --popover-foreground: var(--bone);
+  --primary: var(--lime);
+  --primary-foreground: var(--void);
+  --secondary: var(--shelf);
+  --secondary-foreground: var(--bone);
+  --muted: var(--shelf);
+  --muted-foreground: var(--ash);
+  --accent: var(--shelf);
+  --accent-foreground: var(--bone);
+  --destructive: var(--flare);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--lime);
+  --radius: 4px;
 
-  /* shadcn-compatible tokens (kept stable for Radix components) */
-  --background-gray: rgba(255, 255, 255, 0.06);
-  --background: #141414;
-  --background-elevated: #181818;
-  --background-card: #1c1c1c;
-  --foreground: oklch(0.985 0 0);
-  --foreground-muted: oklch(0.72 0 0);
-  --foreground-faint: oklch(0.52 0 0);
-  --card: oklch(0.18 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.87 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.371 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: #c70e1a;
-  --radius: 1rem;
+  /* Pre-existing token names used across other route groups (about/services/
+     contact/LMS), repointed at the new palette instead of renamed at every
+     call site. Accent role (red -> lime) is a deliberate, disclosed change. */
+  --background-elevated: var(--shelf);
+  --background-card: var(--shelf);
+  --foreground-muted: var(--ash);
+  --foreground-faint: var(--ash);
+  --line: var(--hairline);
+  --line-strong: var(--rule);
+  --red-active: var(--lime);
+  --red-active-hover: var(--lime-lift);
 }
 
 @theme inline {
+  --color-void: var(--void);
+  --color-shelf: var(--shelf);
+  --color-hairline: var(--hairline);
+  --color-rule: var(--rule);
+  --color-bone: var(--bone);
+  --color-ash: var(--ash);
+  --color-lime: var(--lime);
+  --color-lime-lift: var(--lime-lift);
+  --color-lime-press: var(--lime-press);
+  --color-flare: var(--flare);
+
   --color-background: var(--background);
   --color-background-elevated: var(--background-elevated);
   --color-background-card: var(--background-card);
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
-  --color-foreground-faint: var(--foreground-faint);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
-  --color-board: var(--board);
-  --color-board-raised: var(--board-raised);
-  --color-board-card: var(--board-card);
-  --color-ink: var(--ink);
-  --color-ink-dim: var(--ink-dim);
-  --color-ink-faint: var(--ink-faint);
-
-  --font-sans: var(--font-outfit), "Outfit", ui-sans-serif, system-ui,
-    -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: var(--font-momo-trust-display), "Momo Trust Display",
-    ui-sans-serif, system-ui, sans-serif;
-
-  --color-white: #ffffff;
   --color-red-active: var(--red-active);
   --color-red-active-hover: var(--red-active-hover);
-  --color-red-soft: var(--red-soft);
+
+  /* Unbounded/Outfit/JetBrains Mono, loaded via next/font/google in lib/fonts.ts */
+  --font-display: var(--font-unbounded), sans-serif;
+  --font-sans: var(--font-outfit), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
 
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -98,19 +96,89 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
-  /* Soft geometry keeps the board tactile without turning it playful. */
-  --radius-sm: 0.625rem;
-  --radius-md: 0.875rem;
-  --radius-lg: 1.125rem;
-  --radius-xl: 1.5rem;
-  --radius-2xl: 1.75rem;
-  --radius-3xl: 2rem;
-  --radius-4xl: 2.5rem;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ============================================================
-   Base layer
-   ============================================================ */
+/* ============================================
+   Type scale — DESIGN.md §3
+   Desktop values apply from md (768px) up; mobile is the default.
+   ============================================ */
+.text-display-xl {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.text-display-l {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.text-heading {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.text-hero-stat {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.text-subhead {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.text-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+.text-small {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+.text-label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+@media (min-width: 768px) {
+  .text-display-xl { font-size: 72px; }
+  .text-display-l { font-size: 44px; }
+  .text-heading { font-size: 26px; }
+  .text-hero-stat { font-size: 40px; }
+  .text-subhead { font-size: 20px; }
+  .text-body { font-size: 17px; }
+  .text-small { font-size: 15px; }
+  .text-label { font-size: 13px; }
+}
+
+/* ============================================
+   Editorial primitives
+   ============================================ */
 
 @layer base {
   * {
@@ -118,278 +186,97 @@
   }
   html {
     @apply font-sans;
-    background-color: var(--board);
-    color: var(--ink);
-    scrollbar-color: oklch(1 0 0 / 0.22) var(--board);
+    background-color: var(--background);
+    color: var(--foreground);
   }
   body {
-    @apply bg-board text-ink;
-    font-feature-settings: "kern", "liga";
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-display);
-  }
-
-  /* Browser surfaces carry the design: selection, caret,
-     focus, underline offset, tabular numerals. */
-  ::selection {
-    background: rgba(199, 14, 26, 0.45);
-    color: #fff;
-  }
-  input,
-  textarea {
-    caret-color: var(--red-active);
-  }
-  :focus-visible {
-    outline: 1px solid var(--red-active);
-    outline-offset: 3px;
-  }
-  a {
-    text-underline-offset: 3px;
-  }
-  p, li {
-    font-variant-numeric: tabular-nums;
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--board);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: oklch(1 0 0 / 0.18);
-    border: 2px solid var(--board);
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: oklch(1 0 0 / 0.3);
-  }
-
-  /* Display voice */
+  /* Editorial display utility, used on H1, big H2 */
   .font-display {
     font-family: var(--font-display);
-    font-feature-settings: "kern", "liga";
-    letter-spacing: -0.03em;
-  }
-  .h-display {
-    font-family: var(--font-display);
-    font-weight: 400;
-    line-height: 0.96;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11";
     letter-spacing: -0.03em;
   }
 
-  /* Small labels stay quiet without switching type families. */
-  .meta-label {
-    font-family: var(--font-sans);
-    font-size: 0.6875rem;
-    letter-spacing: 0.1em;
+  /* Mono label, used for tiny technical meta */
+  .font-mono-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0;
     text-transform: uppercase;
     font-weight: 500;
-    font-variant-numeric: tabular-nums;
+  }
+  @media (min-width: 768px) {
+    .font-mono-meta { font-size: 13px; }
   }
 
-  /* Editorial section spacing */
-  .section-pad {
-    padding-top: clamp(5rem, 11vw, 10rem);
-    padding-bottom: clamp(5rem, 11vw, 10rem);
-  }
-}
-
-  /* ============================================================
-   Drafting primitives
-   ============================================================ */
-
-@layer components {
-  /* The board: a drafting sheet sits on a fine measuring grid.
-     Earned by the world — this IS the measuring surface. */
-  .sheet-grid {
-    background-image:
-      linear-gradient(oklch(1 0 0 / 0.028) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(1 0 0 / 0.028) 1px, transparent 1px);
-    background-size: 72px 72px;
-    background-position: center top;
-  }
-
-  /* A framed drawing sheet */
-  .sheet {
-    position: relative;
-    border: 1px solid var(--line);
-    background: var(--board-raised);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-  }
-
-  /* Corner registration marks */
-  .reg-mark {
-    position: absolute;
-    width: 9px;
-    height: 9px;
-    border-color: oklch(1 0 0 / 0.28);
+  /* Void fill behind the whole site. No gradient, no glow — a single
+     light source, not a wash (DESIGN.md §1, §7 project-specific bans). */
+  .ambient-canvas {
+    position: fixed;
+    inset: 0;
     pointer-events: none;
-  }
-  .reg-mark-tl { top: -1px; left: -1px; border-top: 1px solid; border-left: 1px solid; }
-  .reg-mark-tr { top: -1px; right: -1px; border-top: 1px solid; border-right: 1px solid; }
-  .reg-mark-bl { bottom: -1px; left: -1px; border-bottom: 1px solid; border-left: 1px solid; }
-  .reg-mark-br { bottom: -1px; right: -1px; border-bottom: 1px solid; border-right: 1px solid; }
-
-  /* Dimension line with end segments and a centered label */
-  .dimension {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-family: var(--font-sans);
-    font-size: 0.6875rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    font-variant-numeric: tabular-nums;
-  }
-  .dimension::before,
-  .dimension::after {
-    content: "";
-    flex: 1 1 0;
-    height: 1px;
-    background: oklch(1 0 0 / 0.16);
-  }
-  .dimension > span {
-    padding: 0 0.25rem;
-    white-space: nowrap;
+    z-index: -1;
+    background: var(--background);
   }
 
-  /* Buttons: hard inversion, no glow */
-  .btn-ink {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.625rem;
-    height: 3rem;
-    padding: 0 1.75rem;
-    background: var(--ink);
-    color: var(--board);
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    transition: background-color 0.15s ease, color 0.15s ease;
-  }
-  .btn-ink:hover {
-    background: var(--red-active);
-    color: #fff;
-  }
-  .btn-line {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.625rem;
-    height: 3rem;
-    padding: 0 1.75rem;
-    border: 1px solid var(--line-strong);
-    color: var(--ink);
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    background: transparent;
-    border-radius: 9999px;
-    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  }
-  .btn-line:hover {
-    background: var(--ink);
-    color: var(--board);
-    border-color: var(--ink);
-  }
-  .btn-red {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.625rem;
-    height: 3rem;
-    padding: 0 1.75rem;
-    background: var(--red-active);
-    color: #fff;
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    transition: background-color 0.15s ease;
-  }
-  .btn-red:hover {
-    background: var(--red-active-hover);
-  }
-
-  /* Soft chips for deliverables and data */
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid var(--line);
-    padding: 0.3rem 0.6rem;
-    font-family: var(--font-sans);
-    font-size: 0.6875rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-dim);
-    font-variant-numeric: tabular-nums;
-    border-radius: var(--radius-2xl);
-  }
-
-  /* Rounded content rows keep the editorial rhythm while softening the board. */
-  .spec-row {
+  /* Film grain, SVG noise data URL, very low opacity, blend in screen mode.
+     Apply to any container that wants a tactile surface. */
+  .grain {
     position: relative;
-    display: grid;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-xl);
-    background: var(--board-raised);
-    overflow: hidden;
-    transition: background-color 0.25s ease, border-color 0.25s ease;
+    isolation: isolate;
   }
-  .spec-row + .spec-row {
-    margin-top: 0.75rem;
-  }
-  .spec-row::before {
+  .grain::after {
     content: "";
     position: absolute;
-    left: 0;
-    top: 0.75rem;
-    bottom: 0.75rem;
-    width: 3px;
-    background: var(--red-active);
-    border-radius: 9999px;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .spec-row:hover {
-    background: var(--board-card);
-    border-color: var(--line-strong);
-  }
-  .spec-row:hover::before {
-    transform: scaleY(1);
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
 
-  /* Red revision stamp */
-  .stamp {
+  /* Editorial section spacing, cinematic chapter padding */
+  .section-pad {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+  @media (min-width: 768px) {
+    .section-pad {
+      padding-top: 128px;
+      padding-bottom: 128px;
+    }
+  }
+
+  /* Single tracked micro-mark for "label" feel without "SECTION 01" energy */
+  .label-mark {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    border: 1px solid var(--red-active);
-    color: var(--red-active);
-    padding: 0.45rem 0.9rem;
-    font-family: var(--font-sans);
-    font-size: 0.6875rem;
-    letter-spacing: 0.16em;
+    gap: 0.65rem;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0;
     text-transform: uppercase;
-    font-variant-numeric: tabular-nums;
-    border-radius: 9999px;
+    color: var(--foreground-muted);
+  }
+  @media (min-width: 768px) {
+    .label-mark { font-size: 13px; }
+  }
+  .label-mark::before {
+    content: "";
+    display: inline-block;
+    width: 1.75rem;
+    height: 1px;
+    background: var(--red-active);
   }
 
-  /* Underline reveal for nav links; red marks the live page */
+  /* Underline animation for nav links (replaces existing nav-link) */
   .nav-link {
     position: relative;
     display: inline-block;
@@ -402,23 +289,237 @@
     left: 0;
     width: 0;
     height: 1px;
-    background: var(--red-active);
-    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--lime);
+    transition: width 0.14s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .nav-link:hover::after,
   .nav-link-active::after {
     width: 100%;
   }
+
+  /* Display heading clamp helpers */
+  .h-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
 }
 
-/* Hide scrollbar for horizontal tracks */
+/* ============================================
+   Status dot — the one permitted perpetual idle animation (DESIGN.md §6)
+   ============================================ */
+@keyframes status-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+.status-dot {
+  animation: status-pulse 3s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-dot { animation: none; opacity: 1; }
+}
+
+/* ============================================
+   Reduced motion — every transition/animation resolves instantly.
+   Shipped alongside every animation it disables (DESIGN.md §6).
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   Marquee, used by TrustedMarquee.
+   Approved exception to the "nothing else loops" / no-carousel rules —
+   see DESIGN.md §7. Transform-only (translate3d), never left/margin.
+   ============================================ */
+@keyframes marquee-x {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  animation: marquee-x 38s linear infinite;
+  will-change: transform;
+}
+.marquee-pause:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ============================================
+   Loading dots, used by Button isLoading (never a circular spinner)
+   ============================================ */
+@keyframes loading-dot {
+  0%, 80%, 100% { opacity: 0.25; }
+  40% { opacity: 1; }
+}
+.loading-dot {
+  animation: loading-dot 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.loading-dot:nth-child(2) { animation-delay: 0.15s; }
+.loading-dot:nth-child(3) { animation-delay: 0.3s; }
+@media (prefers-reduced-motion: reduce) {
+  .loading-dot { animation: none; opacity: 1; }
+}
+
+/* ============================================
+   Editorial card primitive
+   ============================================ */
+.editorial-card {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.025) 0%,
+    rgba(255, 255, 255, 0.005) 100%
+  );
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  transition: border-color 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.editorial-card:hover {
+  border-color: var(--line-strong);
+}
+
+/* Hide scrollbar for the horizontal showcase track */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 
-/* ============================================================
-   Cloud mascot
-   ============================================================ */
+/* ===== DevStacked Courses — lesson markdown (.lms-prose) ===== */
+.lms-prose {
+  color: var(--foreground-muted);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+.lms-prose > * + * { margin-top: 1.1em; }
+.lms-prose h1, .lms-prose h2, .lms-prose h3, .lms-prose h4 {
+  color: var(--foreground);
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 1.6em;
+  margin-bottom: 0.5em;
+}
+.lms-prose h1 { font-size: 1.7rem; }
+.lms-prose h2 { font-size: 1.4rem; }
+.lms-prose h3 { font-size: 1.15rem; }
+.lms-prose p { margin: 0; }
+.lms-prose a { color: var(--red-active); text-decoration: underline; text-underline-offset: 2px; }
+.lms-prose strong { color: var(--foreground); font-weight: 600; }
+.lms-prose ul, .lms-prose ol { padding-left: 1.4em; }
+.lms-prose ul { list-style: disc; }
+.lms-prose ol { list-style: decimal; }
+.lms-prose li { margin-top: 0.4em; }
+.lms-prose li::marker { color: var(--foreground-faint); }
+.lms-prose blockquote {
+  border-left: 3px solid var(--red-active);
+  padding-left: 1em;
+  color: var(--foreground-muted);
+  font-style: italic;
+}
+.lms-prose code:not(pre code) {
+  background: var(--background-card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.12em 0.4em;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--foreground);
+}
+.lms-prose pre {
+  background: var(--shelf);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1em 1.2em;
+  overflow-x: auto;
+  font-size: 0.85rem;
+}
+.lms-prose pre code { font-family: var(--font-mono); background: none; border: none; padding: 0; }
+.lms-prose table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.lms-prose th, .lms-prose td { border: 1px solid var(--line); padding: 0.5em 0.75em; text-align: left; }
+.lms-prose th { background: var(--background-card); color: var(--foreground); }
+.lms-prose img { border-radius: 12px; max-width: 100%; }
+.lms-prose hr { border: none; border-top: 1px solid var(--line); }
 
+/* ============================================
+   Focus ring (DESIGN.md: 2px Lime, offset 2px)
+   ============================================ */
+:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Primitives still used by pages kept from main
+   (not-found, thank-you, contact, services, about)
+   ============================================ */
+.btn-ink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  font-variant-numeric: tabular-nums;
+  border-radius: var(--radius-sm);
+}
+
+.spec-row {
+  position: relative;
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--board-raised);
+  overflow: hidden;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+.spec-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  width: 3px;
+  background: var(--red-active);
+  border-radius: 9999px;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.spec-row:hover {
+  background: var(--board-card);
+  border-color: var(--line-strong);
+}
+.spec-row:hover::before {
+  transform: scaleY(1);
+}
+
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--red-active);
+  color: var(--red-active);
+  padding: 0.45rem 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  border-radius: 9999px;
+}
+
+/* ============================================
+   Cloud mascot (components/mascot/CloudBot.tsx, currently unused)
+   ============================================ */
 .cloud-bot {
   position: relative;
   display: inline-block;
@@ -426,7 +527,6 @@
   min-width: 0;
   pointer-events: none;
 }
-
 .cloud-bot > svg {
   display: block;
   width: 100%;
@@ -434,6 +534,34 @@
   overflow: visible;
 }
 
-.cloud-bot-eye {
-  fill: #f1efe9;
+/* ============================================
+   Legacy aliases (DESIGN.md §8)
+   Map main's --board/--ink tokens onto ours for the pages still on
+   them. Remove when those pages are converted.
+   ============================================ */
+:root {
+  --board: var(--void);
+  --board-raised: var(--shelf);
+  --board-card: var(--shelf);
+  --ink: var(--bone);
+  --ink-dim: var(--ash);
+  --ink-faint: var(--ash);
+}
+@theme inline {
+  --color-board: var(--board);
+  --color-board-raised: var(--board-raised);
+  --color-board-card: var(--board-card);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
+}
+.meta-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+.sheet {
+  background: var(--shelf);
+  border: 1px solid var(--rule);
 }

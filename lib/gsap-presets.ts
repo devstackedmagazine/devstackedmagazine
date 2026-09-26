@@ -1,26 +1,32 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CustomEase } from "gsap/CustomEase";
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.defaults({ ease: "expo.out", duration: 1 });
+  gsap.registerPlugin(ScrollTrigger, CustomEase);
+  CustomEase.create("design", "0.22, 1, 0.36, 1");
+  gsap.defaults({ ease: "design", duration: 0.34 });
 }
 
 export { gsap, ScrollTrigger };
 
+/** Single site-wide curve (DESIGN.md §6). Registered as the GSAP ease "design". */
 export const ease = {
-  elegant: "expo.out",
-  smooth: "power3.out",
-  snappy: "back.out(1.2)",
+  design: "design",
   linear: "none",
 } as const;
 
+/** DESIGN.md §6: entry 340ms, exit 220ms, micro-interaction 140ms. */
 export const dur = {
-  fast: 0.25,
-  medium: 0.6,
-  slow: 1,
-  epic: 1.4,
+  entry: 0.34,
+  exit: 0.22,
+  micro: 0.14,
 } as const;
+
+/** 60ms per item, capped at 8 — item 9+ shares item 8's delay. */
+export function staggerDelay(index: number, stepSeconds = 0.06, cap = 8) {
+  return Math.min(index, cap - 1) * stepSeconds;
+}
 
 export const mq = {
   isMobile: () =>
@@ -39,7 +45,7 @@ export function splitChars(node: HTMLElement | null) {
     const span = document.createElement("span");
     span.style.display = "inline-block";
     span.style.willChange = "transform, opacity";
-    span.textContent = ch === " " ? "\u00A0" : ch;
+    span.textContent = ch === " " ? " " : ch;
     node.appendChild(span);
     return span;
   });

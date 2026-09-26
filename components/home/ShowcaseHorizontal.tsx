@@ -2,50 +2,36 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap-presets";
-import Link from "next/link";
+import { gsap, mq, staggerDelay } from "@/lib/gsap-presets";
 
-/**
- * The honest showcase. devstackedmagazine is a young studio: instead of invented
- * case studies, this sheet annotates the one project every visitor can
- * verify — the site they are reading.
- */
-
-const plates = [
+// Studio work only. Every entry here is something a visitor can open and check
+// for themselves — no client names, no engagement framing, and no figure that
+// would need a measurement we do not have. See DESIGN.md §7.
+const projects = [
   {
-    name: "This website",
-    kind: "Marketing site",
-    year: "2025",
-    lines: [
-      ["Platform", "Next.js, statically exported"],
-      ["Interface", "Tailwind CSS v4, Radix primitives"],
-      ["Motion", "GSAP + Framer Motion, on a budget"],
-      ["Principle", "Every screen earns its place"],
-    ],
+    name: "This site",
+    where: "devstackedmagazine.tech",
+    summary:
+      "The site you are reading. A six-value palette, a fixed type scale, and dividers built from grid gaps rather than borders. Motion is entry-only and drops out entirely under reduced-motion.",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind", "GSAP"],
   },
   {
-    name: "The method",
-    kind: "How a build runs",
-    year: "Ongoing",
-    lines: [
-      ["Drawn first", "Screens against real content, not mood boards"],
-      ["Built in the open", "A real URL from week one"],
-      ["Measured", "Performance budget checked per release"],
-      ["Handed over", "Repository, assets, documentation"],
-    ],
+    name: "Project intake",
+    where: "/project",
+    summary:
+      "A five-section, sixteen-question brief. Questions appear or stay hidden based on earlier answers, each section gates on its own required fields, and progress is visible throughout. Answers are not yet wired to delivery.",
+    stack: ["React", "TypeScript", "Radix UI", "Framer Motion"],
   },
   {
-    name: "Your project",
-    kind: "The next project",
-    year: "Unwritten",
-    lines: [
-      ["Input", "A short brief and a deadline"],
-      ["Process", "The same discipline you are reading now"],
-      ["Output", "A site you own outright"],
-      ["First step", "The two-minute work order"],
-    ],
+    name: "Contact form",
+    where: "/contact",
+    summary:
+      "Field validation, a draft kept in local storage so a half-written message survives a reload, explicit sending and error states, and a confirmation page on success. Delivery runs through Web3Forms.",
+    stack: ["Next.js", "TypeScript", "Web3Forms"],
   },
 ];
+
+const total = String(projects.length).padStart(2, "0");
 
 export default function ShowcaseHorizontal() {
   const root = useRef<HTMLElement | null>(null);
@@ -53,96 +39,122 @@ export default function ShowcaseHorizontal() {
 
   useGSAP(
     () => {
-      const track = trackRef.current;
-      if (!track) return;
+      // Entry only. No scroll-driven motion, no pinning: vertical scroll is
+      // never hijacked, so a user scrolling past reaches the next section.
+      if (mq.isReduced()) return;
 
-      const mm = gsap.matchMedia();
-
-      mm.add("(min-width: 1024px)", () => {
-        const distance = track.scrollWidth - window.innerWidth + 80;
-
-        gsap.to(track, {
-          x: -distance,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: () => `+=${distance}`,
-            scrub: 0.6,
-            pin: true,
-            invalidateOnRefresh: true,
-          },
+      gsap.utils.toArray<HTMLElement>(".showcase-card").forEach((card, i) => {
+        gsap.from(card, {
+          opacity: 0,
+          y: 24,
+          duration: 0.34,
+          ease: "design",
+          delay: staggerDelay(i),
+          scrollTrigger: { trigger: card, start: "top 85%" },
         });
       });
     },
     { scope: root }
   );
 
-  const renderPlate = (p: (typeof plates)[number]) => (
-    <article
-      className="sheet flex h-[58vh] w-[80vw] max-w-[860px] shrink-0 flex-col justify-between p-8 lg:p-12"
-      key={p.name}
-    >
-      <div className="flex items-start justify-between">
-        <span className="meta-label text-ink-faint">{p.kind}</span>
-      </div>
-
-      <div>
-        <h3 className="h-display text-4xl text-ink sm:text-5xl lg:text-6xl">{p.name}</h3>
-        <dl className="mt-8 border-t border-line">
-          {p.lines.map(([k, v]) => (
-            <div
-              key={k}
-              className="flex flex-col gap-1 border-b border-line py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
-            >
-              <dt className="meta-label shrink-0 text-ink-faint">{k}</dt>
-              <dd className="text-sm leading-6 text-ink-dim sm:text-right">{v}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-
-      <p className="meta-label text-ink-faint">{p.year}</p>
-    </article>
-  );
-
   return (
-    <section
-      ref={root}
-      className="sheet-grid relative overflow-hidden border-y border-line bg-board-raised"
-    >
-      <div className="mx-auto max-w-7xl px-5 pt-20 pb-10 sm:px-12 lg:px-20">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
-          <h2 className="h-display text-[clamp(2.1rem,4.2vw,3.8rem)] text-ink lg:col-span-7">
-            The proof you can check.
-          </h2>
-          <p className="text-base leading-7 text-ink-dim lg:col-span-5 lg:max-w-md">
-            We are a young studio, so we will not invent clients. This collection
-            shows the one project you can verify from where you sit: this site,
-            and the way it was built.
+    <section ref={root} className="relative">
+      <div className="mx-auto max-w-[1400px] px-4 pt-16 pb-12 sm:px-6 md:pt-32">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end lg:gap-6">
+          <div className="lg:col-span-7">
+            <p className="label-mark">Our own work</p>
+            <h2 className="text-display-l mt-6 text-bone">
+              Things we built, <br className="hidden sm:block" />
+              <span className="text-ash">running right now.</span>
+            </h2>
+          </div>
+          <p className="text-body text-ash lg:col-span-5 lg:max-w-md">
+            Three projects from this studio, not client work. Each one is live
+            where you can open it and check what it does against what we say it
+            does.
           </p>
         </div>
       </div>
 
-      <div className="hidden pb-24 lg:block">
-        <div
-          ref={trackRef}
-          className="no-scrollbar flex gap-6 pl-[max(5rem,calc((100vw-1280px)/2+5rem))] pr-20 will-change-transform"
-        >
-          {plates.map(renderPlate)}
+      {/* Desktop: native horizontal scroll strip. Transform-free, keyboard
+          operable, and it never captures vertical scroll. */}
+      <div className="hidden pb-16 md:pb-32 lg:block">
+        {/* The scroller itself is the page container, so the track's content is
+            exactly cards + gaps: no padding inside the scrolling box means no
+            dead area after the last card, and the first card lines up with the
+            heading above. Snap points keep a card edge off mid-word. */}
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+          <div
+            ref={trackRef}
+            tabIndex={0}
+            role="region"
+            aria-label="Our own work — scroll horizontally to browse projects"
+            className="snap-x snap-mandatory overflow-x-auto overflow-y-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-void"
+          >
+            <div className="flex w-max gap-px bg-rule">
+              {projects.map((p, i) => (
+                <article
+                  key={p.name}
+                  tabIndex={0}
+                  aria-label={`${p.name} — ${p.where}`}
+                  className="showcase-card flex min-h-[52vh] w-[52vw] max-w-[900px] shrink-0 snap-start flex-col justify-between gap-10 bg-shelf p-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-inset lg:p-12"
+                >
+                  <div className="flex items-start justify-between gap-6">
+                    <span className="text-label text-lime">{p.where}</span>
+                    <span className="text-label text-ash">
+                      {String(i + 1).padStart(2, "0")} / {total}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-display-l text-bone">{p.name}</h3>
+                    <p className="text-body mt-6 max-w-[65ch] text-ash">{p.summary}</p>
+                    <div className="mt-8 h-px bg-rule" />
+                    <ul className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+                      {p.stack.map((s) => (
+                        <li key={s} className="text-label text-ash">
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="flex flex-col gap-5 px-5 pb-20 sm:px-12 lg:hidden">
-        {plates.map((p) => (
-          <div key={p.name}>{renderPlate(p)}</div>
-        ))}
-      </div>
-
-      <div className="mx-auto hidden max-w-7xl px-5 pb-16 sm:px-12 lg:block lg:px-20">
-        <Link href="/contact" className="btn-line">
-          Ask us anything on this sheet
-        </Link>
+      {/* Below lg the strip collapses to a vertical stack in DOM order. */}
+      <div className="pb-16 md:pb-32 lg:hidden">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+          <div className="flex flex-col gap-px bg-rule">
+            {projects.map((p, i) => (
+              <article
+                key={p.name}
+                className="showcase-card flex flex-col justify-between gap-8 bg-shelf p-8"
+              >
+                <div className="flex items-start justify-between gap-6">
+                  <span className="text-label text-lime">{p.where}</span>
+                  <span className="text-label text-ash">
+                    {String(i + 1).padStart(2, "0")} / {total}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-heading text-bone">{p.name}</h3>
+                  <p className="text-body mt-3 text-ash">{p.summary}</p>
+                  <div className="mt-6 h-px bg-rule" />
+                  <ul className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+                    {p.stack.map((s) => (
+                      <li key={s} className="text-label text-ash">
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

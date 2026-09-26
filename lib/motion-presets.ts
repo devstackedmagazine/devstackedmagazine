@@ -1,22 +1,24 @@
-export const easings = {
-  snappy: [0.175, 0.885, 0.32, 1.275] as const,
-  elegant: [0.16, 1, 0.3, 1] as const,
-  smooth: [0.4, 0, 0.2, 1] as const,
+/** Single site-wide curve (DESIGN.md §6). */
+export const ease = [0.22, 1, 0.36, 1] as const;
+
+/** DESIGN.md §6: entry 340ms, exit 220ms, micro-interaction 140ms. */
+export const durations = {
+  entry: 0.34,
+  exit: 0.22,
+  micro: 0.14,
 };
 
-export const durations = {
-  fast: 0.2,
-  medium: 0.4,
-  slow: 0.8,
-  epic: 1.2,
-};
+/** 60ms per item, capped at 8 — item 9+ shares item 8's delay. */
+export function staggerDelay(index: number, stepSeconds = 0.06, cap = 8) {
+  return Math.min(index, cap - 1) * stepSeconds;
+}
 
 export const variants = {
   fadeIn: {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { duration: durations.medium, ease: easings.smooth },
+      transition: { duration: durations.entry, ease },
     },
   },
   fadeInUp: {
@@ -24,7 +26,7 @@ export const variants = {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: durations.slow, ease: easings.elegant },
+      transition: { duration: durations.entry, ease },
     },
   },
   fadeInDown: {
@@ -32,7 +34,7 @@ export const variants = {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: durations.slow, ease: easings.elegant },
+      transition: { duration: durations.entry, ease },
     },
   },
   staggerContainer: {
@@ -40,7 +42,7 @@ export const variants = {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.06,
         delayChildren: 0.1,
       },
     },
@@ -50,7 +52,7 @@ export const variants = {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: durations.medium, ease: easings.snappy },
+      transition: { duration: durations.entry, ease },
     },
   },
 };

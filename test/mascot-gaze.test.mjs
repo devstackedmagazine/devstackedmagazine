@@ -56,20 +56,24 @@ test("the mascot uses the source-informed cloud silhouette and capsule eyes", ()
   ]);
 });
 
-test("the site typography assigns Momo to headings and Outfit to everything else", async () => {
-  const [layout, styles] = await Promise.all([
+test("the site typography loads Unbounded, Outfit and JetBrains Mono from lib/fonts", async () => {
+  const [layout, fonts, styles] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../lib/fonts.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
-  assert.match(layout, /Momo_Trust_Display/);
-  assert.match(layout, /Outfit/);
+  assert.match(layout, /from "@\/lib\/fonts"/);
+  assert.doesNotMatch(layout, /from "next\/font\/google"/);
+  assert.match(fonts, /Unbounded/);
+  assert.match(fonts, /Outfit/);
+  assert.match(fonts, /JetBrains_Mono/);
+  assert.match(styles, /--font-display:\s*var\(--font-unbounded\)/);
   assert.match(styles, /--font-sans:\s*var\(--font-outfit\)/);
-  assert.match(styles, /--font-display:\s*var\(--font-momo-trust-display\)/);
-  assert.match(styles, /h1,\s*h2,\s*h3,\s*h4,\s*h5,\s*h6\s*\{/s);
+  assert.match(styles, /--font-mono:\s*var\(--font-jetbrains-mono\)/);
   assert.doesNotMatch(styles, /font-family:\s*"Pirso"/);
 });
 
-test("uses the lowercase brand name", () => {
-  assert.equal(siteConfig.name, "devstackedmagazine");
+test("uses the DevStacked brand name", () => {
+  assert.equal(siteConfig.name, "DevStacked");
 });
