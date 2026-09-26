@@ -533,3 +533,35 @@
   height: 100%;
   overflow: visible;
 }
+
+/* ============================================
+   Legacy aliases (DESIGN.md §8)
+   Map main's --board/--ink tokens onto ours for the pages still on
+   them. Remove when those pages are converted.
+   ============================================ */
+:root {
+  --board: var(--void);
+  --board-raised: var(--shelf);
+  --board-card: var(--shelf);
+  --ink: var(--bone);
+  --ink-dim: var(--ash);
+  --ink-faint: var(--ash);
+}
+@theme inline {
+  --color-board: var(--board);
+  --color-board-raised: var(--board-raised);
+  --color-board-card: var(--board-card);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
+}
+.meta-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+.sheet {
+  background: var(--shelf);
+  border: 1px solid var(--rule);
+}

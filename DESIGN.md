@@ -281,6 +281,16 @@ recorded here so a later pass does not rediscover them as new findings, and so
 nobody "helpfully" converts them mid-task. Do not touch these without a separate
 instruction.
 
+### Legacy token aliases (from the main merge)
+
+Pages kept from `main` (about, contact, services, 404, thank-you, `Quiz`,
+`WorkingNotes`) use main's `--board*` / `--ink*` tokens and the `.sheet` /
+`.meta-label` classes. A block at the end of `app/globals.css`, marked "Legacy
+aliases", maps them onto ours: `--board` → `Void`, `--board-raised` and
+`--board-card` → `Shelf`, `--ink` → `Bone`, `--ink-dim` and `--ink-faint` → `Ash`
+(not `Rule`: 3.26:1 on `Void` is too low for text). Remove the block when those
+pages are converted to §3 tokens.
+
 ### Unconverted sections (still on the pre-redesign system)
 
 These three still use the old `editorial-card` primitive (1px `--hairline` border,

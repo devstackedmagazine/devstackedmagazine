@@ -26,7 +26,7 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "devstackedmagazine website preview",
+        alt: "DevStacked website preview",
       },
     ],
   },

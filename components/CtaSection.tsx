@@ -36,7 +36,7 @@ export default function CtaSection() {
               </Button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
