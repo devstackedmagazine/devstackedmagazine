@@ -1,70 +1,83 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource/ibm-plex-mono/400.css";
-@import "@fontsource/ibm-plex-mono/500.css";
-@import "@fontsource/ibm-plex-mono/600.css";
 
 :root {
-  /* Brand, kept from the existing palette */
-  --red-active: #c70e1a;
-  --red-active-hover: #89121a;
-  --red-soft: #c7370e;
-  --background-gray: rgba(255, 255, 255, 0.06);
+  /* Design system palette — six named values plus lime's two interaction states. */
+  --void: #0a0b08;
+  --shelf: #131510;
+  --hairline: #2a2e24;
+  --rule: #5f6553;
+  --bone: #f2f4ee;
+  --ash: #8f9488;
+  --lime: #affc41;
+  --lime-lift: #c4ff66;
+  --lime-press: #93d62e;
 
-  /* Base canvas, refined */
-  --background: #141414;
-  --background-elevated: #1a1a1a;
-  --background-card: #1f1f1f;
-  --foreground: oklch(0.985 0 0);
-  --foreground-muted: oklch(0.72 0 0);
-  --foreground-faint: oklch(0.55 0 0);
+  /* Error states only — DESIGN.md §2. NEVER decorative. */
+  --flare: #ff6b4a;
 
-  /* Lines and surfaces */
-  --line: oklch(1 0 0 / 0.08);
-  --line-strong: oklch(1 0 0 / 0.14);
+  /* shadcn-compatible tokens, remapped onto the palette above so existing
+     shadcn primitives (accordion, progress) stay on-system without a rewrite. */
+  --background: var(--void);
+  --foreground: var(--bone);
+  --card: var(--shelf);
+  --card-foreground: var(--bone);
+  --popover: var(--shelf);
+  --popover-foreground: var(--bone);
+  --primary: var(--lime);
+  --primary-foreground: var(--void);
+  --secondary: var(--shelf);
+  --secondary-foreground: var(--bone);
+  --muted: var(--shelf);
+  --muted-foreground: var(--ash);
+  --accent: var(--shelf);
+  --accent-foreground: var(--bone);
+  --destructive: var(--flare);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--lime);
+  --radius: 4px;
 
-  /* shadcn-compatible tokens (kept stable for existing components) */
-  --card: oklch(0.18 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.87 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.371 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.556 0 0);
-  --radius: 0.625rem;
+  /* Pre-existing token names used across other route groups (about/services/
+     contact/LMS), repointed at the new palette instead of renamed at every
+     call site. Accent role (red -> lime) is a deliberate, disclosed change. */
+  --background-elevated: var(--shelf);
+  --background-card: var(--shelf);
+  --foreground-muted: var(--ash);
+  --foreground-faint: var(--ash);
+  --line: var(--hairline);
+  --line-strong: var(--rule);
+  --red-active: var(--lime);
+  --red-active-hover: var(--lime-lift);
 }
 
 @theme inline {
+  --color-void: var(--void);
+  --color-shelf: var(--shelf);
+  --color-hairline: var(--hairline);
+  --color-rule: var(--rule);
+  --color-bone: var(--bone);
+  --color-ash: var(--ash);
+  --color-lime: var(--lime);
+  --color-lime-lift: var(--lime-lift);
+  --color-lime-press: var(--lime-press);
+  --color-flare: var(--flare);
+
   --color-background: var(--background);
   --color-background-elevated: var(--background-elevated);
   --color-background-card: var(--background-card);
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
-  --color-foreground-faint: var(--foreground-faint);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
-
-  /* Font stacks, Satoshi is loaded via Fontshare CDN, JetBrains Mono via fontsource */
-  --font-sans: "Satoshi", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, sans-serif;
-  --font-display: "Satoshi", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo,
-    monospace;
-
-  --color-white: #ffffff;
   --color-red-active: var(--red-active);
   --color-red-active-hover: var(--red-active-hover);
-  --color-red-soft: var(--red-soft);
+
+  /* Unbounded/Outfit/JetBrains Mono, loaded via next/font/google in lib/fonts.ts */
+  --font-display: var(--font-unbounded), sans-serif;
+  --font-sans: var(--font-outfit), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
 
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -93,6 +106,77 @@
 }
 
 /* ============================================
+   Type scale — DESIGN.md §3
+   Desktop values apply from md (768px) up; mobile is the default.
+   ============================================ */
+.text-display-xl {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.text-display-l {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.text-heading {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.text-hero-stat {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.text-subhead {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.text-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+.text-small {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+.text-label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+@media (min-width: 768px) {
+  .text-display-xl { font-size: 72px; }
+  .text-display-l { font-size: 44px; }
+  .text-heading { font-size: 26px; }
+  .text-hero-stat { font-size: 40px; }
+  .text-subhead { font-size: 20px; }
+  .text-body { font-size: 17px; }
+  .text-small { font-size: 15px; }
+  .text-label { font-size: 13px; }
+}
+
+/* ============================================
    Editorial primitives
    ============================================ */
 
@@ -116,37 +200,29 @@
   .font-display {
     font-family: var(--font-display);
     font-feature-settings: "ss01", "ss02", "cv01", "cv11";
-    letter-spacing: -0.035em;
+    letter-spacing: -0.03em;
   }
 
   /* Mono label, used for tiny technical meta */
   .font-mono-meta {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
+    font-size: 12px;
+    letter-spacing: 0;
     text-transform: uppercase;
     font-weight: 500;
   }
+  @media (min-width: 768px) {
+    .font-mono-meta { font-size: 13px; }
+  }
 
-  /* Single soft warm radial that lives behind the whole site.
-     Replaces the heavy red-blob ambient system. */
+  /* Void fill behind the whole site. No gradient, no glow — a single
+     light source, not a wash (DESIGN.md §1, §7 project-specific bans). */
   .ambient-canvas {
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: -1;
-    background:
-      radial-gradient(
-        1100px 700px at 18% 8%,
-        rgba(199, 14, 26, 0.06) 0%,
-        rgba(199, 14, 26, 0) 60%
-      ),
-      radial-gradient(
-        900px 600px at 88% 92%,
-        rgba(199, 14, 26, 0.04) 0%,
-        rgba(199, 14, 26, 0) 65%
-      ),
-      var(--background);
+    background: var(--background);
   }
 
   /* Film grain, SVG noise data URL, very low opacity, blend in screen mode.
@@ -168,8 +244,14 @@
 
   /* Editorial section spacing, cinematic chapter padding */
   .section-pad {
-    padding-top: clamp(5rem, 12vw, 12rem);
-    padding-bottom: clamp(5rem, 12vw, 12rem);
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+  @media (min-width: 768px) {
+    .section-pad {
+      padding-top: 128px;
+      padding-bottom: 128px;
+    }
   }
 
   /* Single tracked micro-mark for "label" feel without "SECTION 01" energy */
@@ -178,10 +260,13 @@
     align-items: center;
     gap: 0.65rem;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.22em;
+    font-size: 12px;
+    letter-spacing: 0;
     text-transform: uppercase;
     color: var(--foreground-muted);
+  }
+  @media (min-width: 768px) {
+    .label-mark { font-size: 13px; }
   }
   .label-mark::before {
     content: "";
@@ -204,8 +289,8 @@
     left: 0;
     width: 0;
     height: 1px;
-    background: var(--red-active);
-    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--lime);
+    transition: width 0.14s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .nav-link:hover::after,
   .nav-link-active::after {
@@ -217,12 +302,41 @@
     font-family: var(--font-display);
     font-weight: 700;
     line-height: 0.95;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
   }
 }
 
 /* ============================================
-   Marquee, used by TrustedMarquee
+   Status dot — the one permitted perpetual idle animation (DESIGN.md §6)
+   ============================================ */
+@keyframes status-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+.status-dot {
+  animation: status-pulse 3s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-dot { animation: none; opacity: 1; }
+}
+
+/* ============================================
+   Reduced motion — every transition/animation resolves instantly.
+   Shipped alongside every animation it disables (DESIGN.md §6).
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   Marquee, used by TrustedMarquee.
+   Approved exception to the "nothing else loops" / no-carousel rules —
+   see DESIGN.md §7. Transform-only (translate3d), never left/margin.
    ============================================ */
 @keyframes marquee-x {
   from { transform: translate3d(0, 0, 0); }
@@ -234,6 +348,25 @@
 }
 .marquee-pause:hover .marquee-track {
   animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ============================================
+   Loading dots, used by Button isLoading (never a circular spinner)
+   ============================================ */
+@keyframes loading-dot {
+  0%, 80%, 100% { opacity: 0.25; }
+  40% { opacity: 1; }
+}
+.loading-dot {
+  animation: loading-dot 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.loading-dot:nth-child(2) { animation-delay: 0.15s; }
+.loading-dot:nth-child(3) { animation-delay: 0.3s; }
+@media (prefers-reduced-motion: reduce) {
+  .loading-dot { animation: none; opacity: 1; }
 }
 
 /* ============================================
@@ -257,3 +390,59 @@
 /* Hide scrollbar for the horizontal showcase track */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* ===== DevStacked Courses — lesson markdown (.lms-prose) ===== */
+.lms-prose {
+  color: var(--foreground-muted);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+.lms-prose > * + * { margin-top: 1.1em; }
+.lms-prose h1, .lms-prose h2, .lms-prose h3, .lms-prose h4 {
+  color: var(--foreground);
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 1.6em;
+  margin-bottom: 0.5em;
+}
+.lms-prose h1 { font-size: 1.7rem; }
+.lms-prose h2 { font-size: 1.4rem; }
+.lms-prose h3 { font-size: 1.15rem; }
+.lms-prose p { margin: 0; }
+.lms-prose a { color: var(--red-active); text-decoration: underline; text-underline-offset: 2px; }
+.lms-prose strong { color: var(--foreground); font-weight: 600; }
+.lms-prose ul, .lms-prose ol { padding-left: 1.4em; }
+.lms-prose ul { list-style: disc; }
+.lms-prose ol { list-style: decimal; }
+.lms-prose li { margin-top: 0.4em; }
+.lms-prose li::marker { color: var(--foreground-faint); }
+.lms-prose blockquote {
+  border-left: 3px solid var(--red-active);
+  padding-left: 1em;
+  color: var(--foreground-muted);
+  font-style: italic;
+}
+.lms-prose code:not(pre code) {
+  background: var(--background-card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.12em 0.4em;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--foreground);
+}
+.lms-prose pre {
+  background: var(--shelf);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1em 1.2em;
+  overflow-x: auto;
+  font-size: 0.85rem;
+}
+.lms-prose pre code { font-family: var(--font-mono); background: none; border: none; padding: 0; }
+.lms-prose table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.lms-prose th, .lms-prose td { border: 1px solid var(--line); padding: 0.5em 0.75em; text-align: left; }
+.lms-prose th { background: var(--background-card); color: var(--foreground); }
+.lms-prose img { border-radius: 12px; max-width: 100%; }
+.lms-prose hr { border: none; border-top: 1px solid var(--line); }

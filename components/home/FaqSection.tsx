@@ -49,19 +49,19 @@ export default function FaqSection() {
       viewport={{ once: true, margin: "-100px" }}
       variants={{
         hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.34, ease: [0.22, 1, 0.36, 1] } },
       }}
       className="relative section-pad"
     >
-      <div className="mx-auto max-w-7xl px-5 sm:px-12 lg:px-20">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-5">
             <p className="label-mark">Questions</p>
-            <h2 className="mt-6 font-display text-[clamp(2rem,3.6vw,3.4rem)] font-bold leading-[0.98] tracking-[-0.035em] text-white">
+            <h2 className="text-display-l mt-6 text-bone">
               Frequently <br />
-              <span className="text-white/55">asked.</span>
+              <span className="text-ash">asked.</span>
             </h2>
-            <p className="mt-6 max-w-sm text-base leading-7 text-white/55">
+            <p className="text-body mt-6 max-w-sm text-ash">
               The questions we hear most often, with the short honest answers.
             </p>
           </div>
@@ -70,16 +70,20 @@ export default function FaqSection() {
             <Accordion
               type="multiple"
               defaultValue={["item-1"]}
-              className="w-full border-t border-white/10"
+              className="w-full border-t border-rule"
             >
               {items.map((item) => (
                 <AccordionItem
                   key={item.value}
                   value={item.value}
-                  className="border-b border-white/10"
+                  className="border-b border-rule"
                 >
-                  <AccordionTrigger>{item.trigger}</AccordionTrigger>
-                  <AccordionContent>{item.content}</AccordionContent>
+                  <AccordionTrigger className="text-subhead text-bone">
+                    {item.trigger}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-body text-ash">
+                    {item.content}
+                  </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>

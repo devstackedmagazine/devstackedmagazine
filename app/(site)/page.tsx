@@ -5,7 +5,6 @@ import ServicesBento from "@/components/home/ServicesBento";
 import TrustedMarquee from "@/components/home/TrustedMarquee";
 import PinnedJourney from "@/components/home/PinnedJourney";
 import ShowcaseHorizontal from "@/components/home/ShowcaseHorizontal";
-import TestimonialCarousel from "@/components/home/TestimonialCarousel";
 import StatsSection from "@/components/StatsSection";
 import CtaSection from "@/components/CtaSection";
 import FaqSection from "@/components/home/FaqSection";
@@ -54,15 +53,12 @@ const homePageJsonLd = {
 export default function Home() {
   return (
     <div className="relative">
-      <div aria-hidden className="ambient-canvas" />
-
       <HeroSection />
       <TrustedMarquee />
       <ServicesBento />
       <ShowcaseHorizontal />
       <StatsSection />
       <PinnedJourney />
-      <TestimonialCarousel />
       <CtaSection />
       <FaqSection />
 

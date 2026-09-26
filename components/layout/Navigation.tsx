@@ -22,8 +22,8 @@ export default function Navigation() {
             key={item.href}
             href={item.href}
             className={[
-              "nav-link text-sm font-medium transition-colors",
-              active ? "text-white nav-link-active" : "text-white/65 hover:text-white",
+              "nav-link text-small font-medium! transition-colors duration-[140ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
+              active ? "text-bone nav-link-active" : "text-ash hover:text-bone",
             ].join(" ")}
           >
             {item.label}

@@ -1,32 +1,32 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import Mascot from "@/public/images/home/heroImage.png";
-import { gsap } from "@/lib/gsap-presets";
+import { gsap, mq } from "@/lib/gsap-presets";
 import { useGSAP } from "@gsap/react";
+import Button from "@/components/ui/Button";
+import HeroSplineScene from "@/components/home/HeroSplineScene";
 
 export default function HeroSection() {
   const root = useRef<HTMLElement | null>(null);
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
-      tl.from(".hero-eyebrow", { y: 24, opacity: 0, duration: 0.9, delay: 0.1 })
+      if (mq.isReduced()) return;
+
+      const tl = gsap.timeline({ defaults: { ease: "design" } });
+      tl.from(".hero-eyebrow", { y: 24, opacity: 0, duration: 0.34, delay: 0.1 })
         .from(".hero-line > span", {
           yPercent: 110,
           opacity: 0,
-          duration: 1.1,
-          stagger: 0.05,
-        }, "-=0.6")
-        .from(".hero-sub", { y: 20, opacity: 0, duration: 0.9 }, "-=0.7")
-        .from(".hero-cta", { y: 20, opacity: 0, duration: 0.9, stagger: 0.08 }, "-=0.7")
-        .from(".hero-meta > *", { y: 12, opacity: 0, duration: 0.7, stagger: 0.06 }, "-=0.6")
-        .from(".hero-stage", { scale: 0.94, opacity: 0, duration: 1.3 }, "-=1.1")
-        .from(".hero-mascot", { y: 24, opacity: 0, duration: 1.1, ease: "expo.out" }, "-=1");
+          duration: 0.34,
+          stagger: 0.06,
+        }, "-=0.2")
+        .from(".hero-sub", { y: 20, opacity: 0, duration: 0.34 }, "-=0.2")
+        .from(".hero-cta", { y: 20, opacity: 0, duration: 0.34, stagger: 0.06 }, "-=0.2")
+        .from(".hero-meta > *", { y: 12, opacity: 0, duration: 0.34, stagger: 0.06 }, "-=0.2")
+        .from(".hero-image", { y: 24, opacity: 0, duration: 0.34 }, "-=0.2");
 
-      gsap.to(".hero-mascot", {
+      gsap.to(".hero-image", {
         yPercent: -4,
         ease: "none",
         scrollTrigger: {
@@ -52,48 +52,43 @@ export default function HeroSection() {
   );
 
   return (
-    <section
-      ref={root}
-      className="relative min-h-[calc(100vh-7rem)] overflow-hidden"
-    >
-      <div aria-hidden className="ambient-canvas" />
-
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-12 lg:px-20 pt-12 pb-24 lg:pt-20 lg:pb-32">
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-10 items-center">
+    <section ref={root} className="relative min-h-[100dvh] overflow-hidden">
+      <div className="relative mx-auto max-w-[1400px] px-4 pt-12 pb-24 sm:px-6 lg:pt-20 lg:pb-32">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-7">
-            <p className="hero-eyebrow label-mark">DEVSTACKED</p>
+            <div className="hero-eyebrow flex items-center gap-3">
+              <p className="label-mark">DEVSTACKED</p>
+              <span className="flex items-center gap-2 text-label text-ash">
+                <span aria-hidden className="status-dot h-1.5 w-1.5 rounded-full bg-lime" />
+                Available for new projects
+              </span>
+            </div>
 
-            <h1 className="hero-title-shift mt-8 font-display text-[clamp(2.6rem,5.2vw,5rem)] font-bold leading-[0.95] tracking-[-0.04em] text-white">
+            <h1 className="hero-title-shift text-display-xl mt-8 text-bone">
               <span className="hero-line block overflow-hidden">
                 <span className="inline-block">Websites That Work</span>
               </span>
               <span className="hero-line block overflow-hidden">
-                <span className="inline-block text-white/90">
-                  as Hard as <span className="text-red-active">You Do</span>
+                <span className="inline-block text-bone/90">
+                  as Hard as <span className="text-lime">You Do</span>
                 </span>
               </span>
             </h1>
 
-            <p className="hero-sub mt-8 max-w-xl text-base leading-7 text-white/65 sm:text-lg">
+            <p className="hero-sub text-body mt-8 max-w-[65ch] text-ash">
               We build fast, modern, and SEO-optimized websites that help your
               business get found — by search engines and AI alike.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Link
-                href="/project"
-                className="hero-cta inline-flex h-12 items-center rounded-full bg-white px-7 text-sm font-medium text-background hover:bg-white/90 transition-colors"
-              >
+              <Button href="/project" className="hero-cta">
                 Start a project
-              </Link>
-              <Link
-                href="/services"
-                className="hero-cta inline-flex h-12 items-center rounded-full border border-white/15 px-7 text-sm font-medium text-white/85 hover:border-white/40 hover:text-white transition-colors"
-              >
+              </Button>
+              <Button href="/services" variant="secondary" className="hero-cta">
                 See our work
                 <svg
                   aria-hidden
-                  className="ml-2 h-4 w-4"
+                  className="ml-1 h-4 w-4"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -101,59 +96,35 @@ export default function HeroSection() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
                 </svg>
-              </Link>
+              </Button>
             </div>
 
-            <div className="hero-meta mt-16 grid grid-cols-2 gap-6 max-w-md border-t border-white/8 pt-6 sm:grid-cols-4">
+            <div className="hero-meta mt-16 grid max-w-md grid-cols-2 gap-6 border-t border-rule pt-6 sm:grid-cols-4">
               <div>
-                <p className="font-display text-2xl text-white">20+</p>
-                <p className="mt-1 text-xs text-white/45">Projects Goal for Year One</p>
+                <p className="text-hero-stat text-bone">20+</p>
+                <p className="text-small mt-1 text-ash">Projects Goal for Year One</p>
               </div>
               <div>
-                <p className="font-display text-2xl text-white">98<span className="text-red-active">%</span></p>
-                <p className="mt-1 text-xs text-white/45">Client Satisfaction Target</p>
+                <p className="text-hero-stat text-bone">98<span className="text-lime">%</span></p>
+                <p className="text-small mt-1 text-ash">Client Satisfaction Target</p>
               </div>
               <div>
-                <p className="font-display text-2xl text-white">10+</p>
-                <p className="mt-1 text-xs text-white/45">Technologies We Work With</p>
+                <p className="text-hero-stat text-bone">10+</p>
+                <p className="text-small mt-1 text-ash">Technologies We Work With</p>
               </div>
               <div>
-                <p className="font-display text-2xl text-white">24<span className="text-white/50">/7</span></p>
-                <p className="mt-1 text-xs text-white/45">Support Available</p>
+                <p className="text-hero-stat text-bone">24<span className="text-ash">/7</span></p>
+                <p className="text-small mt-1 text-ash">Support Available</p>
               </div>
             </div>
           </div>
 
-          <div className="relative h-150 w-150 items-center lg:h-130 lg:w-130 justify-center flex">
-            <Image
-              src={Mascot}
-              alt="DevStacked mascot waving"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="hero-mascot object-contain p-2 will-change-transform"
-            />
+          <div className="mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
+            <HeroSplineScene />
           </div>
         </div>
-      </div>
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/35"
-      >
-        <span className="font-mono-meta">Scroll</span>
-        <span className="block h-10 w-px bg-white/20 overflow-hidden">
-          <span className="block h-1/2 w-full bg-white/60 animate-[hero-line_1.6s_ease-in-out_infinite]" />
-        </span>
-      </div>
-
-      <style jsx>{`
-        @keyframes hero-line {
-          0%   { transform: translateY(-100%); }
-          50%  { transform: translateY(0%); }
-          100% { transform: translateY(200%); }
-        }
-      `}</style>
-    </section>
-  );
-}
+      </div>  
+      </section>
+    );
+  } 
+    

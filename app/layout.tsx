@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { unbounded, outfit, jetbrainsMono } from "@/lib/fonts";
+import MotionProvider from "@/components/layout/MotionProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -60,7 +62,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1f1f1e",
+  themeColor: "#0A0B08",
   colorScheme: "dark",
 };
 
@@ -72,19 +74,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("scroll-smooth", "antialiased")}
+      className={cn(
+        unbounded.variable,
+        outfit.variable,
+        jetbrainsMono.variable,
+        "scroll-smooth",
+        "antialiased"
+      )}
       suppressHydrationWarning
     >
-      <head>
-        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap"
-        />
-      </head>
-      <body className="bg-background text-foreground font-sans selection:bg-red-active/40 selection:text-white">
+      <body className="bg-void text-bone font-sans selection:bg-lime/40 selection:text-void">
         <main className="relative w-full max-w-[100vw] overflow-x-clip">
-          {children}
+          <MotionProvider>{children}</MotionProvider>
         </main>
       </body>
     </html>

@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger } from "@/lib/gsap-presets";
+import { gsap, ScrollTrigger, mq } from "@/lib/gsap-presets";
 
 const steps = [
   {
@@ -34,7 +34,7 @@ export default function PinnedJourney() {
   useGSAP(
     () => {
       const track = trackRef.current;
-      if (!track) return;
+      if (!track || mq.isReduced()) return;
 
       const mm = gsap.matchMedia();
 
@@ -59,13 +59,13 @@ export default function PinnedJourney() {
             start: "top 70%",
             end: "bottom 30%",
             onEnter: () =>
-              gsap.to(card, { scale: 1.04, opacity: 1, duration: 0.6, ease: "expo.out", overwrite: "auto" }),
+              gsap.to(card, { scale: 1.04, opacity: 1, duration: 0.14, ease: "design", overwrite: "auto" }),
             onLeave: () =>
-              gsap.to(card, { scale: 0.92, opacity: 0.45, duration: 0.6, ease: "expo.out", overwrite: "auto" }),
+              gsap.to(card, { scale: 0.92, opacity: 0.45, duration: 0.14, ease: "design", overwrite: "auto" }),
             onEnterBack: () =>
-              gsap.to(card, { scale: 1.04, opacity: 1, duration: 0.6, ease: "expo.out", overwrite: "auto" }),
+              gsap.to(card, { scale: 1.04, opacity: 1, duration: 0.14, ease: "design", overwrite: "auto" }),
             onLeaveBack: () =>
-              gsap.to(card, { scale: 0.92, opacity: 0.45, duration: 0.6, ease: "expo.out", overwrite: "auto" }),
+              gsap.to(card, { scale: 0.92, opacity: 0.45, duration: 0.14, ease: "design", overwrite: "auto" }),
           });
 
           gsap.set(card, { scale: 0.92, opacity: 0.45 });
@@ -79,8 +79,8 @@ export default function PinnedJourney() {
           gsap.from(item, {
             opacity: 0,
             y: 30,
-            duration: 0.8,
-            ease: "expo.out",
+            duration: 0.34,
+            ease: "design",
             scrollTrigger: { trigger: item, start: "top 85%" },
           });
         });
@@ -90,47 +90,38 @@ export default function PinnedJourney() {
   );
 
   return (
-    <section
-      ref={root}
-      className="relative overflow-hidden pt-20 pb-20 lg:pt-28 lg:pb-28"
-    >
-      <div className="mx-auto max-w-7xl px-5 sm:px-12 lg:px-20">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-16">
-          <div className="journey-pin lg:col-span-5 flex flex-col justify-center">
+    <section ref={root} className="relative overflow-hidden py-16 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-6">
+          <div className="journey-pin flex flex-col justify-center lg:col-span-5">
             <p className="label-mark">Process</p>
-            <h2 className="mt-6 font-display text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[0.98] tracking-[-0.035em] text-white">
+            <h2 className="text-display-l mt-6 text-bone">
               The way we <br />
-              <span className="text-red-active">actually work.</span>
+              <span className="text-lime">actually work.</span>
             </h2>
-            <p className="mt-6 max-w-md text-base leading-7 text-white/55">
+            <p className="text-body mt-6 max-w-[65ch] text-ash">
               Four steps. No mystery process, no twelve-week discovery phase. The
               brief is the brief and the build is the build.
             </p>
-            <div className="mt-10 hidden lg:flex items-center gap-3 font-mono-meta text-white/40">
-              <span className="h-px w-12 bg-white/20" />
-              <span>Scroll to advance</span>
+            <div className="mt-10 hidden items-center gap-3 lg:flex">
+              <span className="h-px w-12 bg-rule" />
+              <span className="text-label text-ash">Steps 01–04</span>
             </div>
           </div>
 
-          <div ref={trackRef} className="lg:col-span-7 flex flex-col gap-8 lg:gap-12">
+          <div ref={trackRef} className="flex flex-col gap-px bg-rule lg:col-span-7">
             {steps.map((s) => (
               <article
                 key={s.index}
-                className="journey-item editorial-card p-7 lg:p-9 will-change-transform"
+                className="journey-item bg-shelf p-8 will-change-transform"
               >
                 <div className="flex items-baseline gap-4">
-                  <span className="font-display text-4xl font-bold text-red-active leading-none sm:text-5xl">
-                    {s.index}
-                  </span>
-                  <span className="font-mono-meta text-white/40">Step</span>
+                  <span className="text-display-l leading-none text-lime">{s.index}</span>
+                  <span className="text-label text-ash">Step</span>
                 </div>
-                <h3 className="mt-6 font-display text-3xl font-bold tracking-[-0.02em] text-white sm:text-4xl">
-                  {s.title}
-                </h3>
-                <p className="mt-4 text-sm leading-7 text-white/65 sm:text-base">
-                  {s.body}
-                </p>
-                <div className="mt-8 h-px w-12 bg-white/15" />
+                <h3 className="text-heading mt-6 text-bone">{s.title}</h3>
+                <p className="text-body mt-4 text-ash">{s.body}</p>
+                <div className="mt-8 h-px w-12 bg-rule" />
               </article>
             ))}
           </div>

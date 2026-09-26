@@ -25,8 +25,8 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.35 }}
-      className="fixed inset-0 z-40 bg-background"
+      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed inset-0 z-40 bg-void"
     >
       <div className="flex h-full flex-col justify-between px-8 pt-28 pb-12">
         <motion.ul
@@ -34,7 +34,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
           animate="visible"
           variants={{
             hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.15 } },
+            visible: { opacity: 1, transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
           }}
           className="flex flex-col gap-3"
         >
@@ -45,19 +45,19 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
                 key={item.href}
                 variants={{
                   hidden: { opacity: 0, y: 24 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.34, ease: [0.22, 1, 0.36, 1] } },
                 }}
                 onClick={onClose}
-                className="border-b border-white/10"
+                className="border-b border-rule"
               >
                 <Link
                   href={item.href}
                   className="group flex items-baseline justify-between py-5"
                 >
-                  <span className="font-display text-5xl tracking-tight">
-                    <span className={active ? "text-red-active" : "text-white"}>{item.label}</span>
+                  <span className="text-display-l">
+                    <span className={active ? "text-lime" : "text-bone"}>{item.label}</span>
                   </span>
-                  <span className="font-mono-meta text-white/40">{item.index}</span>
+                  <span className="text-label text-ash">{item.index}</span>
                 </Link>
               </motion.li>
             );
@@ -67,10 +67,10 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.6 }}
+          transition={{ delay: 0.3, duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col gap-5"
         >
-          <p className="font-mono-meta text-white/40">Reach us</p>
+          <p className="text-label text-ash">Reach us</p>
           <ul className="flex flex-col gap-2">
             {socials.map((s) => (
               <li key={s.label}>
@@ -78,7 +78,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
                   href={s.href}
                   target={s.href.startsWith("http") ? "_blank" : undefined}
                   rel={s.href.startsWith("http") ? "noreferrer" : undefined}
-                  className="text-2xl text-white/90 hover:text-red-active transition-colors"
+                  className="text-heading text-bone transition-colors hover:text-lime"
                 >
                   {s.label}
                 </a>

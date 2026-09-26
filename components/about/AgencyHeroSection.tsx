@@ -13,16 +13,29 @@ export default function AgencyHeroSection() {
     () => {
       const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
       tl.from(".about-eyebrow", { y: 20, opacity: 0, duration: 0.9 })
-        .from(".about-line > span", {
-          yPercent: 110,
-          opacity: 0,
-          duration: 1.1,
-          stagger: 0.06,
-        }, "-=0.6")
+        .from(
+          ".about-line > span",
+          {
+            yPercent: 110,
+            opacity: 0,
+            duration: 1.1,
+            stagger: 0.06,
+          },
+          "-=0.6",
+        )
         .from(".about-sub", { y: 20, opacity: 0, duration: 0.9 }, "-=0.7")
-        .from(".about-pill-image", { scale: 0.4, opacity: 0, duration: 1.2, ease: "elastic.out(1, 0.6)" }, "-=0.8");
+        .from(
+          ".about-pill-image",
+          {
+            scale: 0.4,
+            opacity: 0,
+            duration: 1.2,
+            ease: "elastic.out(1, 0.6)",
+          },
+          "-=0.8",
+        );
     },
-    { scope: root }
+    { scope: root },
   );
 
   return (
@@ -58,7 +71,9 @@ export default function AgencyHeroSection() {
                 </span>
               </span>
               <span className="about-line block overflow-hidden">
-                <span className="inline-block text-white/55">that work for a living.</span>
+                <span className="inline-block text-white/55">
+                  that work for a living.
+                </span>
               </span>
             </h1>
           </div>
@@ -71,13 +86,15 @@ export default function AgencyHeroSection() {
             <div className="about-sub border-t border-white/10 pt-6">
               <p className="font-mono-meta text-white/40">Based</p>
               <p className="mt-2 font-display text-2xl text-white leading-tight">
-                Vushtrri, Kosova <br /> <span className="text-white/50">Remote worldwide</span>
+                In Kosovo <br />{" "}
+                <span className="text-white/50">Remote Worldwide</span>
               </p>
             </div>
             <div className="about-sub border-t border-white/10 pt-6">
               <p className="font-mono-meta text-white/40">Practice</p>
               <p className="mt-2 font-display text-2xl text-white leading-tight">
-                Two full-stack <br /> <span className="text-white/50">developers</span>
+                Two full-stack <br />{" "}
+                <span className="text-white/50">developers</span>
               </p>
             </div>
           </div>
