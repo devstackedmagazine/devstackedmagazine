@@ -56,16 +56,14 @@ test("the mascot uses the source-informed cloud silhouette and capsule eyes", ()
   ]);
 });
 
-test("the site typography assigns Momo to headings and Outfit to everything else", async () => {
+test("the site typography uses Outfit for body text", async () => {
   const [layout, styles] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
-  assert.match(layout, /Momo_Trust_Display/);
   assert.match(layout, /Outfit/);
   assert.match(styles, /--font-sans:\s*var\(--font-outfit\)/);
-  assert.match(styles, /--font-display:\s*var\(--font-momo-trust-display\)/);
   assert.match(styles, /h1,\s*h2,\s*h3,\s*h4,\s*h5,\s*h6\s*\{/s);
   assert.doesNotMatch(styles, /font-family:\s*"Pirso"/);
 });

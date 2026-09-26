@@ -96,14 +96,13 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
-  /* Soft geometry keeps the board tactile without turning it playful. */
-  --radius-sm: 0.625rem;
-  --radius-md: 0.875rem;
-  --radius-lg: 1.125rem;
-  --radius-xl: 1.5rem;
-  --radius-2xl: 1.75rem;
-  --radius-3xl: 2rem;
-  --radius-4xl: 2.5rem;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 /* ============================================
@@ -187,63 +186,17 @@
   }
   html {
     @apply font-sans;
-    background-color: var(--board);
-    color: var(--ink);
-    scrollbar-color: oklch(1 0 0 / 0.22) var(--board);
+    background-color: var(--background);
+    color: var(--foreground);
   }
   body {
-    @apply bg-board text-ink;
-    font-feature-settings: "kern", "liga";
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-display);
-  }
-
-  /* Browser surfaces carry the design: selection, caret,
-     focus, underline offset, tabular numerals. */
-  ::selection {
-    background: rgba(199, 14, 26, 0.45);
-    color: #fff;
-  }
-  input,
-  textarea {
-    caret-color: var(--red-active);
-  }
-  :focus-visible {
-    outline: 1px solid var(--red-active);
-    outline-offset: 3px;
-  }
-  a {
-    text-underline-offset: 3px;
-  }
-  p, li {
-    font-variant-numeric: tabular-nums;
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--board);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: oklch(1 0 0 / 0.18);
-    border: 2px solid var(--board);
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: oklch(1 0 0 / 0.3);
-  }
-
-  /* Display voice */
+  /* Editorial display utility, used on H1, big H2 */
   .font-display {
     font-family: var(--font-display);
     font-feature-settings: "ss01", "ss02", "cv01", "cv11";
@@ -257,7 +210,6 @@
     letter-spacing: 0;
     text-transform: uppercase;
     font-weight: 500;
-    font-variant-numeric: tabular-nums;
   }
   @media (min-width: 768px) {
     .font-mono-meta { font-size: 13px; }
@@ -277,24 +229,18 @@
      Apply to any container that wants a tactile surface. */
   .grain {
     position: relative;
-    border: 1px solid var(--line);
-    background: var(--board-raised);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
+    isolation: isolate;
   }
-
-  /* Corner registration marks */
-  .reg-mark {
+  .grain::after {
+    content: "";
     position: absolute;
-    width: 9px;
-    height: 9px;
-    border-color: oklch(1 0 0 / 0.28);
+    inset: 0;
     pointer-events: none;
+    z-index: 1;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
-  .reg-mark-tl { top: -1px; left: -1px; border-top: 1px solid; border-left: 1px solid; }
-  .reg-mark-tr { top: -1px; right: -1px; border-top: 1px solid; border-right: 1px solid; }
-  .reg-mark-bl { bottom: -1px; left: -1px; border-bottom: 1px solid; border-left: 1px solid; }
-  .reg-mark-br { bottom: -1px; right: -1px; border-bottom: 1px solid; border-right: 1px solid; }
 
   /* Editorial section spacing, cinematic chapter padding */
   .section-pad {
@@ -308,8 +254,8 @@
     }
   }
 
-  /* Buttons: hard inversion, no glow */
-  .btn-ink {
+  /* Single tracked micro-mark for "label" feel without "SECTION 01" energy */
+  .label-mark {
     display: inline-flex;
     align-items: center;
     gap: 0.65rem;
@@ -317,62 +263,20 @@
     font-size: 12px;
     letter-spacing: 0;
     text-transform: uppercase;
-    color: var(--ink-dim);
-    font-variant-numeric: tabular-nums;
-    border-radius: var(--radius-2xl);
-  }
-
-  /* Rounded content rows keep the editorial rhythm while softening the board. */
-  .spec-row {
-    position: relative;
-    display: grid;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-xl);
-    background: var(--board-raised);
-    overflow: hidden;
-    transition: background-color 0.25s ease, border-color 0.25s ease;
+    color: var(--foreground-muted);
   }
   @media (min-width: 768px) {
     .label-mark { font-size: 13px; }
   }
   .label-mark::before {
     content: "";
-    position: absolute;
-    left: 0;
-    top: 0.75rem;
-    bottom: 0.75rem;
-    width: 3px;
+    display: inline-block;
+    width: 1.75rem;
+    height: 1px;
     background: var(--red-active);
-    border-radius: 9999px;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .spec-row:hover {
-    background: var(--board-card);
-    border-color: var(--line-strong);
-  }
-  .spec-row:hover::before {
-    transform: scaleY(1);
   }
 
-  /* Red revision stamp */
-  .stamp {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1px solid var(--red-active);
-    color: var(--red-active);
-    padding: 0.45rem 0.9rem;
-    font-family: var(--font-sans);
-    font-size: 0.6875rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    font-variant-numeric: tabular-nums;
-    border-radius: 9999px;
-  }
-
-  /* Underline reveal for nav links; red marks the live page */
+  /* Underline animation for nav links (replaces existing nav-link) */
   .nav-link {
     position: relative;
     display: inline-block;
@@ -465,23 +369,22 @@
   .loading-dot { animation: none; opacity: 1; }
 }
 
-/* ============================================================
-   Cloud mascot
-   ============================================================ */
-
-.cloud-bot {
+/* ============================================
+   Editorial card primitive
+   ============================================ */
+.editorial-card {
   position: relative;
-  display: inline-block;
-  aspect-ratio: 1;
-  min-width: 0;
-  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.025) 0%,
+    rgba(255, 255, 255, 0.005) 100%
+  );
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  transition: border-color 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-.cloud-bot > svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
+.editorial-card:hover {
+  border-color: var(--line-strong);
 }
 
 /* Hide scrollbar for the horizontal showcase track */
@@ -543,3 +446,90 @@
 .lms-prose th { background: var(--background-card); color: var(--foreground); }
 .lms-prose img { border-radius: 12px; max-width: 100%; }
 .lms-prose hr { border: none; border-top: 1px solid var(--line); }
+
+/* ============================================
+   Focus ring (DESIGN.md: 2px Lime, offset 2px)
+   ============================================ */
+:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Primitives still used by pages kept from main
+   (not-found, thank-you, contact, services, about)
+   ============================================ */
+.btn-ink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  font-variant-numeric: tabular-nums;
+  border-radius: var(--radius-sm);
+}
+
+.spec-row {
+  position: relative;
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--board-raised);
+  overflow: hidden;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+.spec-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  width: 3px;
+  background: var(--red-active);
+  border-radius: 9999px;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.spec-row:hover {
+  background: var(--board-card);
+  border-color: var(--line-strong);
+}
+.spec-row:hover::before {
+  transform: scaleY(1);
+}
+
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--red-active);
+  color: var(--red-active);
+  padding: 0.45rem 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  border-radius: 9999px;
+}
+
+/* ============================================
+   Cloud mascot (components/mascot/CloudBot.tsx, currently unused)
+   ============================================ */
+.cloud-bot {
+  position: relative;
+  display: inline-block;
+  aspect-ratio: 1;
+  min-width: 0;
+  pointer-events: none;
+}
+.cloud-bot > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}

@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
 const items = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home", index: "01" },
+  { href: "/about", label: "About", index: "02" },
+  { href: "/services", label: "Services", index: "03" },
+  { href: "/contact", label: "Contact", index: "04" },
 ];
 
 const socials = [
@@ -28,7 +28,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
       className="fixed inset-0 z-40 bg-void"
     >
-      <div className="flex h-full flex-col justify-between px-6 pb-10 pt-24 sm:px-10">
+      <div className="flex h-full flex-col justify-between px-8 pt-28 pb-12">
         <motion.ul
           initial="hidden"
           animate="visible"
@@ -36,7 +36,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
             hidden: { opacity: 0 },
             visible: { opacity: 1, transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
           }}
-          className="flex flex-col"
+          className="flex flex-col gap-3"
         >
           {items.map((item) => {
             const active = pathname === item.href;
@@ -65,7 +65,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
         </motion.ul>
 
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col gap-5"
